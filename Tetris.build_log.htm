@@ -10,12 +10,35 @@ Project File Date:  04/28/2018
 Build target 'Tetris'
 compiling Tetris.c...
 linking...
-Program Size: Code=7568 RO-data=2052 RW-data=80 ZI-data=2624  
+Program Size: Code=7912 RO-data=2864 RW-data=84 ZI-data=2628  
 ".\Tetris.axf" - 0 Error(s), 0 Warning(s).
 </pre>
 </body>
 </html>
- Error(s), 0 Warning(s).
+ set but never used
+        uint8_t t1, t2;
+Tetris.c: 2 warnings, 0 errors
+linking...
+Program Size: Code=7448 RO-data=2052 RW-data=84 ZI-data=2628  
+".\Tetris.axf" - 0 Error(s), 2 Warning(s).
+ Size: Code=7348 RO-data=2052 RW-data=84 ZI-data=2628  
+".\Tetris.axf" - 0 Error(s), 3 Warning(s).
+: error:  #28: expression must have a constant value
+        SBlock, TBlock, ZBlock, nBlock
+Blocks.c(523): error:  #28: expression must have a constant value
+        SBlock, TBlock, ZBlock, nBlock
+Blocks.c(523): error:  #28: expression must have a constant value
+        SBlock, TBlock, ZBlock, nBlock
+Blocks.c(523): error:  #28: expression must have a constant value
+        SBlock, TBlock, ZBlock, nBlock
+Blocks.c(556): error:  #513: a value of type "struct colors" cannot be assigned to an entity of type "uint16_t"
+        Buffer[tx][ty].color = blockColor[type];
+Blocks.c(560): error:  #513: a value of type "struct colors" cannot be assigned to an entity of type "uint16_t"
+        Buffer[tx][ty].color = blockColor[type];
+Blocks.c(564): error:  #513: a value of type "struct colors" cannot be assigned to an entity of type "uint16_t"
+        Buffer[tx][ty].color = blockColor[type];
+Blocks.c(568): error:  #513: a value of type "struct colors" cannot be assigned to an entity of type "uint16_t"
+        Buffer[tx][ty].color = blockColor[type];
+Blocks.c: 0 warnings, 12 errors
+".\Tetris.axf" - 12 Error(s), 0 Warning(s).
 Target not created
-ode=7108 RO-data=2052 RW-data=80 ZI-data=2624  
-".\Tetris.axf" - 0 Error(s), 1 Warning(s).

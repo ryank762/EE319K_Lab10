@@ -9,4 +9,5 @@
 .\tetris.o: Sound.h
 .\tetris.o: Timer0.h
 .\tetris.o: Timer1.h
+.\tetris.o: Timer2.h
 .\tetris.o: Blocks.h

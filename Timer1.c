@@ -32,7 +32,7 @@ void (*PeriodicTask1)(void);   // user function
 // Inputs:  task is a pointer to a user function
 //          period in units (1/clockfreq)
 // Outputs: none
-void Timer1_Init(void(*task)(void), uint32_t period){
+void Timer1_Init(uint32_t period){
   SYSCTL_RCGCTIMER_R |= 0x02;   // 0) activate TIMER1
   TIMER1_CTL_R = 0x00000000;    // 1) disable TIMER1A during setup
   TIMER1_CFG_R = 0x00000000;    // 2) configure for 32-bit mode

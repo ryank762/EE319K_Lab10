@@ -14,7 +14,7 @@
 //          period in units (1/clockfreq)
 // Outputs: none
 unsigned long TimerCount;
-void Timer2_Init(uint32_t period){ 
+void Timer2_Init(void){ 
   unsigned long volatile delay;
   SYSCTL_RCGCTIMER_R |= 0x04;   // 0) activate timer2
   delay = SYSCTL_RCGCTIMER_R;
@@ -22,7 +22,7 @@ void Timer2_Init(uint32_t period){
   TIMER2_CTL_R = 0x00000000;   // 1) disable timer2A
   TIMER2_CFG_R = 0x00000000;   // 2) 32-bit mode
   TIMER2_TAMR_R = 0x00000002;  // 3) periodic mode
-  TIMER2_TAILR_R = period-1;   // 4) reload value
+  TIMER2_TAILR_R = (80000000/30)-1;   // 4) reload value
   TIMER2_TAPR_R = 0;           // 5) clock resolution
   TIMER2_ICR_R = 0x00000001;   // 6) clear timeout flag
   TIMER2_IMR_R = 0x00000001;   // 7) arm timeout

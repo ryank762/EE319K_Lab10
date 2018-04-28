@@ -4,6 +4,22 @@
 
 #include <stdint.h>
 
+extern const uint16_t IBlock;
+
+extern const uint16_t JBlock;
+
+extern const uint16_t LBlock;
+
+extern const uint16_t OBlock;
+
+extern const uint16_t SBlock;
+
+extern const uint16_t TBlock;
+
+extern const uint16_t ZBlock;
+
+extern const uint16_t nBlock;
+
 struct board {
 	uint8_t state;
 	uint16_t color;
