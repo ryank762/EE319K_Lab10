@@ -37,12 +37,14 @@ struct board {
 	uint16_t color;
 };
 
-struct board TetrisBoard[10][16];
+struct board Buffer[10][16];
 
 int8_t i, j;
 uint32_t Data;        						// 12-bit ADC
-uint8_t gameOverFlag = 0;
 uint32_t blocksPlaced = 0;
+uint8_t currentType, currentRot;
+int8_t currentx, currenty;
+
 
 int main(void) {
 	DisableInterrupts();
@@ -55,9 +57,6 @@ int main(void) {
 	Output_Init();									// clear display
 	EnableInterrupts();
 	while (1) {
-		if (gameOverFlag == 1) {
-			Game_Over();
-		}
 		if ((GPIO_PORTE_DATA_R & 0x01) == 1) {
 			Wait10ms(2);
 			while ((GPIO_PORTE_DATA_R & 0x01) == 1) {
@@ -66,7 +65,7 @@ int main(void) {
 			Rotate_Block();
 		}
 		while ((GPIO_PORTE_DATA_R & 0x02) == 1) {
-			FastDrop_Block();
+			TIMER0_TAILR_R = (80000000/8)-1;
 		}
 		TIMER0_TAILR_R = (80000000-1);
 	}
@@ -81,8 +80,8 @@ uint32_t Convert(uint32_t input){
 void Board_Init(void) {
 	for (i = 0; i < 16; i++) {
 		for (j = 0; j < 10; j++) {
-			TetrisBoard[i][j].state = 0;
-			TetrisBoard[i][j].color = 0x0000;
+			Buffer[i][j].state = 0;
+			Buffer[i][j].color = 0x0000;
 		}
 	}
 }
@@ -101,21 +100,6 @@ void SysTick_Handler(void) {
 	PF3 ^= 0x04;			// ADC execution time
 }
 
-/*
-void Board_Check(void) {
-	uint8_t i;
-	while (i < 16) {
-		if (currentBoard[i][15].status == 1) {
-			gameOverFlag = 1;
-			break;
-		}
-	}
-	if (gameOverFlag == 1) {
-		Game_Over();
-	}
-}
-*/
-
 void Game_Over(void) {
 	ST7735_FillScreen(0x0000);
 	ST7735_SetCursor(3, 1);
@@ -128,10 +112,6 @@ void Game_Over(void) {
 	while (1) {
 		
 	}
-}
-
-void FastDrop_Block(void) {
-	TIMER0_TAILR_R = (80000000/8)-1;
 }
 
 void Timer0A_Handler(void) {
