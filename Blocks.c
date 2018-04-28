@@ -692,6 +692,63 @@ void Drop_Block(void) {
 			tempBuffer[i][j].state = Buffer[i][j].state;
 		}
 	}
+	i = Tetris[currentType][currentRot].p0[0] + currentx;
+	j = Tetris[currentType][currentRot].p0[1] + currenty;
+	if (j == 0) {
+		Generate_Block();
+	}
+	tempBuffer[i][j].state = 0;
+	i = Tetris[currentType][currentRot].p1[0] + currentx;
+	j = Tetris[currentType][currentRot].p1[1] + currenty;
+	if (j == 0) {
+		Generate_Block();
+	}
+	tempBuffer[i][j].state = 0;
+	i = Tetris[currentType][currentRot].p2[0] + currentx;
+	j = Tetris[currentType][currentRot].p2[1] + currenty;
+	if (j == 0) {
+		Generate_Block();
+	}
+	tempBuffer[i][j].state = 0;
+	i = Tetris[currentType][currentRot].p3[0] + currentx;
+	j = Tetris[currentType][currentRot].p3[1] + currenty;
+	if (j == 0) {
+		Generate_Block();
+	}
+	tempBuffer[i][j].state = 0;
+	if (tempCheck_Collision(currentType, currentRot, currentx, currenty) == success) {
+		i = Tetris[currentType][currentRot].p0[0] + currentx;
+		j = Tetris[currentType][currentRot].p0[1] + currenty;
+		Buffer[i][j].state = 0;
+		Buffer[i][j].color = 0x0000;
+		i = Tetris[currentType][currentRot].p1[0] + currentx;
+		j = Tetris[currentType][currentRot].p1[1] + currenty;
+		Buffer[i][j].state = 0;
+		Buffer[i][j].color = 0x0000;
+		i = Tetris[currentType][currentRot].p2[0] + currentx;
+		j = Tetris[currentType][currentRot].p2[1] + currenty;
+		Buffer[i][j].state = 0;
+		Buffer[i][j].color = 0x0000;
+		i = Tetris[currentType][currentRot].p3[0] + currentx;
+		j = Tetris[currentType][currentRot].p3[1] + currenty;
+		Buffer[i][j].state = 0;
+		Buffer[i][j].color = 0x0000;
+		currenty--;
+		Place_Block(currentType, currentRot, currentx, currenty);
+	}
+	else {
+		Generate_Block();
+	}
+}
+
+void Rotate_Block(void) {
+	uint8_t i,j;
+	uint8_t tempRot = (currentRot + 1)%4;
+	for (i = 0; i < 10; i++) {
+		for (j = 0; j < 16; j++) {
+			tempBuffer[i][j].state = Buffer[i][j].state;
+		}
+	}
 	i = Tetris[currentType][currentRot].p0[0];
 	j = Tetris[currentType][currentRot].p0[1];
 	tempBuffer[i][j].state = 0;
@@ -704,33 +761,13 @@ void Drop_Block(void) {
 	i = Tetris[currentType][currentRot].p3[0];
 	j = Tetris[currentType][currentRot].p3[1];
 	tempBuffer[i][j].state = 0;
-	if (tempCheck_Collision(currentType, currentRot, currentx, currenty) != 0) {
-		i = Tetris[currentType][currentRot].p0[0];
-		j = Tetris[currentType][currentRot].p0[1];
-		Buffer[i][j].state = 0;
-		Buffer[i][j].color = 0x0000;
-		i = Tetris[currentType][currentRot].p1[0];
-		j = Tetris[currentType][currentRot].p1[1];
-		Buffer[i][j].state = 0;
-		Buffer[i][j].color = 0x0000;
-		i = Tetris[currentType][currentRot].p2[0];
-		j = Tetris[currentType][currentRot].p2[1];
-		Buffer[i][j].state = 0;
-		Buffer[i][j].color = 0x0000;
-		i = Tetris[currentType][currentRot].p3[0];
-		j = Tetris[currentType][currentRot].p3[1];
-		Buffer[i][j].state = 0;
-		Buffer[i][j].color = 0x0000;
-		currenty--;
+	if (tempCheck_Collision (currentType, tempRot, currentx, currenty) == success) {
+		currentRot = tempRot;
 		Place_Block(currentType, currentRot, currentx, currenty);
 	}
 	else {
-		Generate_Block();
+		
 	}
-}
-
-void Rotate_Block(void) {
-	
 }
 
 void Tetris_Init(void) {		
