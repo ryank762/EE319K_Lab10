@@ -22,7 +22,8 @@
  http://users.ece.utexas.edu/~valvano/
  */
 #include <stdint.h>
-
+#include "Tetris.h"
+#include "Blocks.h"
 #include "tm4c123gh6pm.h"
 
 // ***************** Timer0_Init ****************
@@ -30,8 +31,14 @@
 // Inputs:  task is a pointer to a user function
 //          period in units (1/clockfreq)
 // Outputs: none
+
+//uint8_t TimerCount;
+
 void Timer0_Init(void){
+//	TimerCount = 0;
+	volatile unsigned long delay;
   SYSCTL_RCGCTIMER_R |= 0x01;   // 0) activate TIMER0
+	delay = SYSCTL_RCGCTIMER_R;
   TIMER0_CTL_R = 0x00000000;    // 1) disable TIMER0A during setup
   TIMER0_CFG_R = 0x00000000;    // 2) configure for 32-bit mode
   TIMER0_TAMR_R = 0x00000002;   // 3) configure for periodic mode, default down-count settings
@@ -44,4 +51,14 @@ void Timer0_Init(void){
 // vector number 35, interrupt number 19
   NVIC_EN0_R = 1<<19;           // 9) enable IRQ 19 in NVIC
   TIMER0_CTL_R = 0x00000001;    // 10) enable TIMER0A
+}
+
+void Timer0A_Handler(void) {
+	TIMER0_ICR_R = TIMER_ICR_TATOCINT;
+//	TIMER2_CTL_R = 0x00000000;
+	Display_Board();
+	Drop_Block();
+	Check_Board();
+//	TIMER2_CTL_R = 0x00000001;
+//	TimerCount++;
 }

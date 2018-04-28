@@ -15,4 +15,6 @@
 // Outputs: none
 void Timer2_Init(void);
 
+void Timer2A_Handler(void);
+
 #endif // __TIMER2INTS_H__

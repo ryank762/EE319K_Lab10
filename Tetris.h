@@ -32,3 +32,9 @@ extern uint8_t currentType, currentRot;
 extern int8_t currentx, currenty;
 
 void Game_Over(void); 
+
+void Drop_Block(void);
+
+void Check_Board(void);
+
+void Display_Board(void);

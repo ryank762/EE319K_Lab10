@@ -484,7 +484,7 @@ enum {
 };
 
 enum {
-	success, failure
+	failure, success
 };
 
 /*
@@ -506,7 +506,7 @@ struct block {												// contains coordinate positions based on base
 struct board tempBuffer[10][16];
 
 struct block {
-	int8_t p0[2], p1[2], p2[2], p3[2];
+	int16_t p0[2], p1[2], p2[2], p3[2];
 };
 
 
@@ -519,8 +519,8 @@ uint16_t blockColor[8] = {				// array containing block colors
 	0x04FF, 0xFFFF, 0x0F8F, 0x0000
 };
 
-uint8_t Check_Collision (uint8_t type, uint8_t rot, int8_t x2, int8_t y2) {
-	int8_t tx, ty;
+uint8_t Check_Collision (uint8_t type, uint8_t rot, int16_t x2, int16_t y2) {
+	int16_t tx, ty;
 	tx = x2 + Tetris[type][rot].p0[0];
 	ty = y2 + Tetris[type][rot].p0[1];
 	if (Buffer[tx][ty].state != 0) {
@@ -544,8 +544,8 @@ uint8_t Check_Collision (uint8_t type, uint8_t rot, int8_t x2, int8_t y2) {
 	return success;
 }
 
-void Place_Block(uint8_t type, uint8_t rot, int8_t x, int8_t y) {
-	int8_t tx, ty;
+void Place_Block(uint8_t type, uint8_t rot, int16_t x, int16_t y) {
+	int16_t tx, ty;
 	tx = x + Tetris[type][rot].p0[0];
 	ty = y + Tetris[type][rot].p0[1];
 	Buffer[tx][ty].state = 1;
@@ -566,9 +566,10 @@ void Place_Block(uint8_t type, uint8_t rot, int8_t x, int8_t y) {
 
 void Generate_Block(void) {
 	uint8_t n;
-	n = (Random()>>24)%7;
+	n = (Random32()>>24)%7;
+//	n = 0;
 	switch (n) {
-		case 'I' : {		
+		case I : {		
 			if (Check_Collision(I, 0, 3, 15) == success) {
 				Place_Block(I, 0, 3, 15);
 				currentType = I;
@@ -581,7 +582,7 @@ void Generate_Block(void) {
 				Game_Over();
 			}
 		}
-		case 'J' :	{		
+		case J :	{		
 			if (Check_Collision(J, 0, 3, 14) == success) {
 				Place_Block(J, 0, 3, 14);
 				currentType = J;
@@ -594,7 +595,7 @@ void Generate_Block(void) {
 				Game_Over();
 			}
 		}
-		case 'L' :	{		
+		case L :	{		
 			if (Check_Collision(L, 0, 3, 14) == success) {
 				Place_Block(L, 0, 3, 14);
 				currentType = L;
@@ -607,7 +608,7 @@ void Generate_Block(void) {
 				Game_Over();
 			}
 		}
-		case 'O' :	{		
+		case O :	{		
 			if (Check_Collision(O, 0, 4, 14) == success) {
 				Place_Block(O, 0, 4, 14);
 				currentType = O;
@@ -620,7 +621,7 @@ void Generate_Block(void) {
 				Game_Over();
 			}
 		}
-		case 'S' :	{		
+		case S :	{		
 			if (Check_Collision(S, 0, 3, 14) == success) {
 				Place_Block(S, 0, 3, 14);
 				currentType = S;
@@ -633,7 +634,7 @@ void Generate_Block(void) {
 				Game_Over();
 			}
 		}
-		case 'T' :	{		
+		case T :	{		
 			if (Check_Collision(T, 0, 3, 14) == success) {
 				Place_Block(T, 0, 3, 14);
 				currentType = T;
@@ -646,7 +647,7 @@ void Generate_Block(void) {
 				Game_Over();
 			}
 		}
-		case 'Z' :	{		
+		case Z :	{		
 			if (Check_Collision(Z, 0, 3, 14) == success) {
 				Place_Block(Z, 0, 3, 14);
 				currentType = Z;
@@ -662,8 +663,8 @@ void Generate_Block(void) {
 	}
 }
 
-uint8_t tempCheck_Collision (uint8_t type, uint8_t rot, int8_t x2, int8_t y2) {
-	int8_t tx, ty;
+uint8_t tempCheck_Collision (uint8_t type, uint8_t rot, int16_t x2, int16_t y2) {
+	int16_t tx, ty;
 	tx = x2 + Tetris[type][rot].p0[0];
 	ty = y2 + Tetris[type][rot].p0[1];
 	if (tempBuffer[tx][ty].state != 0) {

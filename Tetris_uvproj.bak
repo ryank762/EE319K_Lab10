@@ -475,6 +475,26 @@
               <FileType>1</FileType>
               <FilePath>.\IO.c</FilePath>
             </File>
+            <File>
+              <FileName>Timer2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Timer2.c</FilePath>
+            </File>
+            <File>
+              <FileName>Timer2.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Timer2.h</FilePath>
+            </File>
+            <File>
+              <FileName>Blocks.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Blocks.h</FilePath>
+            </File>
+            <File>
+              <FileName>Blocks.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Blocks.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -22,10 +22,8 @@
  http://users.ece.utexas.edu/~valvano/
  */
 #include <stdint.h>
-
+#include "Tetris.h"
 #include "tm4c123gh6pm.h"
-
-void (*PeriodicTask1)(void);   // user function
 
 // ***************** TIMER1_Init ****************
 // Activate TIMER1 interrupts to run user task periodically

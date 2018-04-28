@@ -27,6 +27,14 @@ void Delay100ms(uint32_t count);	// time delay in 0.1 seconds
 void Wait10ms(uint32_t n);				// time delay in 0.01 seconds
 void Game_Over(void);							// displays "GAME OVER" screen
 void FastDrop_Block(void);				// shortens time interval between block drop
+void Board_Init(void);						// initializes buffer
+void Timer2A_Handler(void);
+void Display_Init(void);
+void SysTick_Init(void);
+void PortE_Init(void);
+void PortF_Init(void);
+int16_t Coordinate_ConversionX(int16_t);
+int16_t Coordinate_ConversionY(int16_t);
 uint32_t Convert(uint32_t input);	// converts ADC data into a floating point value from 0 to 10
 
 #define PF1       (*((volatile uint32_t *)0x40025008))
@@ -121,7 +129,6 @@ struct board {
 
 struct board Buffer[10][16];
 
-int8_t i, j;
 uint32_t Data;        						// 12-bit ADC
 uint32_t blocksPlaced = 0;
 uint8_t currentType, currentRot;
@@ -129,16 +136,22 @@ int8_t currentx, currenty;
 
 
 int main(void) {
-	DisableInterrupts();
 	PLL_Init(Bus80MHz);							// Bus clock is 80 MHz 
-	Timer0_Init();
-//	Timer1_Init();
-	Timer2_Init();
-	Random_Init(1);									// seed
+	Output_Init();
+	Random_Init(8);									// seed
+	Board_Init();
 	Tetris_Init();
 	ADC_Init();											// initialize slide pot
-	Sound_Init();										// initialize sound
 	ST7735_FillScreen(0xA2AE);
+	Display_Init();
+	PortE_Init();
+	PortF_Init();
+	Generate_Block();
+	Timer0_Init();
+//	Timer1_Init();
+//	Timer2_Init();
+	SysTick_Init();
+//	Sound_Init();										// initialize sound
 	EnableInterrupts();
 	while (1) {
 		if ((GPIO_PORTE_DATA_R & 0x01) == 1) {
@@ -148,10 +161,13 @@ int main(void) {
 			}
 			Rotate_Block();
 		}
-		while ((GPIO_PORTE_DATA_R & 0x02) == 1) {
+		if ((GPIO_PORTE_DATA_R & 0x02) == 1) {
 			TIMER0_TAILR_R = (80000000/8)-1;
+			while ((GPIO_PORTE_DATA_R & 0x02) == 1) {
+				
+			}
+			TIMER0_TAILR_R = (80000000-1);
 		}
-		TIMER0_TAILR_R = (80000000-1);
 	}
 }
 
@@ -165,14 +181,16 @@ int8_t Floor(int8_t in) {
 	uint8_t i;
 	int8_t result;
 	for (i = 0; i < 10; i++) {
-		if (i <= in < i+1) {
+		if ((i <= in) && (in < i+1)) {
 			result = i;
+			break;
 		}
 	}
 	return result;
 }
 
 void Board_Init(void) {
+	uint8_t i,j;
 	for (i = 0; i < 16; i++) {
 		for (j = 0; j < 10; j++) {
 			Buffer[i][j].state = 0;
@@ -212,26 +230,43 @@ void Check_Board(void) {
 				j++;
 			}
 			for (i = 0; i < 10; i++) {
-				Buffer[i][9].state = 0;
-				Buffer[i][9].color = 0x0000;
+				Buffer[i][15].state = 0;
+				Buffer[i][15].color = 0x0000;
 			}
 			j = jSave;
 		}
 	}
 }
 
-uint8_t Coordinate_Conversion(int8_t t) {
-	t = (8*t) + 1;
+int16_t Coordinate_ConversionX(int16_t t) {
+	t = 8*t + 1;
 	return t;
 }
 
+int16_t Coordinate_ConversionY(int16_t t) {
+	t = (128-8*t)+30;
+	return t;
+}
+
+void Display_Init(void) {
+	int16_t i, j;
+	uint8_t t1, t2;
+	for (i = 0; i < 10; i++) {
+		for (j = 0; j < 16; j++) {
+			t1 = Coordinate_ConversionX(i);
+			t2 = Coordinate_ConversionY(j);
+			ST7735_DrawBitmap(t1, t2, nBlock, 7, 7);
+		}
+	}
+}
+
 void Display_Board(void) {
-	uint8_t i, j;
+	int16_t i, j;
 	uint16_t t1, t2;
 	for (i = 0; i < 10; i++) {
 		for (j = 0; j < 16; j++) {
-			t1 = Coordinate_Conversion(currentx);
-			t2 = Coordinate_Conversion(currenty);
+			t1 = Coordinate_ConversionX(i);
+			t2 = Coordinate_ConversionY(j);
 			if (Buffer[i][j].state == 0) {
 				ST7735_DrawBitmap(t1, t2, nBlock, 7, 7);
 			}
@@ -271,30 +306,43 @@ void Display_Board(void) {
 	}
 }
 
+void PortE_Init(void) {
+	volatile unsigned long delay;
+	SYSCTL_RCGCGPIO_R |= 0x10;
+	delay = SYSCTL_RCGCGPIO_R;
+	GPIO_PORTE_DEN_R |= 0x03;
+	GPIO_PORTE_DIR_R &= ~0x03;
+	GPIO_PORTE_AFSEL_R = 0x00;
+	GPIO_PORTE_AMSEL_R = 0x00;
+	GPIO_PORTE_PUR_R = 0x00;
+}
+
+void PortF_Init(void) {
+	SYSCTL_RCGCGPIO_R |= 0x20;						// enable PF clock
+	volatile int clockDelay;
+	clockDelay = SYSCTL_RCGCGPIO_R;				// wait until stable
+	GPIO_PORTF_LOCK_R = GPIO_LOCK_KEY;		// unlock PF
+	GPIO_PORTF_CR_R |= 0x1F;							// allow access
+	GPIO_PORTF_DEN_R |= 0x14;							// enable digital logic on PF2,4
+	GPIO_PORTF_DIR_R |= 0x04;							// make PF2 output
+	GPIO_PORTF_AFSEL_R = 0x00;
+	GPIO_PORTF_AMSEL_R = 0x00;						// disable AF and AM for PF
+	GPIO_PORTF_PUR_R = 0x00;							// disable negative logic on PF
+}
+
 void SysTick_Init(void) {
 	NVIC_ST_CTRL_R = 0;									// disable SysTick during init
 	NVIC_ST_RELOAD_R = (80000000/60)-1; // 60Hz interrupts
 	NVIC_ST_CURRENT_R = 0;							// any write to CURRENT clears it
-	NVIC_SYS_PRI3_R = (NVIC_SYS_PRI3_R & 0x00FFFFFF)|0x20000000;
+	NVIC_SYS_PRI3_R = (NVIC_SYS_PRI3_R & 0x00FFFFFF)|0x60000000;
 	NVIC_ST_CTRL_R = 0x00000007;				// enable interrupts, enable SysTick
 }
 
 void SysTick_Handler(void) {
-	PF3 ^= 0x04;      // Heartbeat
+	PF2 ^= 0x04;      // Heartbeat
 	Data = ADC_In();  // sample 12-bit channel 5
-	PF3 ^= 0x04;			// ADC execution time
+	PF2 ^= 0x04;			// ADC execution time
 	currentx = Floor(Data);
-}
-
-void Timer0A_Handler(void) {
-	TIMER0_ICR_R = TIMER_ICR_TATOCINT;
-	Drop_Block();
-	Check_Board();
-}
-
-void Timer2A_Handler(void) {
-	TIMER2_ICR_R = TIMER_ICR_TATOCINT;
-	Display_Board();
 }
 
 void Delay100ms(uint32_t count) {
