@@ -1,0 +1,12 @@
+.\tetris.o: Tetris.c
+.\tetris.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\tetris.o: tm4c123gh6pm.h
+.\tetris.o: ST7735.h
+.\tetris.o: Random.h
+.\tetris.o: PLL.h
+.\tetris.o: ADC.h
+.\tetris.o: IO.h
+.\tetris.o: Sound.h
+.\tetris.o: Timer0.h
+.\tetris.o: Timer1.h
+.\tetris.o: Blocks.h
