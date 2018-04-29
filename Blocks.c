@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include "tm4c123gh6pm.h"
 #include "Tetris.h"
+#include "Timer0.h"
 #include "Random.h"
 #include "ADC.h"
 
@@ -520,7 +521,7 @@ typedef struct block block_t;
 block_t Tetris[7][4];							// 7 types of tetrominoes, 4 rotations
 
 uint16_t blockColor[8] = {				// array containing block colors
-	0x8410, 0xF800, 0x07FF,	0x07E0,
+	0x8410, 0xF800, 0x07FF,	0xFFE0,
 	0x04FF, 0xFFFF, 0x0F8F, 0x0000
 };
 
@@ -531,10 +532,10 @@ uint8_t Check_Collision (uint8_t type, uint8_t rot, int16_t x2, int16_t y2) {
 	if (Buffer[tx][ty].state != 0) {
 		return failure;
 	}
-	if (tx < 0) {
+	if ((tx < 0) || (tx >= 10)) {
 		return failure;
 	}
-	if (ty < 0) {
+	if ((ty < 0) || (ty >= 16)) {
 		return failure;
 	}
 	tx = x2 + Tetris[type][rot].p1[0];
@@ -542,10 +543,10 @@ uint8_t Check_Collision (uint8_t type, uint8_t rot, int16_t x2, int16_t y2) {
 	if (Buffer[tx][ty].state != 0) {
 		return failure;
 	}
-	if (tx < 0) {
+	if ((tx < 0) || (tx >= 10)) {
 		return failure;
 	}
-	if (ty < 0) {
+	if ((ty < 0) || (ty >= 16)) {
 		return failure;
 	}
 	tx = x2 + Tetris[type][rot].p2[0];
@@ -553,10 +554,10 @@ uint8_t Check_Collision (uint8_t type, uint8_t rot, int16_t x2, int16_t y2) {
 	if (Buffer[tx][ty].state != 0) {
 		return failure;
 	}
-	if (tx < 0) {
+	if ((tx < 0) || (tx >= 10)) {
 		return failure;
 	}
-	if (ty < 0) {
+	if ((ty < 0) || (ty >= 16)) {
 		return failure;
 	}
 	tx = x2 + Tetris[type][rot].p3[0];
@@ -564,10 +565,10 @@ uint8_t Check_Collision (uint8_t type, uint8_t rot, int16_t x2, int16_t y2) {
 	if (Buffer[tx][ty].state != 0) {
 		return failure;
 	}
-	if (tx < 0) {
+	if ((tx < 0) || (tx >= 10)) {
 		return failure;
 	}
-	if (ty < 0) {
+	if ((ty < 0) || (ty >= 16)) {
 		return failure;
 	}
 	return success;
@@ -575,7 +576,6 @@ uint8_t Check_Collision (uint8_t type, uint8_t rot, int16_t x2, int16_t y2) {
 
 void Place_Block(uint8_t type, uint8_t rot, int16_t x, int16_t y) {
 	int16_t tx1, ty1;
-	DisableInterrupts();
 	tempRot = rot;
 	tempx = x;
 	tx1 = x + Tetris[type][rot].p0[0];
@@ -594,12 +594,10 @@ void Place_Block(uint8_t type, uint8_t rot, int16_t x, int16_t y) {
 	ty1 = y + Tetris[type][rot].p3[1];
 	Buffer[tx1][ty1].state = 1;
 	Buffer[tx1][ty1].color = blockColor[type];
-	EnableInterrupts();
 }
 
 void Erase_Block(uint8_t type, uint8_t rot, int16_t x, int16_t y) {
 	int16_t tx2, ty2;
-	DisableInterrupts();
 	tx2 = tempx + Tetris[type][rot].p0[0];
 	ty2 = y + Tetris[type][rot].p0[1];
 	Buffer[tx2][ty2].state = 0;
@@ -616,18 +614,18 @@ void Erase_Block(uint8_t type, uint8_t rot, int16_t x, int16_t y) {
 	ty2 = y + Tetris[type][rot].p3[1];
 	Buffer[tx2][ty2].state = 0;
 	Buffer[tx2][ty2].color = 0x0000;
-	EnableInterrupts();
 }
 
 void Generate_Block(void) {
 	uint8_t n;
 	DisableInterrupts();
-	n = (Random32()>>24)%7;
+	n = (Random())%7;
 	switch (n) {
 		case I : {		
-			if (Check_Collision(I, 0, currentx, 15) == success) {
+			if (Check_Collision(I, 0, 4, 15) == success) {
 				currentType = I;
 				currentRot = 0;
+				currentx = 4;
 				currenty = 15;
 				xSave = currentx;
 				ySave = currenty;
@@ -639,9 +637,10 @@ void Generate_Block(void) {
 			}
 		}
 		case J :	{		
-			if (Check_Collision(J, 0, currentx, 14) == success) {
+			if (Check_Collision(J, 0, 3, 14) == success) {
 				currentType = J;
 				currentRot = 0;
+				currentx = 3;
 				currenty = 14;
 				xSave = currentx;
 				ySave = currenty;
@@ -653,9 +652,10 @@ void Generate_Block(void) {
 			}
 		}
 		case L :	{		
-			if (Check_Collision(L, 0, currentx, 14) == success) {
+			if (Check_Collision(L, 0, 3, 14) == success) {
 				currentType = L;
 				currentRot = 0;
+				currentx = 3;
 				currenty = 14;
 				xSave = currentx;
 				ySave = currenty;
@@ -667,9 +667,10 @@ void Generate_Block(void) {
 			}
 		}
 		case O :	{		
-			if (Check_Collision(O, 0, currentx, 14) == success) {
+			if (Check_Collision(O, 0, 3, 14) == success) {
 				currentType = O;
 				currentRot = 0;
+				currentx = 3;
 				currenty = 14;
 				xSave = currentx;
 				ySave = currenty;
@@ -681,9 +682,10 @@ void Generate_Block(void) {
 			}
 		}
 		case S :	{		
-			if (Check_Collision(S, 0, currentx, 14) == success) {
+			if (Check_Collision(S, 0, 3, 14) == success) {
 				currentType = S;
 				currentRot = 0;
+				currentx = 3;
 				currenty = 14;
 				xSave = currentx;
 				ySave = currenty;
@@ -695,9 +697,10 @@ void Generate_Block(void) {
 			}
 		}
 		case T :	{		
-			if (Check_Collision(T, 0, currentx, 14) == success) {
+			if (Check_Collision(T, 0, 3, 14) == success) {
 				currentType = T;
 				currentRot = 0;
+				currentx = 3;
 				currenty = 14;
 				xSave = currentx;
 				ySave = currenty;
@@ -709,9 +712,10 @@ void Generate_Block(void) {
 			}
 		}
 		case Z :	{		
-			if (Check_Collision(Z, 0, currentx, 14) == success) {
+			if (Check_Collision(Z, 0, 3, 14) == success) {
 				currentType = Z;
 				currentRot = 0;
+				currentx = 3;
 				currenty = 14;
 				xSave = currentx;
 				ySave = currenty;
@@ -726,16 +730,54 @@ void Generate_Block(void) {
 	EnableInterrupts();
 }
 
+
+uint8_t Check_Drop (uint8_t type, uint8_t rot, int16_t x2, int16_t y2) {
+	int16_t tx, ty;
+	tx = x2 + Tetris[type][rot].p0[0];
+	ty = y2 + Tetris[type][rot].p0[1];
+	if (Buffer[tx][ty].state != 0) {
+		return failure;
+	}
+	if (ty < 0) {
+		return failure;
+	}
+	tx = x2 + Tetris[type][rot].p1[0];
+	ty = y2 + Tetris[type][rot].p1[1];
+	if (Buffer[tx][ty].state != 0) {
+		return failure;
+	}
+	if (ty < 0) {
+		return failure;
+	}
+	tx = x2 + Tetris[type][rot].p2[0];
+	ty = y2 + Tetris[type][rot].p2[1];
+	if (Buffer[tx][ty].state != 0) {
+		return failure;
+	}
+	if (ty < 0) {
+		return failure;
+	}
+	tx = x2 + Tetris[type][rot].p3[0];
+	ty = y2 + Tetris[type][rot].p3[1];
+	if (Buffer[tx][ty].state != 0) {
+		return failure;
+	}
+	if (ty < 0) {
+		return failure;
+	}
+	return success;
+}
 void Drop_Block(void) {
 	Erase_Block(currentType, tempRot, tempx, currenty);
-	if (Check_Collision(currentType, currentRot, currentx, currenty-1) != 0) {
+	if (Check_Drop(currentType, currentRot, tempx, currenty-1) != 0) {
 		currenty--;
-		Place_Block(currentType, currentRot, currentx, currenty);
+		Place_Block(currentType, currentRot, tempx, currenty);
 	}
 	else {
 		Place_Block(currentType, tempRot, tempx, currenty);
 		Generate_Block();
 		blocksPlaced++;
+		Display_Board();
 	}
 }
 

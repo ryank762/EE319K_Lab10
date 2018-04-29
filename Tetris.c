@@ -33,6 +33,7 @@ void Display_Init(void);
 void SysTick_Init(void);
 void PortE_Init(void);
 void PortF_Init(void);
+void Display_Board(void);
 int16_t Coordinate_ConversionX(int16_t);
 int16_t Coordinate_ConversionY(int16_t);
 uint32_t Convert(uint32_t input);	// converts ADC data into a floating point value from 0 to 10
@@ -73,13 +74,14 @@ const uint16_t LBlock[49] = {
 };
 
 const uint16_t OBlock[64] = {
-	0x07E0,0x07E0,0x07E0,0x07E0,0x07E0,0x07E0,0x07E0,
-	0x07E0,0x07E0,0x07E0,0x07E0,0x07E0,0x07E0,0x07E0,
-	0x07E0,0x07E0,0x07E0,0x07E0,0x07E0,0x07E0,0x07E0,
-	0x07E0,0x07E0,0x07E0,0x07E0,0x07E0,0x07E0,0x07E0,
-	0x07E0,0x07E0,0x07E0,0x07E0,0x07E0,0x07E0,0x07E0,
-	0x07E0,0x07E0,0x07E0,0x07E0,0x07E0,0x07E0,0x07E0,
-	0x07E0,0x07E0,0x07E0,0x07E0,0x07E0,0x07E0,0x07E0
+	0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0,
+	0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0,
+	0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0,
+	0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0,
+	0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0,
+	0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0,
+	0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0,
+	0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0,0xFFE0
 };
 
 const uint16_t SBlock[49] = {
@@ -109,7 +111,7 @@ const uint16_t ZBlock[49] = {
 	0x0F8F,0x0F8F,0x0F8F,0x0F8F,0x0F8F,0x0F8F,0x0F8F,
 	0x0F8F,0x0F8F,0x0F8F,0x0F8F,0x0F8F,0x0F8F,0x0F8F,
 	0x0F8F,0x0F8F,0x0F8F,0x0F8F,0x0F8F,0x0F8F,0x0F8F,
-	0x0F8F,0x0F8F,0x0F8F,0x0F8F,0x0F8F,0x0F8F,0x0F8
+	0x0F8F,0x0F8F,0x0F8F,0x0F8F,0x0F8F,0x0F8F,0x0F8F
 };
 
 const uint16_t nBlock[49] = {
@@ -147,6 +149,7 @@ int main(void) {
 	PortE_Init();
 	PortF_Init();
 	Generate_Block();
+	Display_Board();
 	Timer0_Init();
 //	Timer1_Init();
 //	Timer2_Init();
@@ -154,6 +157,7 @@ int main(void) {
 //	Sound_Init();										// initialize sound
 	EnableInterrupts();
 	while (1) {
+		/*
 		if ((GPIO_PORTE_DATA_R & 0x01) == 1) {
 			Wait10ms(2);
 			while ((GPIO_PORTE_DATA_R & 0x01) == 1) {
@@ -162,58 +166,20 @@ int main(void) {
 			Rotate_Block();
 		}
 		if ((GPIO_PORTE_DATA_R & 0x02) == 1) {
+			Wait10ms(2);
 			TIMER0_TAILR_R = (80000000/240)-1;
 			while ((GPIO_PORTE_DATA_R & 0x02) == 1) {
 				
 			}
 			TIMER0_TAILR_R = (80000000/30-1);
 		}
+		*/
 	}
 }
-
-/*
-uint32_t Convert(uint32_t input) {
-	uint32_t result;
-	result = (input*(10/4.096));	
-  return result;
-}
-*/
 
 int16_t Floor(uint32_t in) {
 	int16_t floor;
 	in &= 0x00000FFF;
-/*
-	if (in < 1*409) {
-		floor = 0;
-	}
-	else if ((1*409 <= in) && (in < 2*409)) {
-		floor = 1;
-	}
-	else if ((2*409 <= in) && (in < 3*409)) {
-		floor = 2;
-	}
-	else if ((3*409 <= in) && (in < 4*409)) {
-		floor = 3;
-	}
-	else if ((4*409 <= in) && (in < 5*409)) {
-		floor = 4;
-	}
-	else if ((5*409 <= in) && (in < 6*409)) {
-		floor = 5;
-	}
-	else if ((6*409 <= in) && (in < 7*409)) {
-		floor = 6;
-	}
-	else if ((7*409 <= in) && (in < 8*409)) {
-		floor = 7;
-	}
-	else if ((8*409 <= in) && (in < 9*409)) {
-		floor = 8;
-	}
-	else if (9*409 <= in) {
-		floor = 9;
-	}
-*/
 	if (in < 600) {
 		floor = -1;
 	}
@@ -306,7 +272,6 @@ void Display_Init(void) {
 void Display_Board(void) {
 	int16_t i, j;
 	uint16_t t1, t2;
-	DisableInterrupts();
 	for (i = 0; i < 10; i++) {
 		for (j = 0; j < 16; j++) {
 			t1 = Coordinate_ConversionX(i);
@@ -328,7 +293,7 @@ void Display_Board(void) {
 						ST7735_DrawBitmap(t1, t2, LBlock, 7, 7);
 						break;
 					}
-					case (0x07E0) : {
+					case (0xFFE0) : {
 						ST7735_DrawBitmap(t1, t2, OBlock, 7, 7);
 						break;
 					}
@@ -348,7 +313,6 @@ void Display_Board(void) {
 			}
 		}
 	}
-	EnableInterrupts();
 }
 
 void PortE_Init(void) {
@@ -384,18 +348,24 @@ void SysTick_Init(void) {
 }
 
 void SysTick_Handler(void) {
-	DisableInterrupts();
+	int16_t c, d;
 	PF2 ^= 0x04;      // Heartbeat
 	Data = ADC_In();  // sample 12-bit channel 5
 	PF2 ^= 0x04;			// ADC execution time
-	currentx += Floor(Data);
-	if (currentx < 0) {
-		currentx = 0;
+	c = currentx + Floor(Data);
+	d = tempx;
+	Erase_Block(currentType, currentRot, tempx, currenty);
+	if (Check_Collision(currentType, currentRot, c, currenty) == 1) {
+		currentx += Floor(Data);
+		if (currentx < 0) {
+			currentx = 0;
+		}
+		if (currentx > 9) {
+			currentx = 9;
+		}
 	}
-	if (currentx > 9) {
-		currentx = 9;
-	}
-	EnableInterrupts();
+	Place_Block(currentType, currentRot, currentx, currenty);
+	tempx = d;
 }
 
 void Delay100ms(uint32_t count) {

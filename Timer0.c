@@ -57,8 +57,10 @@ void Timer0_Init(void){
 }
 
 void Timer0A_Handler(void) {
-	TIMER0_ICR_R = TIMER_ICR_TATOCINT;
+	TIMER0_ICR_R = TIMER_ICR_TATOCINT;\
+//	NVIC_ST_CTRL_R = 0x00000000;
 //	TIMER1_CTL_R = 0x00000000;
+	Display_Board();
 	if ((currentx != xSave) || (currenty != ySave)) {
 		Erase_Block(currentType, currentRot, xSave, ySave);
 		Place_Block(currentType, currentRot, currentx, currenty);
@@ -69,9 +71,10 @@ void Timer0A_Handler(void) {
 	TimerCount++;
 	if(TimerCount == 25) {
 		Drop_Block();
+		Check_Board();
 		TimerCount = 0;
 	}
-	Check_Board();
-	Display_Board();
+//	Display_Board();
+//	NVIC_ST_CTRL_R = 0x00000007;
 //	TIMER1_CTL_R = 0x00000001;
 }

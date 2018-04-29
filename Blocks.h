@@ -10,6 +10,8 @@ void Drop_Block(void);
 
 void Generate_Block(void);
 
-void Place_Block(uint8_t type, uint8_t rotation, int8_t x, int8_t y);
+void Place_Block(uint8_t type, uint8_t rot, int16_t x, int16_t y);
 
-void Erase_Block(uint8_t type, uint8_t rotation, int8_t x, int8_t y);
+void Erase_Block(uint8_t type, uint8_t rot, int16_t x, int16_t y);
+
+uint8_t Check_Collision(uint8_t type, uint8_t rot, int16_t x2, int16_t y2);
