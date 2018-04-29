@@ -129,16 +129,16 @@ struct board {
 
 struct board Buffer[10][16];
 
-uint32_t Data;        						// 12-bit ADC
+int16_t Data;        						// 12-bit ADC
 uint32_t blocksPlaced = 0;
-uint8_t currentType, currentRot;
-int8_t currentx, currenty;
+uint8_t currentType, currentRot, tempRot;
+int8_t currentx, tempx, currenty, xSave, ySave;
 
 
 int main(void) {
 	PLL_Init(Bus80MHz);							// Bus clock is 80 MHz 
 	Output_Init();
-	Random_Init(8);									// seed
+	Random_Init(NVIC_ST_CURRENT_R);		// seed
 	Board_Init();
 	Tetris_Init();
 	ADC_Init();											// initialize slide pot
@@ -162,31 +162,74 @@ int main(void) {
 			Rotate_Block();
 		}
 		if ((GPIO_PORTE_DATA_R & 0x02) == 1) {
-			TIMER0_TAILR_R = (80000000/8)-1;
+			TIMER0_TAILR_R = (80000000/240)-1;
 			while ((GPIO_PORTE_DATA_R & 0x02) == 1) {
 				
 			}
-			TIMER0_TAILR_R = (80000000-1);
+			TIMER0_TAILR_R = (80000000/30-1);
 		}
 	}
 }
 
+/*
 uint32_t Convert(uint32_t input) {
 	uint32_t result;
 	result = (input*(10/4.096));	
   return result;
 }
+*/
 
-int8_t Floor(int8_t in) {
-	uint8_t i;
-	int8_t result;
-	for (i = 0; i < 10; i++) {
-		if ((i <= in) && (in < i+1)) {
-			result = i;
-			break;
-		}
+int16_t Floor(uint32_t in) {
+	int16_t floor;
+	in &= 0x00000FFF;
+/*
+	if (in < 1*409) {
+		floor = 0;
 	}
-	return result;
+	else if ((1*409 <= in) && (in < 2*409)) {
+		floor = 1;
+	}
+	else if ((2*409 <= in) && (in < 3*409)) {
+		floor = 2;
+	}
+	else if ((3*409 <= in) && (in < 4*409)) {
+		floor = 3;
+	}
+	else if ((4*409 <= in) && (in < 5*409)) {
+		floor = 4;
+	}
+	else if ((5*409 <= in) && (in < 6*409)) {
+		floor = 5;
+	}
+	else if ((6*409 <= in) && (in < 7*409)) {
+		floor = 6;
+	}
+	else if ((7*409 <= in) && (in < 8*409)) {
+		floor = 7;
+	}
+	else if ((8*409 <= in) && (in < 9*409)) {
+		floor = 8;
+	}
+	else if (9*409 <= in) {
+		floor = 9;
+	}
+*/
+	if (in < 600) {
+		floor = -1;
+	}
+	else if ((600 <= in) && (in < 1200)) {
+		floor = 0;
+	}
+	else if ((1200 <= in) && (in < 2896)) {
+		floor = 0;
+	}
+	else if ((2896 <= in) && (in < 3496)) {
+		floor = 0;
+		}
+	else if ((3496 <= in) && (in < 4096)) {
+		floor = 1;
+	}
+	return floor;
 }
 
 void Board_Init(void) {
@@ -209,7 +252,7 @@ void Game_Over(void) {
 	LCD_OutDec(blocksPlaced);
 	ST7735_OutString(" blocks");
 	while (1) {
-		
+		DisableInterrupts();
 	}
 }
 
@@ -263,6 +306,7 @@ void Display_Init(void) {
 void Display_Board(void) {
 	int16_t i, j;
 	uint16_t t1, t2;
+	DisableInterrupts();
 	for (i = 0; i < 10; i++) {
 		for (j = 0; j < 16; j++) {
 			t1 = Coordinate_ConversionX(i);
@@ -304,6 +348,7 @@ void Display_Board(void) {
 			}
 		}
 	}
+	EnableInterrupts();
 }
 
 void PortE_Init(void) {
@@ -332,17 +377,25 @@ void PortF_Init(void) {
 
 void SysTick_Init(void) {
 	NVIC_ST_CTRL_R = 0;									// disable SysTick during init
-	NVIC_ST_RELOAD_R = (80000000/60)-1; // 60Hz interrupts
+	NVIC_ST_RELOAD_R = (80000000/5)-1; // 60Hz interrupts
 	NVIC_ST_CURRENT_R = 0;							// any write to CURRENT clears it
 	NVIC_SYS_PRI3_R = (NVIC_SYS_PRI3_R & 0x00FFFFFF)|0x60000000;
 	NVIC_ST_CTRL_R = 0x00000007;				// enable interrupts, enable SysTick
 }
 
 void SysTick_Handler(void) {
+	DisableInterrupts();
 	PF2 ^= 0x04;      // Heartbeat
 	Data = ADC_In();  // sample 12-bit channel 5
 	PF2 ^= 0x04;			// ADC execution time
-	currentx = Floor(Data);
+	currentx += Floor(Data);
+	if (currentx < 0) {
+		currentx = 0;
+	}
+	if (currentx > 9) {
+		currentx = 9;
+	}
+	EnableInterrupts();
 }
 
 void Delay100ms(uint32_t count) {

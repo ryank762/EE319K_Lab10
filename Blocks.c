@@ -2,8 +2,13 @@
 // 4/23/18
 
 #include <stdint.h>
+#include "tm4c123gh6pm.h"
 #include "Tetris.h"
 #include "Random.h"
+#include "ADC.h"
+
+void DisableInterrupts(void);			// Disable interrupts
+void EnableInterrupts(void);			// Enable interrupts
 
 /*
 const uint16_t IBlock0[] = {
@@ -526,9 +531,21 @@ uint8_t Check_Collision (uint8_t type, uint8_t rot, int16_t x2, int16_t y2) {
 	if (Buffer[tx][ty].state != 0) {
 		return failure;
 	}
+	if (tx < 0) {
+		return failure;
+	}
+	if (ty < 0) {
+		return failure;
+	}
 	tx = x2 + Tetris[type][rot].p1[0];
 	ty = y2 + Tetris[type][rot].p1[1];
 	if (Buffer[tx][ty].state != 0) {
+		return failure;
+	}
+	if (tx < 0) {
+		return failure;
+	}
+	if (ty < 0) {
 		return failure;
 	}
 	tx = x2 + Tetris[type][rot].p2[0];
@@ -536,46 +553,85 @@ uint8_t Check_Collision (uint8_t type, uint8_t rot, int16_t x2, int16_t y2) {
 	if (Buffer[tx][ty].state != 0) {
 		return failure;
 	}
+	if (tx < 0) {
+		return failure;
+	}
+	if (ty < 0) {
+		return failure;
+	}
 	tx = x2 + Tetris[type][rot].p3[0];
 	ty = y2 + Tetris[type][rot].p3[1];
 	if (Buffer[tx][ty].state != 0) {
+		return failure;
+	}
+	if (tx < 0) {
+		return failure;
+	}
+	if (ty < 0) {
 		return failure;
 	}
 	return success;
 }
 
 void Place_Block(uint8_t type, uint8_t rot, int16_t x, int16_t y) {
-	int16_t tx, ty;
-	tx = x + Tetris[type][rot].p0[0];
-	ty = y + Tetris[type][rot].p0[1];
-	Buffer[tx][ty].state = 1;
-	Buffer[tx][ty].color = blockColor[type];
-	tx = x + Tetris[type][rot].p1[0];
-	ty = y + Tetris[type][rot].p1[1];
-	Buffer[tx][ty].state = 1;
-	Buffer[tx][ty].color = blockColor[type];
-	tx = x + Tetris[type][rot].p2[0];
-	ty = y + Tetris[type][rot].p2[1];
-	Buffer[tx][ty].state = 1;
-	Buffer[tx][ty].color = blockColor[type];
-	tx = x + Tetris[type][rot].p3[0];
-	ty = y + Tetris[type][rot].p3[1];
-	Buffer[tx][ty].state = 1;
-	Buffer[tx][ty].color = blockColor[type];
+	int16_t tx1, ty1;
+	DisableInterrupts();
+	tempRot = rot;
+	tempx = x;
+	tx1 = x + Tetris[type][rot].p0[0];
+	ty1 = y + Tetris[type][rot].p0[1];
+	Buffer[tx1][ty1].state = 1;
+	Buffer[tx1][ty1].color = blockColor[type];
+	tx1 = x + Tetris[type][rot].p1[0];
+	ty1 = y + Tetris[type][rot].p1[1];
+	Buffer[tx1][ty1].state = 1;
+	Buffer[tx1][ty1].color = blockColor[type];
+	tx1 = x + Tetris[type][rot].p2[0];
+	ty1 = y + Tetris[type][rot].p2[1];
+	Buffer[tx1][ty1].state = 1;
+	Buffer[tx1][ty1].color = blockColor[type];
+	tx1 = x + Tetris[type][rot].p3[0];
+	ty1 = y + Tetris[type][rot].p3[1];
+	Buffer[tx1][ty1].state = 1;
+	Buffer[tx1][ty1].color = blockColor[type];
+	EnableInterrupts();
+}
+
+void Erase_Block(uint8_t type, uint8_t rot, int16_t x, int16_t y) {
+	int16_t tx2, ty2;
+	DisableInterrupts();
+	tx2 = tempx + Tetris[type][rot].p0[0];
+	ty2 = y + Tetris[type][rot].p0[1];
+	Buffer[tx2][ty2].state = 0;
+	Buffer[tx2][ty2].color = 0x0000;
+	tx2 = tempx + Tetris[type][rot].p1[0];
+	ty2 = y + Tetris[type][rot].p1[1];
+	Buffer[tx2][ty2].state = 0;
+	Buffer[tx2][ty2].color = 0x0000;
+	tx2 = tempx + Tetris[type][rot].p2[0];
+	ty2 = y + Tetris[type][rot].p2[1];
+	Buffer[tx2][ty2].state = 0;
+	Buffer[tx2][ty2].color = 0x0000;
+	tx2 = tempx + Tetris[type][rot].p3[0];
+	ty2 = y + Tetris[type][rot].p3[1];
+	Buffer[tx2][ty2].state = 0;
+	Buffer[tx2][ty2].color = 0x0000;
+	EnableInterrupts();
 }
 
 void Generate_Block(void) {
 	uint8_t n;
+	DisableInterrupts();
 	n = (Random32()>>24)%7;
-//	n = 0;
 	switch (n) {
 		case I : {		
-			if (Check_Collision(I, 0, 3, 15) == success) {
-				Place_Block(I, 0, 3, 15);
+			if (Check_Collision(I, 0, currentx, 15) == success) {
 				currentType = I;
 				currentRot = 0;
-				currentx = 3;
 				currenty = 15;
+				xSave = currentx;
+				ySave = currenty;
+				Place_Block(currentType, currentRot, currentx, currenty);
 				break;
 			}
 			else {
@@ -583,12 +639,13 @@ void Generate_Block(void) {
 			}
 		}
 		case J :	{		
-			if (Check_Collision(J, 0, 3, 14) == success) {
-				Place_Block(J, 0, 3, 14);
+			if (Check_Collision(J, 0, currentx, 14) == success) {
 				currentType = J;
 				currentRot = 0;
-				currentx = 3;
 				currenty = 14;
+				xSave = currentx;
+				ySave = currenty;
+				Place_Block(currentType, currentRot, currentx, currenty);
 				break;
 			}
 			else {
@@ -596,12 +653,13 @@ void Generate_Block(void) {
 			}
 		}
 		case L :	{		
-			if (Check_Collision(L, 0, 3, 14) == success) {
-				Place_Block(L, 0, 3, 14);
+			if (Check_Collision(L, 0, currentx, 14) == success) {
 				currentType = L;
 				currentRot = 0;
-				currentx = 3;
 				currenty = 14;
+				xSave = currentx;
+				ySave = currenty;
+				Place_Block(currentType, currentRot, currentx, currenty);
 				break;
 			}
 			else {
@@ -609,12 +667,13 @@ void Generate_Block(void) {
 			}
 		}
 		case O :	{		
-			if (Check_Collision(O, 0, 4, 14) == success) {
-				Place_Block(O, 0, 4, 14);
+			if (Check_Collision(O, 0, currentx, 14) == success) {
 				currentType = O;
 				currentRot = 0;
-				currentx = 4;
 				currenty = 14;
+				xSave = currentx;
+				ySave = currenty;
+				Place_Block(currentType, currentRot, currentx, currenty);
 				break;
 			}
 			else {
@@ -622,12 +681,13 @@ void Generate_Block(void) {
 			}
 		}
 		case S :	{		
-			if (Check_Collision(S, 0, 3, 14) == success) {
-				Place_Block(S, 0, 3, 14);
+			if (Check_Collision(S, 0, currentx, 14) == success) {
 				currentType = S;
 				currentRot = 0;
-				currentx = 3;
 				currenty = 14;
+				xSave = currentx;
+				ySave = currenty;
+				Place_Block(currentType, currentRot, currentx, currenty);
 				break;
 			}
 			else {
@@ -635,12 +695,13 @@ void Generate_Block(void) {
 			}
 		}
 		case T :	{		
-			if (Check_Collision(T, 0, 3, 14) == success) {
-				Place_Block(T, 0, 3, 14);
+			if (Check_Collision(T, 0, currentx, 14) == success) {
 				currentType = T;
 				currentRot = 0;
-				currentx = 3;
 				currenty = 14;
+				xSave = currentx;
+				ySave = currenty;
+				Place_Block(currentType, currentRot, currentx, currenty);
 				break;
 		}
 		else {
@@ -648,12 +709,13 @@ void Generate_Block(void) {
 			}
 		}
 		case Z :	{		
-			if (Check_Collision(Z, 0, 3, 14) == success) {
-				Place_Block(Z, 0, 3, 14);
+			if (Check_Collision(Z, 0, currentx, 14) == success) {
 				currentType = Z;
 				currentRot = 0;
-				currentx = 3;
 				currenty = 14;
+				xSave = currentx;
+				ySave = currenty;
+				Place_Block(currentType, currentRot, currentx, currenty);
 				break;
 			}
 			else {
@@ -661,90 +723,25 @@ void Generate_Block(void) {
 			}
 		}
 	}
-}
-
-uint8_t tempCheck_Collision (uint8_t type, uint8_t rot, int16_t x2, int16_t y2) {
-	int16_t tx, ty;
-	tx = x2 + Tetris[type][rot].p0[0];
-	ty = y2 + Tetris[type][rot].p0[1];
-	if (tempBuffer[tx][ty].state != 0) {
-		return failure;
-	}
-	tx = x2 + Tetris[type][rot].p1[0];
-	ty = y2 + Tetris[type][rot].p1[1];
-	if (tempBuffer[tx][ty].state != 0) {
-		return failure;
-	}
-	tx = x2 + Tetris[type][rot].p2[0];
-	ty = y2 + Tetris[type][rot].p2[1];
-	if (tempBuffer[tx][ty].state != 0) {
-		return failure;
-	}
-	tx = x2 + Tetris[type][rot].p3[0];
-	ty = y2 + Tetris[type][rot].p3[1];
-	if (tempBuffer[tx][ty].state != 0) {
-		return failure;
-	}
-	return success;
+	EnableInterrupts();
 }
 
 void Drop_Block(void) {
-	uint8_t i,j;
-	for (i = 0; i < 10; i++) {
-		for (j = 0; j < 16; j++) {
-			tempBuffer[i][j].state = Buffer[i][j].state;
-		}
-	}
-	i = Tetris[currentType][currentRot].p0[0] + currentx;
-	j = Tetris[currentType][currentRot].p0[1] + currenty;
-	if (j == 0) {
-		Generate_Block();
-	}
-	tempBuffer[i][j].state = 0;
-	i = Tetris[currentType][currentRot].p1[0] + currentx;
-	j = Tetris[currentType][currentRot].p1[1] + currenty;
-	if (j == 0) {
-		Generate_Block();
-	}
-	tempBuffer[i][j].state = 0;
-	i = Tetris[currentType][currentRot].p2[0] + currentx;
-	j = Tetris[currentType][currentRot].p2[1] + currenty;
-	if (j == 0) {
-		Generate_Block();
-	}
-	tempBuffer[i][j].state = 0;
-	i = Tetris[currentType][currentRot].p3[0] + currentx;
-	j = Tetris[currentType][currentRot].p3[1] + currenty;
-	if (j == 0) {
-		Generate_Block();
-	}
-	tempBuffer[i][j].state = 0;
-	if (tempCheck_Collision(currentType, currentRot, currentx, currenty) == success) {
-		i = Tetris[currentType][currentRot].p0[0] + currentx;
-		j = Tetris[currentType][currentRot].p0[1] + currenty;
-		Buffer[i][j].state = 0;
-		Buffer[i][j].color = 0x0000;
-		i = Tetris[currentType][currentRot].p1[0] + currentx;
-		j = Tetris[currentType][currentRot].p1[1] + currenty;
-		Buffer[i][j].state = 0;
-		Buffer[i][j].color = 0x0000;
-		i = Tetris[currentType][currentRot].p2[0] + currentx;
-		j = Tetris[currentType][currentRot].p2[1] + currenty;
-		Buffer[i][j].state = 0;
-		Buffer[i][j].color = 0x0000;
-		i = Tetris[currentType][currentRot].p3[0] + currentx;
-		j = Tetris[currentType][currentRot].p3[1] + currenty;
-		Buffer[i][j].state = 0;
-		Buffer[i][j].color = 0x0000;
+	Erase_Block(currentType, tempRot, tempx, currenty);
+	if (Check_Collision(currentType, currentRot, currentx, currenty-1) != 0) {
 		currenty--;
 		Place_Block(currentType, currentRot, currentx, currenty);
 	}
 	else {
+		Place_Block(currentType, tempRot, tempx, currenty);
 		Generate_Block();
+		blocksPlaced++;
 	}
 }
 
 void Rotate_Block(void) {
+	tempRot = (currentRot + 1)%4;
+/*
 	uint8_t i,j;
 	uint8_t tempRot = (currentRot + 1)%4;
 	for (i = 0; i < 10; i++) {
@@ -755,15 +752,19 @@ void Rotate_Block(void) {
 	i = Tetris[currentType][currentRot].p0[0];
 	j = Tetris[currentType][currentRot].p0[1];
 	tempBuffer[i][j].state = 0;
+	tempBuffer[i][j].color = 0x0000;
 	i = Tetris[currentType][currentRot].p1[0];
 	j = Tetris[currentType][currentRot].p1[1];
 	tempBuffer[i][j].state = 0;
+	tempBuffer[i][j].color = 0x0000;
 	i = Tetris[currentType][currentRot].p2[0];
 	j = Tetris[currentType][currentRot].p2[1];
 	tempBuffer[i][j].state = 0;
+	tempBuffer[i][j].color = 0x0000;
 	i = Tetris[currentType][currentRot].p3[0];
 	j = Tetris[currentType][currentRot].p3[1];
 	tempBuffer[i][j].state = 0;
+	tempBuffer[i][j].color = 0x0000;
 	if (tempCheck_Collision (currentType, tempRot, currentx, currenty) == success) {
 		currentRot = tempRot;
 		Place_Block(currentType, currentRot, currentx, currenty);
@@ -771,6 +772,7 @@ void Rotate_Block(void) {
 	else {
 		
 	}
+*/
 }
 
 void Tetris_Init(void) {		

@@ -34,8 +34,8 @@ void Timer2_Init(void){
 void Timer2A_Handler(void) {
 	TIMER2_ICR_R = TIMER_ICR_TATOCINT;
 	TIMER0_CTL_R = 0x00000000;
-	Drop_Block();
-	Check_Board();
 	Display_Board();
+	Check_Board();
+	Drop_Block();
 	TIMER0_CTL_R = 0x00000001;
 }

@@ -25,11 +25,22 @@ struct board {
 	uint16_t color;
 };
 
-extern struct board Buffer[16][10];
+extern struct board Buffer[10][16];
 
-extern uint8_t currentType, currentRot;
+extern uint8_t currentType, currentRot, tempRot;
 
-extern int8_t currentx, currenty;
+extern int8_t currentx, tempx, currenty;
+
+extern int8_t xSave;
+
+extern int8_t ySave;
+
+
+extern uint32_t blocksPlaced;
+/*
+uint32_t Convert(uint32_t input);
+*/
+int16_t Floor(uint32_t in);
 
 void Game_Over(void); 
 
