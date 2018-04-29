@@ -1,6 +1,6 @@
 Dependencies for Project 'Tetris', Target 'Tetris': (DO NOT MODIFY !)
 F (.\startup.s)(0x5AE48FE0)(--cpu Cortex-M4 --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary--list .\startup.lst --xref -o .\startup.o --depend .\startup.d)
-F (.\random.s)(0x5AE5809B)(--cpu Cortex-M4 --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary--list .\random.lst --xref -o .\random.o --depend .\random.d)
+F (.\random.s)(0x5AE5896C)(--cpu Cortex-M4 --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary--list .\random.lst --xref -o .\random.o --depend .\random.d)
 F (.\DAC.c)(0x5ADA2571)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\dac.o --omf_browse .\dac.crf --depend .\dac.d)
 I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
 I (..\../inc/tm4c123gh6pm.h)(0x5388C2DA)
@@ -8,7 +8,7 @@ F (.\ADC.c)(0x5AE51FB8)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --sp
 I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
 I (Tetris.h)(0x5AE5553B)
 I (..\../inc/tm4c123gh6pm.h)(0x5388C2DA)
-F (.\Timer0.c)(0x5AE57915)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\timer0.o --omf_browse .\timer0.crf --depend .\timer0.d)
+F (.\Timer0.c)(0x5AE5879D)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\timer0.o --omf_browse .\timer0.crf --depend .\timer0.d)
 I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
 I (Tetris.h)(0x5AE5553B)
 I (Blocks.h)(0x5AE56891)
@@ -33,7 +33,7 @@ F (.\PLL.c)(0x5ADA121A)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --sp
 I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
 I (PLL.h)(0x5ADA121A)
 I (..\../inc/tm4c123gh6pm.h)(0x5388C2DA)
-F (.\Tetris.c)(0x5AE57EDA)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\tetris.o --omf_browse .\tetris.crf --depend .\tetris.d)
+F (.\Tetris.c)(0x5AE58DC5)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\tetris.o --omf_browse .\tetris.crf --depend .\tetris.d)
 I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
 I (tm4c123gh6pm.h)(0x5ADA121A)
 I (ST7735.h)(0x5ADA121A)
@@ -57,7 +57,7 @@ I (ADC.h)(0x5ADA279C)
 I (Tetris.h)(0x5AE5553B)
 F (.\Timer2.h)(0x5AE489BD)()
 F (.\Blocks.h)(0x5AE56891)()
-F (.\Blocks.c)(0x5AE58142)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\blocks.o --omf_browse .\blocks.crf --depend .\blocks.d)
+F (.\Blocks.c)(0x5AE58D0C)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\blocks.o --omf_browse .\blocks.crf --depend .\blocks.d)
 I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
 I (tm4c123gh6pm.h)(0x5ADA121A)
 I (Tetris.h)(0x5AE5553B)

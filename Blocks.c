@@ -493,21 +493,7 @@ enum {
 	failure, success
 };
 
-/*
-struct block {									// struct used for each block
-	uint16_t w[7][4];								// width of ith rotation of block
-	uint16_t h[7][4];								// height of ith rotation of block
-	const uint16_t *Image[7][4];		// color of block
-};
-
-struct block TetrisBlock;
-*/
-
-/*
-struct block {												// contains coordinate positions based on base
-	int8_t *p0, *p1, *p2, *p3;	
-};
-*/
+uint8_t nSave = 6;
 
 struct board tempBuffer[10][16];
 
@@ -521,8 +507,8 @@ typedef struct block block_t;
 block_t Tetris[7][4];							// 7 types of tetrominoes, 4 rotations
 
 uint16_t blockColor[8] = {				// array containing block colors
-	0x8410, 0xF800, 0x07FF,	0xFFE0,
-	0x04FF, 0xFFFF, 0x0F8F, 0x0000
+	0xFFE0, 0x04FF, 0xF800,	0x07FF,
+	0x001F, 0xF81F, 0x0F8F, 0x0000
 };
 
 uint8_t Check_Collision (uint8_t type, uint8_t rot, int16_t x2, int16_t y2) {
@@ -620,6 +606,13 @@ void Generate_Block(void) {
 	uint8_t n;
 	DisableInterrupts();
 	n = (Random())%7;
+	while (n >= 7) {
+		n = (Random())%7;
+	}
+	while (n == nSave) {
+		n = (Random())%7;
+	}
+	nSave = n;
 	switch (n) {
 		case I : {		
 			if (Check_Collision(I, 0, 4, 15) == success) {
