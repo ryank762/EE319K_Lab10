@@ -4,21 +4,7 @@
 
 #include <stdint.h>
 
-extern const uint16_t IBlock;
-
-extern const uint16_t JBlock;
-
-extern const uint16_t LBlock;
-
-extern const uint16_t OBlock;
-
-extern const uint16_t SBlock;
-
-extern const uint16_t TBlock;
-
-extern const uint16_t ZBlock;
-
-extern const uint16_t nBlock;
+extern const uint16_t IBlock, JBlock, LBlock, OBlock, SBlock, TBlock, ZBlock, nBlock, gBlock;
 
 struct board {
 	uint8_t state;
@@ -27,19 +13,12 @@ struct board {
 
 extern struct board Buffer[10][16];
 
-extern uint8_t currentType, currentRot, tempRot;
+extern uint8_t currentType, currentRot, tempRot, nextBlock, level, startLine;
 
-extern int8_t currentx, tempx, currenty;
+extern int8_t currentx, tempx, currenty, xSave, ySave;
 
-extern int8_t xSave;
+extern uint32_t linesCleared, blocksPlaced, fdropCount, score;
 
-extern int8_t ySave;
-
-
-extern uint32_t blocksPlaced;
-/*
-uint32_t Convert(uint32_t input);
-*/
 int16_t Floor(uint32_t in);
 
 void Game_Over(void); 

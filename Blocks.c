@@ -7,6 +7,7 @@
 #include "Timer0.h"
 #include "Random.h"
 #include "ADC.h"
+#include "ST7735.h"
 
 void DisableInterrupts(void);			// Disable interrupts
 void EnableInterrupts(void);			// Enable interrupts
@@ -493,8 +494,6 @@ enum {
 	failure, success
 };
 
-uint8_t nSave = 6;
-
 struct board tempBuffer[10][16];
 
 struct block {
@@ -510,6 +509,8 @@ uint16_t blockColor[8] = {				// array containing block colors
 	0xFFE0, 0x04FF, 0xF800,	0x07FF,
 	0x001F, 0xF81F, 0x0F8F, 0x0000
 };
+
+uint8_t dropFlag = 0;
 
 uint8_t Check_Collision (uint8_t type, uint8_t rot, int16_t x2, int16_t y2) {
 	int16_t tx, ty;
@@ -562,7 +563,6 @@ uint8_t Check_Collision (uint8_t type, uint8_t rot, int16_t x2, int16_t y2) {
 
 void Place_Block(uint8_t type, uint8_t rot, int16_t x, int16_t y) {
 	int16_t tx1, ty1;
-	tempRot = rot;
 	tempx = x;
 	tx1 = x + Tetris[type][rot].p0[0];
 	ty1 = y + Tetris[type][rot].p0[1];
@@ -605,20 +605,12 @@ void Erase_Block(uint8_t type, uint8_t rot, int16_t x, int16_t y) {
 void Generate_Block(void) {
 	uint8_t n;
 	DisableInterrupts();
-	n = (Random())%7;
-	while (n >= 7) {
-		n = (Random())%7;
-	}
-	while (n == nSave) {
-		n = (Random())%7;
-	}
-	nSave = n;
-	switch (n) {
+	switch (nextBlock) {
 		case I : {		
-			if (Check_Collision(I, 0, 4, 15) == success) {
+			if (Check_Collision(I, 0, 2, 15) == success) {
 				currentType = I;
 				currentRot = 0;
-				currentx = 4;
+				currentx = 2;
 				currenty = 15;
 				xSave = currentx;
 				ySave = currenty;
@@ -720,6 +712,14 @@ void Generate_Block(void) {
 			}
 		}
 	}
+	n = (Random())%7;
+	while (n >= 7) {
+		n = (Random())%7;
+	}
+	while (n == nextBlock) {
+		n = (Random())%7;
+	}
+	nextBlock = n;
 	EnableInterrupts();
 }
 
@@ -761,53 +761,87 @@ uint8_t Check_Drop (uint8_t type, uint8_t rot, int16_t x2, int16_t y2) {
 	return success;
 }
 void Drop_Block(void) {
-	Erase_Block(currentType, tempRot, tempx, currenty);
+	Erase_Block(currentType, currentRot, tempx, currenty);
 	if (Check_Drop(currentType, currentRot, tempx, currenty-1) != 0) {
 		currenty--;
 		Place_Block(currentType, currentRot, tempx, currenty);
+		dropFlag = 0;
 	}
 	else {
-		Place_Block(currentType, tempRot, tempx, currenty);
+		Place_Block(currentType, currentRot, tempx, currenty);
 		Generate_Block();
 		blocksPlaced++;
 		Display_Board();
+		Check_Board();
+		dropFlag = 1;
 	}
 }
 
-void Rotate_Block(void) {
-	tempRot = (currentRot + 1)%4;
-/*
-	uint8_t i,j;
-	uint8_t tempRot = (currentRot + 1)%4;
-	for (i = 0; i < 10; i++) {
-		for (j = 0; j < 16; j++) {
-			tempBuffer[i][j].state = Buffer[i][j].state;
+void FastDrop_Block(void) {
+	while (dropFlag == 0) {
+		Drop_Block();
+	}
+	dropFlag = 0;
+	fdropCount++;
+}
+
+void Add_Line(void) {			// *********************** work in progress
+	uint8_t i, j;
+	int16_t ts1 = currentx;
+	int16_t ts2 = currenty;
+	NVIC_ST_CTRL_R = 0x00000000;
+	startLine++;
+	Erase_Block(currentType, currentRot, ts1, ts2);
+	for (j = startLine; j < 16; j++) {
+		for (i = 0; i < 10; i++) {
+			Buffer[i][j].state = Buffer[i][j-1].state;
+			Buffer[i][j].color = Buffer[i][j-1].color;
 		}
 	}
-	i = Tetris[currentType][currentRot].p0[0];
-	j = Tetris[currentType][currentRot].p0[1];
-	tempBuffer[i][j].state = 0;
-	tempBuffer[i][j].color = 0x0000;
-	i = Tetris[currentType][currentRot].p1[0];
-	j = Tetris[currentType][currentRot].p1[1];
-	tempBuffer[i][j].state = 0;
-	tempBuffer[i][j].color = 0x0000;
-	i = Tetris[currentType][currentRot].p2[0];
-	j = Tetris[currentType][currentRot].p2[1];
-	tempBuffer[i][j].state = 0;
-	tempBuffer[i][j].color = 0x0000;
-	i = Tetris[currentType][currentRot].p3[0];
-	j = Tetris[currentType][currentRot].p3[1];
-	tempBuffer[i][j].state = 0;
-	tempBuffer[i][j].color = 0x0000;
-	if (tempCheck_Collision (currentType, tempRot, currentx, currenty) == success) {
+	for (i = 0; i < 10; i++) {
+		Buffer[i][startLine-1].state = 1;
+		Buffer[i][startLine-1].color = 0x8080;
+	}
+	currentx = ts1;
+	currenty = ts2;
+	Place_Block(currentType, currentRot, currentx, currenty);
+	NVIC_ST_CTRL_R = 0x00000007;
+}
+
+void Rotate_Block(void) {
+	uint8_t tempc, f, rFlag = 0;
+	int16_t savex = currentx;
+	NVIC_ST_CTRL_R = 0x00000000;
+	tempRot = (currentRot + 1)%4;
+	Erase_Block(currentType, currentRot, savex, currenty);
+	if (Check_Collision(currentType, tempRot, savex, currenty) != 0) {
 		currentRot = tempRot;
-		Place_Block(currentType, currentRot, currentx, currenty);
+		Place_Block(currentType, currentRot, savex, currenty);
 	}
 	else {
-		
+		if (currentType == I) {
+			f = 4;
+		}
+		else {
+			f = 3;
+		}
+		for (tempc = 0; tempc < f; tempc--) {
+			savex--;
+			if (Check_Collision(currentType, tempRot, savex, currenty) != 0) {
+				currentRot = tempRot;
+				currentx = savex;
+				Place_Block(currentType, currentRot, currentx, currenty);
+				rFlag = 1;
+				break;
+			}
+		}
+		if (rFlag == 0) {
+			currentx = savex;
+			Place_Block(currentType, currentRot, currentx, currenty);
+		}
 	}
-*/
+	Display_Board();
+	NVIC_ST_CTRL_R = 0x00000007;
 }
 
 void Tetris_Init(void) {		

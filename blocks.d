@@ -5,3 +5,4 @@
 .\blocks.o: Timer0.h
 .\blocks.o: Random.h
 .\blocks.o: ADC.h
+.\blocks.o: ST7735.h

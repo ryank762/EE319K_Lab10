@@ -120,7 +120,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGDARM</Key>
-          <Name>(1010=-1,-1,-1,-1,0)(1007=-1,-1,-1,-1,0)(1008=90,121,456,347,0)(1009=-1,-1,-1,-1,0)(1012=-1,-1,-1,-1,0)(9108=752,304,917,526,1)(9106=-1,-1,-1,-1,0)(9104=218,441,614,712,0)(9107=213,445,666,716,1)(9102=195,172,591,446,1)</Name>
+          <Name>(1010=-1,-1,-1,-1,0)(1007=-1,-1,-1,-1,0)(1008=90,121,456,347,0)(1009=-1,-1,-1,-1,0)(1012=-1,-1,-1,-1,0)(9108=533,328,698,550,1)(9106=-1,-1,-1,-1,0)(9104=759,232,1155,503,1)(9107=213,445,666,716,1)(9102=195,172,591,446,1)</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -150,7 +150,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DAC_INPUT_SEL</Key>
-          <Name>1</Name>
+          <Name>2</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -357,7 +357,7 @@
       <Focus>0</Focus>
       <ColumnNumber>1</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>11</TopLine>
+      <TopLine>1</TopLine>
       <CurrentLine>24</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\random.s</PathWithFileName>
@@ -387,10 +387,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>50</ColumnNumber>
+      <ColumnNumber>16</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>8</TopLine>
-      <CurrentLine>47</CurrentLine>
+      <TopLine>1</TopLine>
+      <CurrentLine>31</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\ADC.c</PathWithFileName>
       <FilenameWithoutPath>ADC.c</FilenameWithoutPath>
@@ -403,10 +403,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>34</ColumnNumber>
+      <ColumnNumber>15</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>26</TopLine>
-      <CurrentLine>49</CurrentLine>
+      <TopLine>37</TopLine>
+      <CurrentLine>73</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\Timer0.c</PathWithFileName>
       <FilenameWithoutPath>Timer0.c</FilenameWithoutPath>
@@ -453,8 +453,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>73</TopLine>
-      <CurrentLine>99</CurrentLine>
+      <TopLine>71</TopLine>
+      <CurrentLine>82</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\LCD.s</PathWithFileName>
       <FilenameWithoutPath>LCD.s</FilenameWithoutPath>
@@ -485,8 +485,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>487</TopLine>
-      <CurrentLine>488</CurrentLine>
+      <TopLine>961</TopLine>
+      <CurrentLine>969</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\ST7735.c</PathWithFileName>
       <FilenameWithoutPath>ST7735.c</FilenameWithoutPath>
@@ -531,10 +531,10 @@
       <FileType>1</FileType>
       <tvExp>1</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>50</ColumnNumber>
+      <ColumnNumber>80</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>83</TopLine>
-      <CurrentLine>103</CurrentLine>
+      <TopLine>214</TopLine>
+      <CurrentLine>230</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\Tetris.c</PathWithFileName>
       <FilenameWithoutPath>Tetris.c</FilenameWithoutPath>
@@ -547,10 +547,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>42</ColumnNumber>
+      <ColumnNumber>20</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>10</TopLine>
-      <CurrentLine>31</CurrentLine>
+      <TopLine>14</TopLine>
+      <CurrentLine>41</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\IO.c</PathWithFileName>
       <FilenameWithoutPath>IO.c</FilenameWithoutPath>
@@ -611,10 +611,10 @@
       <FileType>1</FileType>
       <tvExp>1</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>2</ColumnNumber>
+      <ColumnNumber>29</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>7</TopLine>
-      <CurrentLine>512</CurrentLine>
+      <TopLine>300</TopLine>
+      <CurrentLine>788</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\Blocks.c</PathWithFileName>
       <FilenameWithoutPath>Blocks.c</FilenameWithoutPath>

@@ -35,10 +35,11 @@ void EnableInterrupts(void);			// Enable interrupts
 //          period in units (1/clockfreq)
 // Outputs: none
 
-uint8_t TimerCount;
+uint32_t TimerCount, TimerCounter;
 
 void Timer0_Init(void){
 	TimerCount = 0;
+	TimerCounter = 0;
 	volatile unsigned long delay;
   SYSCTL_RCGCTIMER_R |= 0x01;   // 0) activate TIMER0
 	delay = SYSCTL_RCGCTIMER_R;
@@ -46,7 +47,7 @@ void Timer0_Init(void){
   TIMER0_CFG_R = 0x00000000;    // 2) configure for 32-bit mode
   TIMER0_TAMR_R = 0x00000002;   // 3) configure for periodic mode, default down-count settings
 //  TIMER0_TAILR_R = (80000000/30)-1;			// 4) reload value
-	  TIMER0_TAILR_R = (80000000/120)-1;			// 4) reload value
+	 TIMER0_TAILR_R = (80000000/360)-1;			// 4) reload value
   TIMER0_TAPR_R = 0;            // 5) bus clock resolution
   TIMER0_ICR_R = 0x00000001;    // 6) clear TIMER0A timeout flag
   TIMER0_IMR_R = 0x00000001;    // 7) arm timeout interrupt
@@ -58,9 +59,7 @@ void Timer0_Init(void){
 }
 
 void Timer0A_Handler(void) {
-	TIMER0_ICR_R = TIMER_ICR_TATOCINT;\
-//	NVIC_ST_CTRL_R = 0x00000000;
-//	TIMER1_CTL_R = 0x00000000;
+	TIMER0_ICR_R = TIMER_ICR_TATOCINT;
 	Display_Board();
 	if ((currentx != xSave) || (currenty != ySave)) {
 		Erase_Block(currentType, currentRot, xSave, ySave);
@@ -70,12 +69,13 @@ void Timer0A_Handler(void) {
 		Display_Board();
 	}
 	TimerCount++;
-	if(TimerCount == 25) {
+	if(TimerCount == (20 - level)) {
+		Add_Line();
 		Drop_Block();
+		Display_Board();
 		Check_Board();
 		TimerCount = 0;
+		TimerCounter++;
+		score = (blocksPlaced * 10) + (TimerCounter / 18) + (linesCleared * 50) + (fdropCount * 10);
 	}
-//	Display_Board();
-//	NVIC_ST_CTRL_R = 0x00000007;
-//	TIMER1_CTL_R = 0x00000001;
 }
