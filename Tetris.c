@@ -175,13 +175,13 @@ int main(void) {
 //	Sound_Init();										// initialize sound
 	EnableInterrupts();
 	while (1) {
-		if ((GPIO_PORTE_DATA_R & 0x02) == 1) {
+		if ((GPIO_PORTE_DATA_R & 0x02)) {
 			Wait10ms(2);
-			while ((GPIO_PORTE_DATA_R & 0x02) == 1) {
-			}
-			PF3 ^= 0x08;
+			PF1 ^= 0x01;
 			FastDrop_Block();
-			PF3 ^= 0x08;
+			while ((GPIO_PORTE_DATA_R & 0x02)) {
+			}
+			PF1 ^= 0x01;
 			Delay100ms(1);
 		}
 		if ((GPIO_PORTE_DATA_R & 0x01) == 1) {
@@ -241,7 +241,7 @@ void Game_Over(void) {
 }
 
 void Check_Board(void) {						// ****** contains minor bug, will fix later
-	uint8_t i, j, jSave, iCount;
+	int8_t i, j, jSave, iCount;
 	for (j = startLine; j < 16; j++) {
 		iCount = 0;
 		for (i = 0; i < 10; i++) {
@@ -255,8 +255,8 @@ void Check_Board(void) {						// ****** contains minor bug, will fix later
 			jSave = j;
 			while (j < 15) {
 				for (i = 0; i < 10; i++) {
-					Buffer[i][j].state = 0;
-					Buffer[i][j].color = 0x0000;
+//					Buffer[i][j].state = 0;
+//					Buffer[i][j].color = 0x0000;
 					Buffer[i][j].state = Buffer[i][j+1].state;
 					Buffer[i][j].color = Buffer[i][j+1].color;
 				}
@@ -266,7 +266,8 @@ void Check_Board(void) {						// ****** contains minor bug, will fix later
 				Buffer[i][15].state = 0;
 				Buffer[i][15].color = 0x0000;
 			}
-			j = jSave;
+			j = jSave - 1;
+			Display_Board();	
 		}
 	}
 }

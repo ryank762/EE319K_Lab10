@@ -770,10 +770,10 @@ void Drop_Block(void) {
 	}
 	else {
 		Place_Block(currentType, currentRot, tempx, currenty);
-		Generate_Block();
 		blocksPlaced++;
-		Display_Board();
 		Check_Board();
+		Generate_Block();
+		Display_Board();
 		dropFlag = 1;
 		rotFlag = 1;
 	}
@@ -816,20 +816,30 @@ void Rotate_Block(void) {
 	int16_t savey = currenty;
 	int16_t savex1 = currentx;
 	int16_t savey1 = currenty;
+	int16_t ceil = 14;
+//	int16_t tempx1 = tempx;
+//	int16_t tempy1 = tempy;
 	NVIC_ST_CTRL_R = 0x00000000;
 	TIMER0_CTL_R = 0x00000000;
 	DisableInterrupts();
 	tempRot = (currentRot + 1)%4;
-	if (currenty < 14) {
+	if (currentType == I) {
+		ceil = 13;
+	}
+	if (currenty < ceil) {
 		Erase_Block(currentType, currentRot, savex, savey);
-		if (Check_Collision(currentType, currentRot, savex, currenty-1) == 0) {
-			Place_Block(currentType, currentRot, savex, savey);
+		if (Check_Collision(currentType, tempRot, savex, currenty) != 0) {
+			currentRot = tempRot;
+			currentx = savex;
+			currenty = savey;
+			Place_Block(currentType, currentRot, currentx, currenty);
 		}
 //		else if (Check_Collision(currentType, tempRot, savex, currenty) == 0) {
 //			currentRot = tempRot;
 //			Place_Block(currentType, currentRot, savex, savey);
 //		}
 //		else if (Check_Drop(currentType, currentRot, savex, currenty-1) != 0) {
+//			savex++;
 //			Place_Block(currentType, currentRot, savex, savey);
 //		}
 		else {
@@ -844,9 +854,6 @@ void Rotate_Block(void) {
 				if (savex < 0) {
 					savex = 0;
 				}
-				if (savey < 0) {
-						savey = 0;
-				}
 				if (Check_Collision(currentType, tempRot, savex, currenty) != 0) {
 					currentRot = tempRot;
 					currentx = savex;
@@ -855,14 +862,19 @@ void Rotate_Block(void) {
 					break;
 				}
 			}
-			for (tempc = 0; tempc < f; tempc++) {
-				savey--;
-				if (Check_Collision(currentType, tempRot, savex, currenty) != 0) {
-					currentRot = tempRot;
-					currenty = savey;
-					Place_Block(currentType, currentRot, currentx, currenty);
-					rFlag = 1;
-					break;
+			if (rFlag == 0){
+				for (tempc = 0; tempc < f; tempc++) {
+					savey--;
+					if (savey < 0) {
+						savey = 0;
+					}
+					if (Check_Collision(currentType, tempRot, currentx, savey) != 0) {
+						currentRot = tempRot;
+						currenty = savey;
+						Place_Block(currentType, currentRot, currentx, currenty);
+						rFlag = 1;
+						break;
+					}
 				}
 			}
 			if (rFlag == 0) {
@@ -873,6 +885,8 @@ void Rotate_Block(void) {
 		}
 		Display_Board();
 	}
+//	tempx = tempx1;
+//	tempy = tempy1;
 	rotFlag = 0;
 	TIMER0_CTL_R = 0x00000001;
 	NVIC_ST_CTRL_R = 0x00000007;

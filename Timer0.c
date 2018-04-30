@@ -59,6 +59,7 @@ void Timer0_Init(void){
 }
 
 void Timer0A_Handler(void) {
+	uint8_t rem;
 	TIMER0_ICR_R = TIMER_ICR_TATOCINT;
 	Display_Board();
 	if ((currentx != xSave) || (currenty != ySave)) {
@@ -78,6 +79,11 @@ void Timer0A_Handler(void) {
 //		Check_Board();
 		TimerCount = 0;
 		TimerCounter++;
-		score = ((blocksPlaced * 10) + (TimerCounter) + (linesCleared * 50) + (fdropCount * 10)) * 10;
+		score = ((blocksPlaced * 10) + (TimerCounter * 1.2) + (linesCleared * 50) + (fdropCount * 10)) * 10;
+
+		rem = score%10;
+		if (rem != 0) {
+			score -= rem;
+		}
 	}
 }
