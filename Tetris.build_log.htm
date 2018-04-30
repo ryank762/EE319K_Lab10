@@ -4,48 +4,98 @@
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
 C:\Keil\EE319KwareSpring2018\Git\EE319K_Lab10\Tetris.uvproj
-Project File Date:  04/28/2018
+Project File Date:  04/30/2018
 
 <h2>Output:</h2>
 Build target 'Tetris'
-compiling Tetris.c...
 compiling Blocks.c...
 linking...
-Program Size: Code=9848 RO-data=2932 RW-data=104 ZI-data=2848  
-".\Tetris.axf" - 0 Error(s), 0 Warning(s).
-</pre>
-</body>
-</html>
-int.s...
-compiling ST7735.c...
-compiling PLL.c...
-compiling Tetris.c...
-compiling IO.c...
-compiling Timer2.c...
-compiling Blocks.c...
-linking...
-Program Size: Code=9848 RO-data=2932 RW-data=104 ZI-data=2848  
+Program Size: Code=9676 RO-data=2932 RW-data=108 ZI-data=2756  
 ".\Tetris.axf" - 0 Error(s), 0 Warning(s).
 Load "C:\\Keil\\EE319KwareSpring2018\\Git\\EE319K_Lab10\\Tetris.axf" 
 Connecting: Mode=JTAG, Speed=1000000Hz
 Erase Done.
 Programming Done.
 Verify OK.
- never referenced
-        int16_t a0, a1, a2, a3, b0, b1, b2, b3;
-Tetris.c(221): warning:  #177-D: variable "b1" was declared but never referenced
-        int16_t a0, a1, a2, a3, b0, b1, b2, b3;
-Tetris.c(221): warning:  #177-D: variable "b2" was declared but never referenced
-        int16_t a0, a1, a2, a3, b0, b1, b2, b3;
-Tetris.c(221): warning:  #177-D: variable "b3" was declared but never referenced
-        int16_t a0, a1, a2, a3, b0, b1, b2, b3;
-Tetris.c: 8 warnings, 0 errors
-linking...
-Program Size: Code=9592 RO-data=2836 RW-data=104 ZI-data=2848  
-".\Tetris.axf" - 0 Error(s), 8 Warning(s).
-rentType][currentRot].p3[1];
-Tetris.c: 0 warnings, 8 errors
-".\Tetris.axf" - 8 Error(s), 0 Warning(s).
+</pre>
+</body>
+</html>
+Error: Flash Download failed  -  Could not load file 'C:\Keil\EE319KwareSpring2018\Git\EE319K_Lab10\Tetris.axf'
+Load "C:\\Keil\\EE319KwareSpring2018\\Git\\EE319K_Lab10\\Tetris.axf" 
+_____^
+*** error 56: cannot open file
+Error: Flash Download failed  -  Could not load file 'C:\Keil\EE319KwareSpring2018\Git\EE319K_Lab10\Tetris.axf'
+0000007;
+Blocks.c(872): error:  #18: expected a ")"
+        NVIC_ST_CTRL_R = 0x00000007;
+Blocks.c(872): error:  #144: a value of type "int" cannot be used to initialize an entity of type "int *"
+        NVIC_ST_CTRL_R = 0x00000007;
+Blocks.c(873): warning:  #1295-D: Deprecated declaration EnableInterrupts - give arg types
+        EnableInterrupts();
+Blocks.c(873): error:  #260-D: explicit type is missing ("int" assumed)
+        EnableInterrupts();
+Blocks.c(873): error:  #147: declaration is incompatible with "void EnableInterrupts(void)" (declared at line 13)
+        EnableInterrupts();
+Blocks.c(874): error:  #169: expected a declaration
+  }
+Blocks.c(897): warning:  #12-D: parsing restarts here after previous syntax error
+        Tetris[I][2].p0[1] = 0;
+Blocks.c(898): error:  #94-D: the size of an array must be greater than zero
+        Tetris[I][2].p1[0] = 1;
+Blocks.c(898): error:  #77-D: this declaration has no storage class or type specifier
+        Tetris[I][2].p1[0] = 1;
+Blocks.c(898): error:  #147: declaration is incompatible with "block_t Tetris[7][4]" (declared at line 506)
+        Tetris[I][2].p1[0] = 1;
+Blocks.c(898): error:  #65: expected a ";"
+        Tetris[I][2].p1[0] = 1;
+Blocks.c(899): error:  #94-D: the size of an array must be greater than zero
+        Tetris[I][2].p1[1] = 0;
+Blocks.c(899): error:  #77-D: this declaration has no storage class or type specifier
+        Tetris[I][2].p1[1] = 0;
+Blocks.c(899): error:  #65: expected a ";"
+        Tetris[I][2].p1[1] = 0;
+Blocks.c(900): error:  #94-D: the size of an array must be greater than zero
+        Tetris[I][2].p2[0] = 2;
+Blocks.c(900): error:  #77-D: this declaration has no storage class or type specifier
+        Tetris[I][2].p2[0] = 2;
+Blocks.c(900): error:  #65: expected a ";"
+        Tetris[I][2].p2[0] = 2;
+Blocks.c(901): error:  #94-D: the size of an array must be greater than zero
+        Tetris[I][2].p2[1] = 0;
+Blocks.c(901): error:  #77-D: this declaration has no storage class or type specifier
+        Tetris[I][2].p2[1] = 0;
+Blocks.c(901): error:  #65: expected a ";"
+        Tetris[I][2].p2[1] = 0;
+Blocks.c(902): error:  #94-D: the size of an array must be greater than zero
+        Tetris[I][2].p3[0] = 3;
+Blocks.c(902): error:  #77-D: this declaration has no storage class or type specifier
+        Tetris[I][2].p3[0] = 3;
+Blocks.c(902): error:  #65: expected a ";"
+        Tetris[I][2].p3[0] = 3;
+Blocks.c(903): error:  #94-D: the size of an array must be greater than zero
+        Tetris[I][2].p3[1] = 0;
+Blocks.c(903): error:  #77-D: this declaration has no storage class or type specifier
+        Tetris[I][2].p3[1] = 0;
+Blocks.c(903): error:  #65: expected a ";"
+        Tetris[I][2].p3[1] = 0;
+Blocks.c: 2 warnings, 30 errors
+".\Tetris.axf" - 30 Error(s), 2 Warning(s).
 Target not created
-0 Warning(s).
+Load "C:\\Keil\\EE319KwareSpring2018\\Git\\EE319K_Lab10\\Tetris.axf" 
+_____^
+*** error 56: cannot open file
+Error: Flash Download failed  -  Could not load file 'C:\Keil\EE319KwareSpring2018\Git\EE319K_Lab10\Tetris.axf'
+      Tetris[I][2].p2[1] = 0;
+Blocks.c(898): error:  #65: expected a ";"
+        Tetris[I][2].p2[1] = 0;
+Blocks.c(899): error:  #94-D: the size of an array must be greater than zero
+        Tetris[I][2].p3[0] = 3;
+Blocks.c(899): error:  #77-D: this declaration has no storage class or type specifier
+        Tetris[I][2].p3[0] = 3;
+Blocks.c(899): error:  #65: expected a ";"
+        Tetris[I][2].p3[0] = 3;
+Blocks.c(900): error:  #94-D: the size of an array must be greater than zero
+        Tetris[I][2].p3[1] = 0;
+Blocks.c: 9 warnings, 30 errors
+".\Tetris.axf" - 30 Error(s), 9 Warning(s).
 Target not created

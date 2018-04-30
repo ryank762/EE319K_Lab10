@@ -150,7 +150,8 @@ uint32_t score = 0;
 uint8_t currentType, currentRot, tempRot, nextBlock;
 uint8_t level = 0;
 uint8_t startLine = 0;
-int8_t currentx, tempx, currenty, xSave, ySave;
+uint8_t rotFlag = 0;
+int8_t currentx, tempx, currenty, tempy, xSave, ySave;
 
 
 int main(void) {
@@ -174,12 +175,24 @@ int main(void) {
 //	Sound_Init();										// initialize sound
 	EnableInterrupts();
 	while (1) {
-		while (((GPIO_PORTE_DATA_R) & 0x01) == 0) {
+		if ((GPIO_PORTE_DATA_R & 0x02) == 1) {
+			Wait10ms(2);
+			while ((GPIO_PORTE_DATA_R & 0x02) == 1) {
+			}
+			PF3 ^= 0x08;
+			FastDrop_Block();
+			PF3 ^= 0x08;
+			Delay100ms(1);
 		}
-		Wait10ms(20);
-		while (((GPIO_PORTE_DATA_R) & 0x01) == 1) {
+		if ((GPIO_PORTE_DATA_R & 0x01) == 1) {
+			Wait10ms(2);
+			while ((GPIO_PORTE_DATA_R & 0x01) == 1) {
+			}
+			PF3 ^= 0x08;
+			Rotate_Block();
+			PF3 ^= 0x08;
+			Delay100ms(1);
 		}
-		FastDrop_Block();
 	}
 }
 
@@ -196,7 +209,7 @@ int16_t Floor(uint32_t in) {
 		floor = 0;
 	}
 	else if ((2896 <= in) && (in < 3496)) {
-		floor = 0;
+		floor = 1;
 		}
 	else if ((3496 <= in) && (in < 4096)) {
 		floor = 1;
@@ -336,10 +349,9 @@ void PortE_Init(void) {
 	delay = SYSCTL_RCGCGPIO_R;
 	GPIO_PORTE_DEN_R |= 0x03;
 	GPIO_PORTE_DIR_R &= ~0x03;
-	GPIO_PORTE_AFSEL_R &= ~0x03;
-	GPIO_PORTE_AMSEL_R &= ~0x03;
 //	GPIO_PORTE_PCTL_R &= ~0x000F0000;
 	GPIO_PORTE_PUR_R &= ~0x03;
+	GPIO_PORTE_PDR_R |= 0x03;
 }
 
 void PortF_Init(void) {
@@ -385,16 +397,16 @@ void SysTick_Handler(void) {
 	PF2 ^= 0x04;			// ADC execution time
 	Random_Init(Data);
 	c = currentx + Floor(Data);
+	if (c < 0) {
+		c = 0;
+	}
+	if (c > 9) {
+		c = 9;
+	}
 	d = tempx;
 	Erase_Block(currentType, currentRot, tempx, currenty);
 	if (Check_Collision(currentType, currentRot, c, currenty) == 1) {
-		currentx += Floor(Data);
-		if (currentx < 0) {
-			currentx = 0;
-		}
-		if (currentx > 9) {
-			currentx = 9;
-		}
+		currentx = c;
 	} 
 	Place_Block(currentType, currentRot, currentx, currenty);
 	tempx = d;

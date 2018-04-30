@@ -46,8 +46,8 @@ void Timer0_Init(void){
   TIMER0_CTL_R = 0x00000000;    // 1) disable TIMER0A during setup
   TIMER0_CFG_R = 0x00000000;    // 2) configure for 32-bit mode
   TIMER0_TAMR_R = 0x00000002;   // 3) configure for periodic mode, default down-count settings
-//  TIMER0_TAILR_R = (80000000/30)-1;			// 4) reload value
-	 TIMER0_TAILR_R = (80000000/360)-1;			// 4) reload value
+  TIMER0_TAILR_R = (80000000/15)-1;			// 4) reload value
+//	 TIMER0_TAILR_R = (80000000/360)-1;			// 4) reload value
   TIMER0_TAPR_R = 0;            // 5) bus clock resolution
   TIMER0_ICR_R = 0x00000001;    // 6) clear TIMER0A timeout flag
   TIMER0_IMR_R = 0x00000001;    // 7) arm timeout interrupt
@@ -69,13 +69,15 @@ void Timer0A_Handler(void) {
 		Display_Board();
 	}
 	TimerCount++;
-	if(TimerCount == (20 - level)) {
-		Add_Line();
+	if(TimerCount == (12 - level)) {
+//		Add_Line();
+//		Rotate_Block();
+//		FastDrop_Block();
 		Drop_Block();
 		Display_Board();
-		Check_Board();
+//		Check_Board();
 		TimerCount = 0;
 		TimerCounter++;
-		score = (blocksPlaced * 10) + (TimerCounter / 18) + (linesCleared * 50) + (fdropCount * 10);
+		score = ((blocksPlaced * 10) + (TimerCounter) + (linesCleared * 50) + (fdropCount * 10)) * 10;
 	}
 }
