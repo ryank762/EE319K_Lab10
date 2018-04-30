@@ -495,6 +495,26 @@
               <FileType>1</FileType>
               <FilePath>.\Blocks.c</FilePath>
             </File>
+            <File>
+              <FileName>FiFo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FiFo.c</FilePath>
+            </File>
+            <File>
+              <FileName>FiFo.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\FiFo.h</FilePath>
+            </File>
+            <File>
+              <FileName>UART.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\UART.c</FilePath>
+            </File>
+            <File>
+              <FileName>UART.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\UART.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

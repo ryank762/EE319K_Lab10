@@ -4,17 +4,15 @@
 // original Space Invaders.
 // Jonathan Valvano
 // November 17, 2014
-
+#include <stdint.h>
+#include "tm4c123gh6pm.h"
 
 void Sound_Init(void);
-void Sound_Play(const uint8_t *pt, uint32_t count);
-void Sound_Shoot(void);
-void Sound_Killed(void);
-void Sound_Explosion(void);
-
-void Sound_Fastinvader1(void);
-void Sound_Fastinvader2(void);
-void Sound_Fastinvader3(void);
-void Sound_Fastinvader4(void);
-void Sound_Highpitch(void);
-
+//void Play(void);
+//void Sound_Play(const unsigned char *pt, unsigned long count);
+//void StopMusic(void);
+void Sound_Rotate(void);
+void Sound_Blockhit(void);
+void Sound_Gameover(void);
+void Sound_Song(void);
+void Sound_Play1(const unsigned char *sound, uint32_t length);
