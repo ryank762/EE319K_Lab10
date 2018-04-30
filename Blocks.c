@@ -12,6 +12,10 @@
 void DisableInterrupts(void);			// Disable interrupts
 void EnableInterrupts(void);			// Enable interrupts
 
+#define PF1       (*((volatile uint32_t *)0x40025008))
+#define PF2       (*((volatile uint32_t *)0x40025010))
+#define PF3       (*((volatile uint32_t *)0x40025020))		
+
 /*
 const uint16_t IBlock0[] = {
 	0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410,
@@ -606,6 +610,7 @@ void Erase_Block(uint8_t type, uint8_t rot, int16_t x, int16_t y) {
 
 void Generate_Block(void) {
 	uint8_t n;
+	PF2 ^= 0x04;
 	switch (nextBlock) {
 		case I : {		
 			if (Check_Collision(I, 0, 2, 15) == success) {
@@ -616,10 +621,17 @@ void Generate_Block(void) {
 				xSave = currentx;
 				ySave = currenty;
 				Place_Block(currentType, currentRot, currentx, currenty);
+				PF2 ^= 0x04;
 				break;
 			}
 			else {
-				Game_Over();
+				PF2 ^= 0x04;
+				if (cFlag == 0) {
+					Game_Over();
+				}
+				else {
+					cFlag--;
+				}
 			}
 		}
 		case J :	{		
@@ -631,10 +643,17 @@ void Generate_Block(void) {
 				xSave = currentx;
 				ySave = currenty;
 				Place_Block(currentType, currentRot, currentx, currenty);
+				PF2 ^= 0x04;
 				break;
 			}
 			else {
-				Game_Over();
+				PF2 ^= 0x04;
+				if (cFlag == 0) {
+					Game_Over();
+				}
+				else {
+					cFlag--;
+				}
 			}
 		}
 		case L :	{		
@@ -646,10 +665,17 @@ void Generate_Block(void) {
 				xSave = currentx;
 				ySave = currenty;
 				Place_Block(currentType, currentRot, currentx, currenty);
+				PF2 ^= 0x04;
 				break;
 			}
 			else {
-				Game_Over();
+				PF2 ^= 0x04;
+				if (cFlag == 0) {
+					Game_Over();
+				}
+				else {
+					cFlag--;
+				}
 			}
 		}
 		case O :	{		
@@ -661,10 +687,17 @@ void Generate_Block(void) {
 				xSave = currentx;
 				ySave = currenty;
 				Place_Block(currentType, currentRot, currentx, currenty);
+				PF2 ^= 0x04;
 				break;
 			}
 			else {
-				Game_Over();
+				PF2 ^= 0x04;
+				if (cFlag == 0) {
+					Game_Over();
+				}
+				else {
+					cFlag--;
+				}
 			}
 		}
 		case S :	{		
@@ -676,10 +709,17 @@ void Generate_Block(void) {
 				xSave = currentx;
 				ySave = currenty;
 				Place_Block(currentType, currentRot, currentx, currenty);
+				PF2 ^= 0x04;
 				break;
 			}
 			else {
-				Game_Over();
+				PF2 ^= 0x04;
+				if (cFlag == 0) {
+					Game_Over();
+				}
+				else {
+					cFlag--;
+				}
 			}
 		}
 		case T :	{		
@@ -691,10 +731,17 @@ void Generate_Block(void) {
 				xSave = currentx;
 				ySave = currenty;
 				Place_Block(currentType, currentRot, currentx, currenty);
+				PF2 ^= 0x04;
 				break;
 		}
 		else {
-				Game_Over();
+				PF2 ^= 0x04;
+				if (cFlag == 0) {
+					Game_Over();
+				}
+				else {
+					cFlag--;
+				}
 			}
 		}
 		case Z :	{		
@@ -706,10 +753,17 @@ void Generate_Block(void) {
 				xSave = currentx;
 				ySave = currenty;
 				Place_Block(currentType, currentRot, currentx, currenty);
+				PF2 ^= 0x04;
 				break;
 			}
 			else {
-				Game_Over();
+				PF2 ^= 0x04;
+				if (cFlag == 0) {
+					Game_Over();
+				}
+				else {
+					cFlag--;
+				}
 			}
 		}
 	}
@@ -788,25 +842,13 @@ void FastDrop_Block(void) {
 }
 
 void Add_Line(void) {			// *********************** work in progress
-	uint8_t i, j;
-	int16_t ts1 = currentx;
-	int16_t ts2 = currenty;
+	uint8_t i;
 	NVIC_ST_CTRL_R = 0x00000000;
-	startLine++;
-	Erase_Block(currentType, currentRot, ts1, ts2);
-	for (j = startLine; j < 16; j++) {
-		for (i = 0; i < 10; i++) {
-			Buffer[i][j].state = Buffer[i][j-1].state;
-			Buffer[i][j].color = Buffer[i][j-1].color;
-		}
-	}
 	for (i = 0; i < 10; i++) {
-		Buffer[i][startLine-1].state = 1;
-		Buffer[i][startLine-1].color = 0x8080;
+		Buffer[i][startLine].state = 1;
+		Buffer[i][startLine].color = 0xFEFE;
 	}
-	currentx = ts1;
-	currenty = ts2;
-	Place_Block(currentType, currentRot, currentx, currenty);
+	startLine++;
 	NVIC_ST_CTRL_R = 0x00000007;
 }
 
@@ -904,14 +946,14 @@ void Tetris_Init(void) {
 	Tetris[I][0].p3[0] = 3;
 	Tetris[I][0].p3[1] = 0;
 //
-	Tetris[I][1].p0[0] = 0;		//  *
-	Tetris[I][1].p0[1] = 0;		//  *
-	Tetris[I][1].p1[0] = 0;		//  *
-	Tetris[I][1].p1[1] = 1;		// (*)
-	Tetris[I][1].p2[0] = 0;
-	Tetris[I][1].p2[1] = 2;
-	Tetris[I][1].p3[0] = 0;
-	Tetris[I][1].p3[1] = 3;
+	Tetris[I][3].p0[0] = 0;		//  *
+	Tetris[I][3].p0[1] = 0;		//  *
+	Tetris[I][3].p1[0] = 0;		//  *
+	Tetris[I][3].p1[1] = 1;		// (*)
+	Tetris[I][3].p2[0] = 0;
+	Tetris[I][3].p2[1] = 2;
+	Tetris[I][3].p3[0] = 0;
+	Tetris[I][3].p3[1] = 3;
 //
 	Tetris[I][2].p0[0] = 0;		// (*)* * *
 	Tetris[I][2].p0[1] = 0;
@@ -922,14 +964,14 @@ void Tetris_Init(void) {
 	Tetris[I][2].p3[0] = 3;
 	Tetris[I][2].p3[1] = 0;
 //
-	Tetris[I][3].p0[0] = 0;		//  *
-	Tetris[I][3].p0[1] = 0;		//  *
-	Tetris[I][3].p1[0] = 0;		//  *
-	Tetris[I][3].p1[1] = 1;		// (*)
-	Tetris[I][3].p2[0] = 0;
-	Tetris[I][3].p2[1] = 2;
-	Tetris[I][3].p3[0] = 0;
-	Tetris[I][3].p3[1] = 3;
+	Tetris[I][1].p0[0] = 0;		//  *
+	Tetris[I][1].p0[1] = 0;		//  *
+	Tetris[I][1].p1[0] = 0;		//  *
+	Tetris[I][1].p1[1] = 1;		// (*)
+	Tetris[I][1].p2[0] = 0;
+	Tetris[I][1].p2[1] = 2;
+	Tetris[I][1].p3[0] = 0;
+	Tetris[I][1].p3[1] = 3;
 // ************
 // J block init
 	Tetris[J][0].p0[0] = 0;		//  *
@@ -941,14 +983,14 @@ void Tetris_Init(void) {
 	Tetris[J][0].p3[0] = 0;
 	Tetris[J][0].p3[1] = 1;
 //
-	Tetris[J][1].p0[0] = 0;		//    *
-	Tetris[J][1].p0[1] = 0;		//    *
-	Tetris[J][1].p1[0] = 1;		// (*)*
-	Tetris[J][1].p1[1] = 0;
-	Tetris[J][1].p2[0] = 1;
-	Tetris[J][1].p2[1] = 1;
-	Tetris[J][1].p3[0] = 1;
-	Tetris[J][1].p3[1] = 2;
+	Tetris[J][3].p0[0] = 0;		//    *
+	Tetris[J][3].p0[1] = 0;		//    *
+	Tetris[J][3].p1[0] = 1;		// (*)*
+	Tetris[J][3].p1[1] = 0;
+	Tetris[J][3].p2[0] = 1;
+	Tetris[J][3].p2[1] = 1;
+	Tetris[J][3].p3[0] = 1;
+	Tetris[J][3].p3[1] = 2;
 //
 	Tetris[J][2].p0[0] = 0;		// (*)* *
 	Tetris[J][2].p0[1] = 0;		//      *
@@ -959,14 +1001,14 @@ void Tetris_Init(void) {
 	Tetris[J][2].p3[0] = 2;
 	Tetris[J][2].p3[1] = -1;
 //
-	Tetris[J][3].p0[0] = 0;		//  * *
-	Tetris[J][3].p0[1] = 0;		//  *
-	Tetris[J][3].p1[0] = 0;		// (*)
-	Tetris[J][3].p1[1] = 1;
-	Tetris[J][3].p2[0] = 0;
-	Tetris[J][3].p2[1] = 2;
-	Tetris[J][3].p3[0] = 1;
-	Tetris[J][3].p3[1] = 2;
+	Tetris[J][1].p0[0] = 0;		//  * *
+	Tetris[J][1].p0[1] = 0;		//  *
+	Tetris[J][1].p1[0] = 0;		// (*)
+	Tetris[J][1].p1[1] = 1;
+	Tetris[J][1].p2[0] = 0;
+	Tetris[J][1].p2[1] = 2;
+	Tetris[J][1].p3[0] = 1;
+	Tetris[J][1].p3[1] = 2;
 // ************
 // L block init
 	Tetris[L][0].p0[0] = 0;		//      *
@@ -978,14 +1020,14 @@ void Tetris_Init(void) {
 	Tetris[L][0].p3[0] = 2;
 	Tetris[L][0].p3[1] = 1;
 //
-	Tetris[L][1].p0[0] = 0;		// (*)*
-	Tetris[L][1].p0[1] = 0;		//    *
-	Tetris[L][1].p1[0] = 1;		//    *
-	Tetris[L][1].p1[1] = 0;
-	Tetris[L][1].p2[0] = 1;
-	Tetris[L][1].p2[1] = -1;
-	Tetris[L][1].p3[0] = 1;
-	Tetris[L][1].p3[1] = -2;
+	Tetris[L][3].p0[0] = 0;		// (*)*
+	Tetris[L][3].p0[1] = 0;		//    *
+	Tetris[L][3].p1[0] = 1;		//    *
+	Tetris[L][3].p1[1] = 0;
+	Tetris[L][3].p2[0] = 1;
+	Tetris[L][3].p2[1] = -1;
+	Tetris[L][3].p3[0] = 1;
+	Tetris[L][3].p3[1] = -2;
 //
 	Tetris[L][2].p0[0] = 0;		//  * * *
 	Tetris[L][2].p0[1] = 0;		// (*)
@@ -996,14 +1038,14 @@ void Tetris_Init(void) {
 	Tetris[L][2].p3[0] = 2;
 	Tetris[L][2].p3[1] = 1;
 //
-	Tetris[L][3].p0[0] = 0;		//  *
-	Tetris[L][3].p0[1] = 0;		//  *
-	Tetris[L][3].p1[0] = 0;		// (*)*
-	Tetris[L][3].p1[1] = 1;
-	Tetris[L][3].p2[0] = 0;
-	Tetris[L][3].p2[1] = 2;
-	Tetris[L][3].p3[0] = 1;
-	Tetris[L][3].p3[1] = 0;
+	Tetris[L][1].p0[0] = 0;		//  *
+	Tetris[L][1].p0[1] = 0;		//  *
+	Tetris[L][1].p1[0] = 0;		// (*)*
+	Tetris[L][1].p1[1] = 1;
+	Tetris[L][1].p2[0] = 0;
+	Tetris[L][1].p2[1] = 2;
+	Tetris[L][1].p3[0] = 1;
+	Tetris[L][1].p3[1] = 0;
 // ************
 // O block init
 	Tetris[O][0].p0[0] = 0;		//  * *
@@ -1015,14 +1057,14 @@ void Tetris_Init(void) {
 	Tetris[O][0].p3[0] = 1;
 	Tetris[O][0].p3[1] = 1;
 //
-	Tetris[O][1].p0[0] = 0;		//  * *
-	Tetris[O][1].p0[1] = 0;		// (*)*
-	Tetris[O][1].p1[0] = 1;
-	Tetris[O][1].p1[1] = 0;
-	Tetris[O][1].p2[0] = 0;
-	Tetris[O][1].p2[1] = 1;
-	Tetris[O][1].p3[0] = 1;
-	Tetris[O][1].p3[1] = 1;
+	Tetris[O][3].p0[0] = 0;		//  * *
+	Tetris[O][3].p0[1] = 0;		// (*)*
+	Tetris[O][3].p1[0] = 1;
+	Tetris[O][3].p1[1] = 0;
+	Tetris[O][3].p2[0] = 0;
+	Tetris[O][3].p2[1] = 1;
+	Tetris[O][3].p3[0] = 1;
+	Tetris[O][3].p3[1] = 1;
 //
 	Tetris[O][2].p0[0] = 0;		//  * *
 	Tetris[O][2].p0[1] = 0;		// (*)*
@@ -1033,14 +1075,14 @@ void Tetris_Init(void) {
 	Tetris[O][2].p3[0] = 1;
 	Tetris[O][2].p3[1] = 1;
 //
-	Tetris[O][3].p0[0] = 0;		//  * *
-	Tetris[O][3].p0[1] = 0;		// (*)*
-	Tetris[O][3].p1[0] = 1;
-	Tetris[O][3].p1[1] = 0;
-	Tetris[O][3].p2[0] = 0;
-	Tetris[O][3].p2[1] = 1;
-	Tetris[O][3].p3[0] = 1;
-	Tetris[O][3].p3[1] = 1;
+	Tetris[O][1].p0[0] = 0;		//  * *
+	Tetris[O][1].p0[1] = 0;		// (*)*
+	Tetris[O][1].p1[0] = 1;
+	Tetris[O][1].p1[1] = 0;
+	Tetris[O][1].p2[0] = 0;
+	Tetris[O][1].p2[1] = 1;
+	Tetris[O][1].p3[0] = 1;
+	Tetris[O][1].p3[1] = 1;
 // ************
 // S block init
 	Tetris[S][0].p0[0] = 0;		// (*)*
@@ -1052,14 +1094,14 @@ void Tetris_Init(void) {
 	Tetris[S][0].p3[0] = 2;
 	Tetris[S][0].p3[1] = -1;
 //
-	Tetris[S][1].p0[0] = 0;		//    *
-	Tetris[S][1].p0[1] = 0;		//  * *
-	Tetris[S][1].p1[0] = 0;		// (*)
-	Tetris[S][1].p1[1] = 1;
-	Tetris[S][1].p2[0] = 1;
-	Tetris[S][1].p2[1] = 1;
-	Tetris[S][1].p3[0] = 1;
-	Tetris[S][1].p3[1] = 2;
+	Tetris[S][3].p0[0] = 0;		//    *
+	Tetris[S][3].p0[1] = 0;		//  * *
+	Tetris[S][3].p1[0] = 0;		// (*)
+	Tetris[S][3].p1[1] = 1;
+	Tetris[S][3].p2[0] = 1;
+	Tetris[S][3].p2[1] = 1;
+	Tetris[S][3].p3[0] = 1;
+	Tetris[S][3].p3[1] = 2;
 //
 	Tetris[S][2].p0[0] = 0;		// (*)*
 	Tetris[S][2].p0[1] = 0;		//    * *
@@ -1070,14 +1112,14 @@ void Tetris_Init(void) {
 	Tetris[S][2].p3[0] = 2;
 	Tetris[S][2].p3[1] = -1;
 //
-	Tetris[S][3].p0[0] = 0;		//    *
-	Tetris[S][3].p0[1] = 0;		//  * *
-	Tetris[S][3].p1[0] = 0;		// (*)
-	Tetris[S][3].p1[1] = 1;
-	Tetris[S][3].p2[0] = 1;
-	Tetris[S][3].p2[1] = 1;
-	Tetris[S][3].p3[0] = 1;
-	Tetris[S][3].p3[1] = 2;	
+	Tetris[S][1].p0[0] = 0;		//    *
+	Tetris[S][1].p0[1] = 0;		//  * *
+	Tetris[S][1].p1[0] = 0;		// (*)
+	Tetris[S][1].p1[1] = 1;
+	Tetris[S][1].p2[0] = 1;
+	Tetris[S][1].p2[1] = 1;
+	Tetris[S][1].p3[0] = 1;
+	Tetris[S][1].p3[1] = 2;	
 // ************
 // T block init
 	Tetris[T][0].p0[0] = 0;		//    *
@@ -1089,14 +1131,14 @@ void Tetris_Init(void) {
 	Tetris[T][0].p3[0] = 1;
 	Tetris[T][0].p3[1] = 1;
 //
-	Tetris[T][1].p0[0] = 0;		//    *
-	Tetris[T][1].p0[1] = 0;		// (*)*
-	Tetris[T][1].p1[0] = 1;		//    *
-	Tetris[T][1].p1[1] = 0;
-	Tetris[T][1].p2[0] = 1;
-	Tetris[T][1].p2[1] = 1;
-	Tetris[T][1].p3[0] = 1;
-	Tetris[T][1].p3[1] = -1;
+	Tetris[T][3].p0[0] = 0;		//    *
+	Tetris[T][3].p0[1] = 0;		// (*)*
+	Tetris[T][3].p1[0] = 1;		//    *
+	Tetris[T][3].p1[1] = 0;
+	Tetris[T][3].p2[0] = 1;
+	Tetris[T][3].p2[1] = 1;
+	Tetris[T][3].p3[0] = 1;
+	Tetris[T][3].p3[1] = -1;
 //
 	Tetris[T][2].p0[0] = 0;		// (*)* *
 	Tetris[T][2].p0[1] = 0;		//    *
@@ -1107,14 +1149,14 @@ void Tetris_Init(void) {
 	Tetris[T][2].p3[0] = 1;
 	Tetris[T][2].p3[1] = -1;
 //
-	Tetris[T][3].p0[0] = 0;		//  *
-	Tetris[T][3].p0[1] = 0;		//  * *
-	Tetris[T][3].p1[0] = 0;		// (*)
-	Tetris[T][3].p1[1] = 1;
-	Tetris[T][3].p2[0] = 0;
-	Tetris[T][3].p2[1] = 2;
-	Tetris[T][3].p3[0] = 1;
-	Tetris[T][3].p3[1] = 1;
+	Tetris[T][1].p0[0] = 0;		//  *
+	Tetris[T][1].p0[1] = 0;		//  * *
+	Tetris[T][1].p1[0] = 0;		// (*)
+	Tetris[T][1].p1[1] = 1;
+	Tetris[T][1].p2[0] = 0;
+	Tetris[T][1].p2[1] = 2;
+	Tetris[T][1].p3[0] = 1;
+	Tetris[T][1].p3[1] = 1;
 // ************
 // Z block init
 	Tetris[Z][0].p0[0] = 0;		//    * *
@@ -1126,14 +1168,14 @@ void Tetris_Init(void) {
 	Tetris[Z][0].p3[0] = 2;
 	Tetris[Z][0].p3[1] = 1;
 //
-	Tetris[Z][1].p0[0] = 0;		//  *
-	Tetris[Z][1].p0[1] = 0;		// (*)*
-	Tetris[Z][1].p1[0] = 0;		//    *
-	Tetris[Z][1].p1[1] = 1;
-	Tetris[Z][1].p2[0] = 1;
-	Tetris[Z][1].p2[1] = 0;
-	Tetris[Z][1].p3[0] = 1;
-	Tetris[Z][1].p3[1] = -1;
+	Tetris[Z][3].p0[0] = 0;		//  *
+	Tetris[Z][3].p0[1] = 0;		// (*)*
+	Tetris[Z][3].p1[0] = 0;		//    *
+	Tetris[Z][3].p1[1] = 1;
+	Tetris[Z][3].p2[0] = 1;
+	Tetris[Z][3].p2[1] = 0;
+	Tetris[Z][3].p3[0] = 1;
+	Tetris[Z][3].p3[1] = -1;
 //
 	Tetris[Z][2].p0[0] = 0;		//    * *
 	Tetris[Z][2].p0[1] = 0;		// (*)*
@@ -1144,12 +1186,12 @@ void Tetris_Init(void) {
 	Tetris[Z][2].p3[0] = 2;
 	Tetris[Z][2].p3[1] = 1;
 //
-	Tetris[Z][3].p0[0] = 0;		//  *
-	Tetris[Z][3].p0[1] = 0;		// (*)*
-	Tetris[Z][3].p1[0] = 0;		//    *
-	Tetris[Z][3].p1[1] = 1;
-	Tetris[Z][3].p2[0] = 1;
-	Tetris[Z][3].p2[1] = 0;
-	Tetris[Z][3].p3[0] = 1;
-	Tetris[Z][3].p3[1] = -1;
+	Tetris[Z][1].p0[0] = 0;		//  *
+	Tetris[Z][1].p0[1] = 0;		// (*)*
+	Tetris[Z][1].p1[0] = 0;		//    *
+	Tetris[Z][1].p1[1] = 1;
+	Tetris[Z][1].p2[0] = 1;
+	Tetris[Z][1].p2[1] = 0;
+	Tetris[Z][1].p3[0] = 1;
+	Tetris[Z][1].p3[1] = -1;
 }

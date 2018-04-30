@@ -13,7 +13,7 @@ struct board {
 
 extern struct board Buffer[10][16];
 
-extern uint8_t currentType, currentRot, tempRot, nextBlock, level, startLine, rotFlag;
+extern uint8_t currentType, currentRot, tempRot, nextBlock, level, startLine, rotFlag, cFlag;
 
 extern int8_t currentx, tempx, currenty, tempy, xSave, ySave;
 

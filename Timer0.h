@@ -33,6 +33,8 @@ void Timer0_Init(void);
 
 void Timer0A_Handler(void);
 
+extern uint32_t TimerCount;
+
 extern uint32_t TimerCounter;
 
 #endif // __TIMER2INTS_H__

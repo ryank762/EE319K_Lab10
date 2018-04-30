@@ -115,6 +115,7 @@ Section Cross References
     tetris.o(i.Check_Board) refers to tetris.o(i.Display_Board) for Display_Board
     tetris.o(i.Check_Board) refers to tetris.o(.data) for startLine
     tetris.o(i.Check_Board) refers to tetris.o(.bss) for Buffer
+    tetris.o(i.Check_Board) refers to timer0.o(.data) for TimerCount
     tetris.o(i.Display_Board) refers to tetris.o(i.Coordinate_ConversionX) for Coordinate_ConversionX
     tetris.o(i.Display_Board) refers to tetris.o(i.Coordinate_ConversionY) for Coordinate_ConversionY
     tetris.o(i.Display_Board) refers to st7735.o(i.ST7735_DrawBitmap) for ST7735_DrawBitmap
@@ -125,15 +126,14 @@ Section Cross References
     tetris.o(i.Display_Init) refers to st7735.o(i.ST7735_DrawBitmap) for ST7735_DrawBitmap
     tetris.o(i.Display_Init) refers to tetris.o(.constdata) for nBlock
     tetris.o(i.GPIOPortF_Handler) refers to blocks.o(i.Rotate_Block) for Rotate_Block
+    tetris.o(i.Game_Over) refers to startup.o(.text) for DisableInterrupts
     tetris.o(i.Game_Over) refers to st7735.o(i.ST7735_FillScreen) for ST7735_FillScreen
     tetris.o(i.Game_Over) refers to st7735.o(i.ST7735_SetCursor) for ST7735_SetCursor
     tetris.o(i.Game_Over) refers to st7735.o(i.ST7735_OutString) for ST7735_OutString
     tetris.o(i.Game_Over) refers to print.o(.text) for LCD_OutDec
-    tetris.o(i.Game_Over) refers to startup.o(.text) for DisableInterrupts
     tetris.o(i.Game_Over) refers to tetris.o(.data) for score
     tetris.o(i.PortF_Init) refers to startup.o(.text) for EnableInterrupts
     tetris.o(i.SysTick_Handler) refers to adc.o(i.ADC_In) for ADC_In
-    tetris.o(i.SysTick_Handler) refers to random.o(.text) for Random_Init
     tetris.o(i.SysTick_Handler) refers to tetris.o(i.Floor) for Floor
     tetris.o(i.SysTick_Handler) refers to blocks.o(i.Erase_Block) for Erase_Block
     tetris.o(i.SysTick_Handler) refers to blocks.o(i.Check_Collision) for Check_Collision
@@ -163,10 +163,8 @@ Section Cross References
     timer2.o(i.Timer2A_Handler) refers to tetris.o(i.Display_Board) for Display_Board
     timer2.o(i.Timer2A_Handler) refers to tetris.o(i.Check_Board) for Check_Board
     timer2.o(i.Timer2A_Handler) refers to blocks.o(i.Drop_Block) for Drop_Block
-    blocks.o(i.Add_Line) refers to blocks.o(i.Erase_Block) for Erase_Block
-    blocks.o(i.Add_Line) refers to blocks.o(i.Place_Block) for Place_Block
-    blocks.o(i.Add_Line) refers to tetris.o(.data) for currentx
     blocks.o(i.Add_Line) refers to tetris.o(.bss) for Buffer
+    blocks.o(i.Add_Line) refers to tetris.o(.data) for startLine
     blocks.o(i.Check_Collision) refers to blocks.o(.bss) for Tetris
     blocks.o(i.Check_Collision) refers to tetris.o(.bss) for Buffer
     blocks.o(i.Check_Drop) refers to blocks.o(.bss) for Tetris
@@ -189,8 +187,8 @@ Section Cross References
     blocks.o(i.Generate_Block) refers to blocks.o(i.Place_Block) for Place_Block
     blocks.o(i.Generate_Block) refers to tetris.o(i.Game_Over) for Game_Over
     blocks.o(i.Generate_Block) refers to random.o(.text) for Random
-    blocks.o(i.Generate_Block) refers to tetris.o(i.Display_Board) for Display_Board
     blocks.o(i.Generate_Block) refers to tetris.o(.data) for nextBlock
+    blocks.o(i.Generate_Block) refers to tetris.o(i.Display_Board) for Display_Board
     blocks.o(i.Place_Block) refers to tetris.o(.data) for tempx
     blocks.o(i.Place_Block) refers to blocks.o(.bss) for Tetris
     blocks.o(i.Place_Block) refers to tetris.o(.bss) for Buffer
@@ -281,9 +279,9 @@ Removing Unused input sections from the image.
     Removing io.o(i.IO_Init), (104 bytes).
     Removing io.o(i.IO_Touch), (40 bytes).
     Removing timer2.o(i.Timer2_Init), (100 bytes).
-    Removing blocks.o(i.Add_Line), (244 bytes).
+    Removing blocks.o(i.Add_Line), (84 bytes).
 
-47 unused section(s) (total 2808 bytes) removed from the image.
+47 unused section(s) (total 2648 bytes) removed from the image.
 
 ==============================================================================
 
@@ -362,64 +360,64 @@ Image Symbol Table
     i.ADC_Init                               0x000008dc   Section        0  adc.o(i.ADC_Init)
     i.Board_Init                             0x000009bc   Section        0  tetris.o(i.Board_Init)
     i.Check_Board                            0x000009f4   Section        0  tetris.o(i.Check_Board)
-    i.Check_Collision                        0x00000ab4   Section        0  blocks.o(i.Check_Collision)
-    i.Check_Drop                             0x00000be8   Section        0  blocks.o(i.Check_Drop)
-    i.Coordinate_ConversionX                 0x00000cdc   Section        0  tetris.o(i.Coordinate_ConversionX)
-    i.Coordinate_ConversionY                 0x00000ce4   Section        0  tetris.o(i.Coordinate_ConversionY)
-    i.Delay100ms                             0x00000cf0   Section        0  tetris.o(i.Delay100ms)
-    i.Delay1ms                               0x00000d14   Section        0  st7735.o(i.Delay1ms)
-    i.Display_Board                          0x00000d34   Section        0  tetris.o(i.Display_Board)
-    i.Display_Init                           0x00000e94   Section        0  tetris.o(i.Display_Init)
-    i.Drop_Block                             0x00000ed4   Section        0  blocks.o(i.Drop_Block)
-    i.Erase_Block                            0x00000f8c   Section        0  blocks.o(i.Erase_Block)
-    i.FastDrop_Block                         0x000010b4   Section        0  blocks.o(i.FastDrop_Block)
-    i.Floor                                  0x000010e0   Section        0  tetris.o(i.Floor)
-    i.GPIOPortF_Handler                      0x00001138   Section        0  tetris.o(i.GPIOPortF_Handler)
-    i.Game_Over                              0x0000114c   Section        0  tetris.o(i.Game_Over)
-    i.Generate_Block                         0x000011a4   Section        0  blocks.o(i.Generate_Block)
-    i.Output_Init                            0x000014a0   Section        0  st7735.o(i.Output_Init)
-    i.PLL_Init                               0x000014b0   Section        0  pll.o(i.PLL_Init)
-    i.Place_Block                            0x0000152c   Section        0  blocks.o(i.Place_Block)
-    i.PortE_Init                             0x0000164c   Section        0  tetris.o(i.PortE_Init)
-    i.PortF_Init                             0x000016a4   Section        0  tetris.o(i.PortF_Init)
-    i.Rotate_Block                           0x000017a4   Section        0  blocks.o(i.Rotate_Block)
-    i.ST7735_DrawBitmap                      0x0000198c   Section        0  st7735.o(i.ST7735_DrawBitmap)
-    i.ST7735_DrawCharS                       0x00001aac   Section        0  st7735.o(i.ST7735_DrawCharS)
-    i.ST7735_DrawPixel                       0x00001ba0   Section        0  st7735.o(i.ST7735_DrawPixel)
-    i.ST7735_DrawString                      0x00001be8   Section        0  st7735.o(i.ST7735_DrawString)
-    i.ST7735_FillRect                        0x00001c40   Section        0  st7735.o(i.ST7735_FillRect)
-    i.ST7735_FillScreen                      0x00001cec   Section        0  st7735.o(i.ST7735_FillScreen)
-    i.ST7735_InitR                           0x00001d10   Section        0  st7735.o(i.ST7735_InitR)
-    i.ST7735_OutChar                         0x00001d8c   Section        0  st7735.o(i.ST7735_OutChar)
-    i.ST7735_OutString                       0x00001e60   Section        0  st7735.o(i.ST7735_OutString)
-    i.ST7735_SetCursor                       0x00001e78   Section        0  st7735.o(i.ST7735_SetCursor)
-    i.SysTick_Handler                        0x00001e98   Section        0  tetris.o(i.SysTick_Handler)
-    i.SysTick_Init                           0x00001f60   Section        0  tetris.o(i.SysTick_Init)
-    i.Tetris_Init                            0x00001f94   Section        0  blocks.o(i.Tetris_Init)
-    i.Timer0A_Handler                        0x0000245c   Section        0  timer0.o(i.Timer0A_Handler)
-    i.Timer0_Init                            0x000025f0   Section        0  timer0.o(i.Timer0_Init)
-    i.Timer2A_Handler                        0x00002668   Section        0  timer2.o(i.Timer2A_Handler)
-    i.Wait10ms                               0x00002694   Section        0  io.o(i.Wait10ms)
-    i.__scatterload_copy                     0x000026b4   Section       14  handlers.o(i.__scatterload_copy)
-    i.__scatterload_null                     0x000026c2   Section        2  handlers.o(i.__scatterload_null)
-    i.__scatterload_zeroinit                 0x000026c4   Section       14  handlers.o(i.__scatterload_zeroinit)
-    i.commandList                            0x000026d2   Section        0  st7735.o(i.commandList)
-    commandList                              0x000026d3   Thumb Code    86  st7735.o(i.commandList)
-    i.commonInit                             0x00002728   Section        0  st7735.o(i.commonInit)
-    commonInit                               0x00002729   Thumb Code   340  st7735.o(i.commonInit)
-    i.main                                   0x000028ac   Section        0  tetris.o(i.main)
-    i.pushColor                              0x00002984   Section        0  st7735.o(i.pushColor)
-    pushColor                                0x00002985   Thumb Code    18  st7735.o(i.pushColor)
-    i.setAddrWindow                          0x00002998   Section        0  st7735.o(i.setAddrWindow)
-    setAddrWindow                            0x00002999   Thumb Code   106  st7735.o(i.setAddrWindow)
-    .constdata                               0x00002a0c   Section     2018  st7735.o(.constdata)
-    Font                                     0x00002a0c   Data        1275  st7735.o(.constdata)
-    Bcmd                                     0x00002f07   Data         103  st7735.o(.constdata)
-    Rcmd1                                    0x00002f6e   Data          59  st7735.o(.constdata)
-    Rcmd2green                               0x00002fa9   Data          13  st7735.o(.constdata)
-    Rcmd2red                                 0x00002fb6   Data          13  st7735.o(.constdata)
-    Rcmd3                                    0x00002fc3   Data          43  st7735.o(.constdata)
-    .constdata                               0x000031ee   Section      882  tetris.o(.constdata)
+    i.Check_Collision                        0x00000b04   Section        0  blocks.o(i.Check_Collision)
+    i.Check_Drop                             0x00000c38   Section        0  blocks.o(i.Check_Drop)
+    i.Coordinate_ConversionX                 0x00000d2c   Section        0  tetris.o(i.Coordinate_ConversionX)
+    i.Coordinate_ConversionY                 0x00000d34   Section        0  tetris.o(i.Coordinate_ConversionY)
+    i.Delay100ms                             0x00000d40   Section        0  tetris.o(i.Delay100ms)
+    i.Delay1ms                               0x00000d64   Section        0  st7735.o(i.Delay1ms)
+    i.Display_Board                          0x00000d84   Section        0  tetris.o(i.Display_Board)
+    i.Display_Init                           0x00000ee0   Section        0  tetris.o(i.Display_Init)
+    i.Drop_Block                             0x00000f20   Section        0  blocks.o(i.Drop_Block)
+    i.Erase_Block                            0x00000fd8   Section        0  blocks.o(i.Erase_Block)
+    i.FastDrop_Block                         0x00001100   Section        0  blocks.o(i.FastDrop_Block)
+    i.Floor                                  0x0000112c   Section        0  tetris.o(i.Floor)
+    i.GPIOPortF_Handler                      0x00001184   Section        0  tetris.o(i.GPIOPortF_Handler)
+    i.Game_Over                              0x00001198   Section        0  tetris.o(i.Game_Over)
+    i.Generate_Block                         0x000011f0   Section        0  blocks.o(i.Generate_Block)
+    i.Output_Init                            0x0000162c   Section        0  st7735.o(i.Output_Init)
+    i.PLL_Init                               0x0000163c   Section        0  pll.o(i.PLL_Init)
+    i.Place_Block                            0x000016b8   Section        0  blocks.o(i.Place_Block)
+    i.PortE_Init                             0x000017d8   Section        0  tetris.o(i.PortE_Init)
+    i.PortF_Init                             0x00001830   Section        0  tetris.o(i.PortF_Init)
+    i.Rotate_Block                           0x00001930   Section        0  blocks.o(i.Rotate_Block)
+    i.ST7735_DrawBitmap                      0x00001b18   Section        0  st7735.o(i.ST7735_DrawBitmap)
+    i.ST7735_DrawCharS                       0x00001c38   Section        0  st7735.o(i.ST7735_DrawCharS)
+    i.ST7735_DrawPixel                       0x00001d2c   Section        0  st7735.o(i.ST7735_DrawPixel)
+    i.ST7735_DrawString                      0x00001d74   Section        0  st7735.o(i.ST7735_DrawString)
+    i.ST7735_FillRect                        0x00001dcc   Section        0  st7735.o(i.ST7735_FillRect)
+    i.ST7735_FillScreen                      0x00001e78   Section        0  st7735.o(i.ST7735_FillScreen)
+    i.ST7735_InitR                           0x00001e9c   Section        0  st7735.o(i.ST7735_InitR)
+    i.ST7735_OutChar                         0x00001f18   Section        0  st7735.o(i.ST7735_OutChar)
+    i.ST7735_OutString                       0x00001fec   Section        0  st7735.o(i.ST7735_OutString)
+    i.ST7735_SetCursor                       0x00002004   Section        0  st7735.o(i.ST7735_SetCursor)
+    i.SysTick_Handler                        0x00002024   Section        0  tetris.o(i.SysTick_Handler)
+    i.SysTick_Init                           0x000020c4   Section        0  tetris.o(i.SysTick_Init)
+    i.Tetris_Init                            0x000020f8   Section        0  blocks.o(i.Tetris_Init)
+    i.Timer0A_Handler                        0x000025c0   Section        0  timer0.o(i.Timer0A_Handler)
+    i.Timer0_Init                            0x00002754   Section        0  timer0.o(i.Timer0_Init)
+    i.Timer2A_Handler                        0x000027cc   Section        0  timer2.o(i.Timer2A_Handler)
+    i.Wait10ms                               0x000027f8   Section        0  io.o(i.Wait10ms)
+    i.__scatterload_copy                     0x00002818   Section       14  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x00002826   Section        2  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x00002828   Section       14  handlers.o(i.__scatterload_zeroinit)
+    i.commandList                            0x00002836   Section        0  st7735.o(i.commandList)
+    commandList                              0x00002837   Thumb Code    86  st7735.o(i.commandList)
+    i.commonInit                             0x0000288c   Section        0  st7735.o(i.commonInit)
+    commonInit                               0x0000288d   Thumb Code   340  st7735.o(i.commonInit)
+    i.main                                   0x00002a10   Section        0  tetris.o(i.main)
+    i.pushColor                              0x00002ae8   Section        0  st7735.o(i.pushColor)
+    pushColor                                0x00002ae9   Thumb Code    18  st7735.o(i.pushColor)
+    i.setAddrWindow                          0x00002afc   Section        0  st7735.o(i.setAddrWindow)
+    setAddrWindow                            0x00002afd   Thumb Code   106  st7735.o(i.setAddrWindow)
+    .constdata                               0x00002b70   Section     2018  st7735.o(.constdata)
+    Font                                     0x00002b70   Data        1275  st7735.o(.constdata)
+    Bcmd                                     0x0000306b   Data         103  st7735.o(.constdata)
+    Rcmd1                                    0x000030d2   Data          59  st7735.o(.constdata)
+    Rcmd2green                               0x0000310d   Data          13  st7735.o(.constdata)
+    Rcmd2red                                 0x0000311a   Data          13  st7735.o(.constdata)
+    Rcmd3                                    0x00003127   Data          43  st7735.o(.constdata)
+    .constdata                               0x00003352   Section      882  tetris.o(.constdata)
     .data                                    0x20000000   Section        8  timer0.o(.data)
     .data                                    0x20000008   Section       44  st7735.o(.data)
     _width                                   0x20000012   Data           2  st7735.o(.data)
@@ -610,61 +608,61 @@ Image Symbol Table
     ADC_In                                   0x000008b1   Thumb Code    36  adc.o(i.ADC_In)
     ADC_Init                                 0x000008dd   Thumb Code   198  adc.o(i.ADC_Init)
     Board_Init                               0x000009bd   Thumb Code    50  tetris.o(i.Board_Init)
-    Check_Board                              0x000009f5   Thumb Code   180  tetris.o(i.Check_Board)
-    Check_Collision                          0x00000ab5   Thumb Code   300  blocks.o(i.Check_Collision)
-    Check_Drop                               0x00000be9   Thumb Code   234  blocks.o(i.Check_Drop)
-    Coordinate_ConversionX                   0x00000cdd   Thumb Code     8  tetris.o(i.Coordinate_ConversionX)
-    Coordinate_ConversionY                   0x00000ce5   Thumb Code    10  tetris.o(i.Coordinate_ConversionY)
-    Delay100ms                               0x00000cf1   Thumb Code    30  tetris.o(i.Delay100ms)
-    Delay1ms                                 0x00000d15   Thumb Code    32  st7735.o(i.Delay1ms)
-    Display_Board                            0x00000d35   Thumb Code   310  tetris.o(i.Display_Board)
-    Display_Init                             0x00000e95   Thumb Code    60  tetris.o(i.Display_Init)
-    Drop_Block                               0x00000ed5   Thumb Code   156  blocks.o(i.Drop_Block)
-    Erase_Block                              0x00000f8d   Thumb Code   280  blocks.o(i.Erase_Block)
-    FastDrop_Block                           0x000010b5   Thumb Code    34  blocks.o(i.FastDrop_Block)
-    Floor                                    0x000010e1   Thumb Code    86  tetris.o(i.Floor)
-    GPIOPortF_Handler                        0x00001139   Thumb Code    14  tetris.o(i.GPIOPortF_Handler)
-    Game_Over                                0x0000114d   Thumb Code    58  tetris.o(i.Game_Over)
-    Generate_Block                           0x000011a5   Thumb Code   734  blocks.o(i.Generate_Block)
-    Output_Init                              0x000014a1   Thumb Code    16  st7735.o(i.Output_Init)
-    PLL_Init                                 0x000014b1   Thumb Code   118  pll.o(i.PLL_Init)
-    Place_Block                              0x0000152d   Thumb Code   268  blocks.o(i.Place_Block)
-    PortE_Init                               0x0000164d   Thumb Code    74  tetris.o(i.PortE_Init)
-    PortF_Init                               0x000016a5   Thumb Code   230  tetris.o(i.PortF_Init)
-    Rotate_Block                             0x000017a5   Thumb Code   458  blocks.o(i.Rotate_Block)
-    ST7735_DrawBitmap                        0x0000198d   Thumb Code   280  st7735.o(i.ST7735_DrawBitmap)
-    ST7735_DrawCharS                         0x00001aad   Thumb Code   232  st7735.o(i.ST7735_DrawCharS)
-    ST7735_DrawPixel                         0x00001ba1   Thumb Code    64  st7735.o(i.ST7735_DrawPixel)
-    ST7735_DrawString                        0x00001be9   Thumb Code    86  st7735.o(i.ST7735_DrawString)
-    ST7735_FillRect                          0x00001c41   Thumb Code   164  st7735.o(i.ST7735_FillRect)
-    ST7735_FillScreen                        0x00001ced   Thumb Code    28  st7735.o(i.ST7735_FillScreen)
-    ST7735_InitR                             0x00001d11   Thumb Code    90  st7735.o(i.ST7735_InitR)
-    ST7735_OutChar                           0x00001d8d   Thumb Code   176  st7735.o(i.ST7735_OutChar)
-    ST7735_OutString                         0x00001e61   Thumb Code    24  st7735.o(i.ST7735_OutString)
-    ST7735_SetCursor                         0x00001e79   Thumb Code    22  st7735.o(i.ST7735_SetCursor)
-    SysTick_Handler                          0x00001e99   Thumb Code   170  tetris.o(i.SysTick_Handler)
-    SysTick_Init                             0x00001f61   Thumb Code    42  tetris.o(i.SysTick_Init)
-    Tetris_Init                              0x00001f95   Thumb Code  1218  blocks.o(i.Tetris_Init)
-    Timer0A_Handler                          0x0000245d   Thumb Code   338  timer0.o(i.Timer0A_Handler)
-    Timer0_Init                              0x000025f1   Thumb Code    90  timer0.o(i.Timer0_Init)
-    Timer2A_Handler                          0x00002669   Thumb Code    34  timer2.o(i.Timer2A_Handler)
-    Wait10ms                                 0x00002695   Thumb Code    32  io.o(i.Wait10ms)
-    __scatterload_copy                       0x000026b5   Thumb Code    14  handlers.o(i.__scatterload_copy)
-    __scatterload_null                       0x000026c3   Thumb Code     2  handlers.o(i.__scatterload_null)
-    __scatterload_zeroinit                   0x000026c5   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
-    main                                     0x000028ad   Thumb Code   202  tetris.o(i.main)
-    dBfs                                     0x00002fee   Data         512  st7735.o(.constdata)
-    IBlock                                   0x000031ee   Data          98  tetris.o(.constdata)
-    JBlock                                   0x00003250   Data          98  tetris.o(.constdata)
-    LBlock                                   0x000032b2   Data          98  tetris.o(.constdata)
-    OBlock                                   0x00003314   Data          98  tetris.o(.constdata)
-    SBlock                                   0x00003376   Data          98  tetris.o(.constdata)
-    TBlock                                   0x000033d8   Data          98  tetris.o(.constdata)
-    ZBlock                                   0x0000343a   Data          98  tetris.o(.constdata)
-    nBlock                                   0x0000349c   Data          98  tetris.o(.constdata)
-    gBlock                                   0x000034fe   Data          98  tetris.o(.constdata)
-    Region$$Table$$Base                      0x00003560   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x00003580   Number         0  anon$$obj.o(Region$$Table)
+    Check_Board                              0x000009f5   Thumb Code   248  tetris.o(i.Check_Board)
+    Check_Collision                          0x00000b05   Thumb Code   300  blocks.o(i.Check_Collision)
+    Check_Drop                               0x00000c39   Thumb Code   234  blocks.o(i.Check_Drop)
+    Coordinate_ConversionX                   0x00000d2d   Thumb Code     8  tetris.o(i.Coordinate_ConversionX)
+    Coordinate_ConversionY                   0x00000d35   Thumb Code    10  tetris.o(i.Coordinate_ConversionY)
+    Delay100ms                               0x00000d41   Thumb Code    30  tetris.o(i.Delay100ms)
+    Delay1ms                                 0x00000d65   Thumb Code    32  st7735.o(i.Delay1ms)
+    Display_Board                            0x00000d85   Thumb Code   306  tetris.o(i.Display_Board)
+    Display_Init                             0x00000ee1   Thumb Code    60  tetris.o(i.Display_Init)
+    Drop_Block                               0x00000f21   Thumb Code   156  blocks.o(i.Drop_Block)
+    Erase_Block                              0x00000fd9   Thumb Code   280  blocks.o(i.Erase_Block)
+    FastDrop_Block                           0x00001101   Thumb Code    34  blocks.o(i.FastDrop_Block)
+    Floor                                    0x0000112d   Thumb Code    86  tetris.o(i.Floor)
+    GPIOPortF_Handler                        0x00001185   Thumb Code    14  tetris.o(i.GPIOPortF_Handler)
+    Game_Over                                0x00001199   Thumb Code    58  tetris.o(i.Game_Over)
+    Generate_Block                           0x000011f1   Thumb Code  1080  blocks.o(i.Generate_Block)
+    Output_Init                              0x0000162d   Thumb Code    16  st7735.o(i.Output_Init)
+    PLL_Init                                 0x0000163d   Thumb Code   118  pll.o(i.PLL_Init)
+    Place_Block                              0x000016b9   Thumb Code   268  blocks.o(i.Place_Block)
+    PortE_Init                               0x000017d9   Thumb Code    74  tetris.o(i.PortE_Init)
+    PortF_Init                               0x00001831   Thumb Code   230  tetris.o(i.PortF_Init)
+    Rotate_Block                             0x00001931   Thumb Code   458  blocks.o(i.Rotate_Block)
+    ST7735_DrawBitmap                        0x00001b19   Thumb Code   280  st7735.o(i.ST7735_DrawBitmap)
+    ST7735_DrawCharS                         0x00001c39   Thumb Code   232  st7735.o(i.ST7735_DrawCharS)
+    ST7735_DrawPixel                         0x00001d2d   Thumb Code    64  st7735.o(i.ST7735_DrawPixel)
+    ST7735_DrawString                        0x00001d75   Thumb Code    86  st7735.o(i.ST7735_DrawString)
+    ST7735_FillRect                          0x00001dcd   Thumb Code   164  st7735.o(i.ST7735_FillRect)
+    ST7735_FillScreen                        0x00001e79   Thumb Code    28  st7735.o(i.ST7735_FillScreen)
+    ST7735_InitR                             0x00001e9d   Thumb Code    90  st7735.o(i.ST7735_InitR)
+    ST7735_OutChar                           0x00001f19   Thumb Code   176  st7735.o(i.ST7735_OutChar)
+    ST7735_OutString                         0x00001fed   Thumb Code    24  st7735.o(i.ST7735_OutString)
+    ST7735_SetCursor                         0x00002005   Thumb Code    22  st7735.o(i.ST7735_SetCursor)
+    SysTick_Handler                          0x00002025   Thumb Code   136  tetris.o(i.SysTick_Handler)
+    SysTick_Init                             0x000020c5   Thumb Code    42  tetris.o(i.SysTick_Init)
+    Tetris_Init                              0x000020f9   Thumb Code  1218  blocks.o(i.Tetris_Init)
+    Timer0A_Handler                          0x000025c1   Thumb Code   338  timer0.o(i.Timer0A_Handler)
+    Timer0_Init                              0x00002755   Thumb Code    90  timer0.o(i.Timer0_Init)
+    Timer2A_Handler                          0x000027cd   Thumb Code    34  timer2.o(i.Timer2A_Handler)
+    Wait10ms                                 0x000027f9   Thumb Code    32  io.o(i.Wait10ms)
+    __scatterload_copy                       0x00002819   Thumb Code    14  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x00002827   Thumb Code     2  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x00002829   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
+    main                                     0x00002a11   Thumb Code   202  tetris.o(i.main)
+    dBfs                                     0x00003152   Data         512  st7735.o(.constdata)
+    IBlock                                   0x00003352   Data          98  tetris.o(.constdata)
+    JBlock                                   0x000033b4   Data          98  tetris.o(.constdata)
+    LBlock                                   0x00003416   Data          98  tetris.o(.constdata)
+    OBlock                                   0x00003478   Data          98  tetris.o(.constdata)
+    SBlock                                   0x000034da   Data          98  tetris.o(.constdata)
+    TBlock                                   0x0000353c   Data          98  tetris.o(.constdata)
+    ZBlock                                   0x0000359e   Data          98  tetris.o(.constdata)
+    nBlock                                   0x00003600   Data          98  tetris.o(.constdata)
+    gBlock                                   0x00003662   Data          98  tetris.o(.constdata)
+    Region$$Table$$Base                      0x000036c4   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x000036e4   Number         0  anon$$obj.o(Region$$Table)
     TimerCount                               0x20000000   Data           4  timer0.o(.data)
     TimerCounter                             0x20000004   Data           4  timer0.o(.data)
     StX                                      0x20000008   Data           4  st7735.o(.data)
@@ -683,6 +681,7 @@ Image Symbol Table
     level                                    0x20000044   Data           1  tetris.o(.data)
     startLine                                0x20000045   Data           1  tetris.o(.data)
     rotFlag                                  0x20000046   Data           1  tetris.o(.data)
+    cFlag                                    0x20000047   Data           1  tetris.o(.data)
     Data                                     0x20000048   Data           2  tetris.o(.data)
     currentType                              0x2000004a   Data           1  tetris.o(.data)
     currentRot                               0x2000004b   Data           1  tetris.o(.data)
@@ -710,9 +709,9 @@ Memory Map of the image
 
   Image Entry point : 0x0000026d
 
-  Load Region LR_1 (Base: 0x00000000, Size: 0x000035ec, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x00000000, Size: 0x00003750, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Base: 0x00000000, Size: 0x00003580, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Base: 0x00000000, Size: 0x000036e4, Max: 0xffffffff, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -744,60 +743,60 @@ Memory Map of the image
     0x000008b0   0x0000002c   Code   RO           41    i.ADC_In            adc.o
     0x000008dc   0x000000e0   Code   RO           42    i.ADC_Init          adc.o
     0x000009bc   0x00000038   Code   RO          458    i.Board_Init        tetris.o
-    0x000009f4   0x000000c0   Code   RO          459    i.Check_Board       tetris.o
-    0x00000ab4   0x00000134   Code   RO          627    i.Check_Collision   blocks.o
-    0x00000be8   0x000000f4   Code   RO          628    i.Check_Drop        blocks.o
-    0x00000cdc   0x00000008   Code   RO          460    i.Coordinate_ConversionX  tetris.o
-    0x00000ce4   0x0000000a   Code   RO          461    i.Coordinate_ConversionY  tetris.o
-    0x00000cee   0x00000002   PAD
-    0x00000cf0   0x00000024   Code   RO          462    i.Delay100ms        tetris.o
-    0x00000d14   0x00000020   Code   RO          177    i.Delay1ms          st7735.o
-    0x00000d34   0x00000160   Code   RO          463    i.Display_Board     tetris.o
-    0x00000e94   0x00000040   Code   RO          464    i.Display_Init      tetris.o
-    0x00000ed4   0x000000b8   Code   RO          629    i.Drop_Block        blocks.o
-    0x00000f8c   0x00000128   Code   RO          630    i.Erase_Block       blocks.o
-    0x000010b4   0x0000002c   Code   RO          631    i.FastDrop_Block    blocks.o
-    0x000010e0   0x00000056   Code   RO          465    i.Floor             tetris.o
-    0x00001136   0x00000002   PAD
-    0x00001138   0x00000014   Code   RO          466    i.GPIOPortF_Handler  tetris.o
-    0x0000114c   0x00000058   Code   RO          467    i.Game_Over         tetris.o
-    0x000011a4   0x000002fc   Code   RO          632    i.Generate_Block    blocks.o
-    0x000014a0   0x00000010   Code   RO          180    i.Output_Init       st7735.o
-    0x000014b0   0x0000007c   Code   RO          443    i.PLL_Init          pll.o
-    0x0000152c   0x00000120   Code   RO          633    i.Place_Block       blocks.o
-    0x0000164c   0x00000058   Code   RO          468    i.PortE_Init        tetris.o
-    0x000016a4   0x00000100   Code   RO          469    i.PortF_Init        tetris.o
-    0x000017a4   0x000001e8   Code   RO          634    i.Rotate_Block      blocks.o
-    0x0000198c   0x00000120   Code   RO          184    i.ST7735_DrawBitmap  st7735.o
-    0x00001aac   0x000000f4   Code   RO          186    i.ST7735_DrawCharS  st7735.o
-    0x00001ba0   0x00000048   Code   RO          189    i.ST7735_DrawPixel  st7735.o
-    0x00001be8   0x00000056   Code   RO          190    i.ST7735_DrawString  st7735.o
-    0x00001c3e   0x00000002   PAD
-    0x00001c40   0x000000ac   Code   RO          191    i.ST7735_FillRect   st7735.o
-    0x00001cec   0x00000024   Code   RO          192    i.ST7735_FillScreen  st7735.o
-    0x00001d10   0x0000007c   Code   RO          194    i.ST7735_InitR      st7735.o
-    0x00001d8c   0x000000d4   Code   RO          196    i.ST7735_OutChar    st7735.o
-    0x00001e60   0x00000018   Code   RO          197    i.ST7735_OutString  st7735.o
-    0x00001e78   0x00000020   Code   RO          207    i.ST7735_SetCursor  st7735.o
-    0x00001e98   0x000000c8   Code   RO          470    i.SysTick_Handler   tetris.o
-    0x00001f60   0x00000034   Code   RO          471    i.SysTick_Init      tetris.o
-    0x00001f94   0x000004c8   Code   RO          635    i.Tetris_Init       blocks.o
-    0x0000245c   0x00000194   Code   RO           63    i.Timer0A_Handler   timer0.o
-    0x000025f0   0x00000078   Code   RO           64    i.Timer0_Init       timer0.o
-    0x00002668   0x0000002c   Code   RO          608    i.Timer2A_Handler   timer2.o
-    0x00002694   0x00000020   Code   RO          581    i.Wait10ms          io.o
-    0x000026b4   0x0000000e   Code   RO          734    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x000026c2   0x00000002   Code   RO          735    i.__scatterload_null  mc_w.l(handlers.o)
-    0x000026c4   0x0000000e   Code   RO          736    i.__scatterload_zeroinit  mc_w.l(handlers.o)
-    0x000026d2   0x00000056   Code   RO          211    i.commandList       st7735.o
-    0x00002728   0x00000184   Code   RO          212    i.commonInit        st7735.o
-    0x000028ac   0x000000d8   Code   RO          473    i.main              tetris.o
-    0x00002984   0x00000012   Code   RO          217    i.pushColor         st7735.o
-    0x00002996   0x00000002   PAD
-    0x00002998   0x00000074   Code   RO          218    i.setAddrWindow     st7735.o
-    0x00002a0c   0x000007e2   Data   RO          220    .constdata          st7735.o
-    0x000031ee   0x00000372   Data   RO          475    .constdata          tetris.o
-    0x00003560   0x00000020   Data   RO          732    Region$$Table       anon$$obj.o
+    0x000009f4   0x00000110   Code   RO          459    i.Check_Board       tetris.o
+    0x00000b04   0x00000134   Code   RO          627    i.Check_Collision   blocks.o
+    0x00000c38   0x000000f4   Code   RO          628    i.Check_Drop        blocks.o
+    0x00000d2c   0x00000008   Code   RO          460    i.Coordinate_ConversionX  tetris.o
+    0x00000d34   0x0000000a   Code   RO          461    i.Coordinate_ConversionY  tetris.o
+    0x00000d3e   0x00000002   PAD
+    0x00000d40   0x00000024   Code   RO          462    i.Delay100ms        tetris.o
+    0x00000d64   0x00000020   Code   RO          177    i.Delay1ms          st7735.o
+    0x00000d84   0x0000015c   Code   RO          463    i.Display_Board     tetris.o
+    0x00000ee0   0x00000040   Code   RO          464    i.Display_Init      tetris.o
+    0x00000f20   0x000000b8   Code   RO          629    i.Drop_Block        blocks.o
+    0x00000fd8   0x00000128   Code   RO          630    i.Erase_Block       blocks.o
+    0x00001100   0x0000002c   Code   RO          631    i.FastDrop_Block    blocks.o
+    0x0000112c   0x00000056   Code   RO          465    i.Floor             tetris.o
+    0x00001182   0x00000002   PAD
+    0x00001184   0x00000014   Code   RO          466    i.GPIOPortF_Handler  tetris.o
+    0x00001198   0x00000058   Code   RO          467    i.Game_Over         tetris.o
+    0x000011f0   0x0000043c   Code   RO          632    i.Generate_Block    blocks.o
+    0x0000162c   0x00000010   Code   RO          180    i.Output_Init       st7735.o
+    0x0000163c   0x0000007c   Code   RO          443    i.PLL_Init          pll.o
+    0x000016b8   0x00000120   Code   RO          633    i.Place_Block       blocks.o
+    0x000017d8   0x00000058   Code   RO          468    i.PortE_Init        tetris.o
+    0x00001830   0x00000100   Code   RO          469    i.PortF_Init        tetris.o
+    0x00001930   0x000001e8   Code   RO          634    i.Rotate_Block      blocks.o
+    0x00001b18   0x00000120   Code   RO          184    i.ST7735_DrawBitmap  st7735.o
+    0x00001c38   0x000000f4   Code   RO          186    i.ST7735_DrawCharS  st7735.o
+    0x00001d2c   0x00000048   Code   RO          189    i.ST7735_DrawPixel  st7735.o
+    0x00001d74   0x00000056   Code   RO          190    i.ST7735_DrawString  st7735.o
+    0x00001dca   0x00000002   PAD
+    0x00001dcc   0x000000ac   Code   RO          191    i.ST7735_FillRect   st7735.o
+    0x00001e78   0x00000024   Code   RO          192    i.ST7735_FillScreen  st7735.o
+    0x00001e9c   0x0000007c   Code   RO          194    i.ST7735_InitR      st7735.o
+    0x00001f18   0x000000d4   Code   RO          196    i.ST7735_OutChar    st7735.o
+    0x00001fec   0x00000018   Code   RO          197    i.ST7735_OutString  st7735.o
+    0x00002004   0x00000020   Code   RO          207    i.ST7735_SetCursor  st7735.o
+    0x00002024   0x000000a0   Code   RO          470    i.SysTick_Handler   tetris.o
+    0x000020c4   0x00000034   Code   RO          471    i.SysTick_Init      tetris.o
+    0x000020f8   0x000004c8   Code   RO          635    i.Tetris_Init       blocks.o
+    0x000025c0   0x00000194   Code   RO           63    i.Timer0A_Handler   timer0.o
+    0x00002754   0x00000078   Code   RO           64    i.Timer0_Init       timer0.o
+    0x000027cc   0x0000002c   Code   RO          608    i.Timer2A_Handler   timer2.o
+    0x000027f8   0x00000020   Code   RO          581    i.Wait10ms          io.o
+    0x00002818   0x0000000e   Code   RO          734    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x00002826   0x00000002   Code   RO          735    i.__scatterload_null  mc_w.l(handlers.o)
+    0x00002828   0x0000000e   Code   RO          736    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x00002836   0x00000056   Code   RO          211    i.commandList       st7735.o
+    0x0000288c   0x00000184   Code   RO          212    i.commonInit        st7735.o
+    0x00002a10   0x000000d8   Code   RO          473    i.main              tetris.o
+    0x00002ae8   0x00000012   Code   RO          217    i.pushColor         st7735.o
+    0x00002afa   0x00000002   PAD
+    0x00002afc   0x00000074   Code   RO          218    i.setAddrWindow     st7735.o
+    0x00002b70   0x000007e2   Data   RO          220    .constdata          st7735.o
+    0x00003352   0x00000372   Data   RO          475    .constdata          tetris.o
+    0x000036c4   0x00000020   Data   RO          732    Region$$Table       anon$$obj.o
 
 
     Execution Region ER_RW (Base: 0x20000000, Size: 0x0000006c, Max: 0xffffffff, ABSOLUTE)
@@ -829,8 +828,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       268         34          0          0          0       1866   adc.o
-      3840        172          0         18       1088       7199   blocks.o
+       268         34          0          0          0       1892   adc.o
+      4160        182          0         18       1088       7475   blocks.o
          0          0          0          0          0       4212   dac.o
         32          0          0          0          0        687   io.o
         80         12          0          0          0        196   lcd.o
@@ -839,12 +838,12 @@ Image component sizes
         60         14          0          4          0        192   random.o
       1946        182       2018         44          0      12552   st7735.o
        672        622          0          0       1024        884   startup.o
-      1724        200        882         32        640       8482   tetris.o
+      1760        206        882         32        640       8580   tetris.o
        524         96          0          8          0       1194   timer0.o
         44         10          0          0          0        390   timer2.o
 
     ----------------------------------------------------------------------
-      9750       1352       2932        108       2756      38589   Object Totals
+     10106       1368       2932        108       2756      38989   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          8          0          0          2          4          0   (incl. Padding)
 
@@ -893,15 +892,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     10764       1368       2932        108       2756      36729   Grand Totals
-     10764       1368       2932        108       2756      36729   ELF Image Totals
-     10764       1368       2932        108          0          0   ROM Totals
+     11120       1384       2932        108       2756      37129   Grand Totals
+     11120       1384       2932        108       2756      37129   ELF Image Totals
+     11120       1384       2932        108          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                13696 (  13.38kB)
+    Total RO  Size (Code + RO Data)                14052 (  13.72kB)
     Total RW  Size (RW Data + ZI Data)              2864 (   2.80kB)
-    Total ROM Size (Code + RO Data + RW Data)      13804 (  13.48kB)
+    Total ROM Size (Code + RO Data + RW Data)      14160 (  13.83kB)
 
 ==============================================================================
 
