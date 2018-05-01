@@ -17,7 +17,7 @@ extern uint8_t currentType, currentRot, tempRot, nextBlock, level, startLine, ro
 
 extern int8_t currentx, tempx, currenty, tempy, xSave, ySave;
 
-extern uint32_t linesCleared, blocksPlaced, fdropCount, score;
+extern uint32_t linesCleared, blocksPlaced, fdropCount, score, Position;
 
 int16_t Floor(uint32_t in);
 

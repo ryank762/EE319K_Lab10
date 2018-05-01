@@ -8,6 +8,7 @@
 #include "Random.h"
 #include "ADC.h"
 #include "ST7735.h"
+#include "Sound.h"
 
 void DisableInterrupts(void);			// Disable interrupts
 void EnableInterrupts(void);			// Enable interrupts
@@ -818,16 +819,19 @@ uint8_t Check_Drop (uint8_t type, uint8_t rot, int16_t x2, int16_t y2) {
 void Drop_Block(void) {
 	Erase_Block(currentType, currentRot, tempx, currenty);
 	if (Check_Drop(currentType, currentRot, tempx, currenty-1) != 0) {
+		ButtonSound();
 		currenty--;
 		Place_Block(currentType, currentRot, tempx, currenty);
 		dropFlag = 0;
 	}
 	else {
 		Place_Block(currentType, currentRot, tempx, currenty);
+		Sound_Blockhit();
 		blocksPlaced++;
 		Check_Board();
 		Generate_Block();
 		Display_Board();
+		Sound_NewLine();
 		dropFlag = 1;
 		rotFlag = 1;
 	}
@@ -841,15 +845,17 @@ void FastDrop_Block(void) {
 	fdropCount++;
 }
 
-void Add_Line(void) {			// *********************** work in progress
+void Add_Line(void) {
 	uint8_t i;
 	NVIC_ST_CTRL_R = 0x00000000;
+	TIMER0_CTL_R = 0x00000000;
 	for (i = 0; i < 10; i++) {
 		Buffer[i][startLine].state = 1;
-		Buffer[i][startLine].color = 0xFEFE;
+		Buffer[i][startLine].color = 0x4227;
 	}
 	startLine++;
 	NVIC_ST_CTRL_R = 0x00000007;
+	TIMER0_CTL_R = 0x00000001;
 }
 
 void Rotate_Block(void) {
@@ -863,7 +869,6 @@ void Rotate_Block(void) {
 //	int16_t tempy1 = tempy;
 	NVIC_ST_CTRL_R = 0x00000000;
 	TIMER0_CTL_R = 0x00000000;
-	DisableInterrupts();
 	tempRot = (currentRot + 1)%4;
 	if (currentType == I) {
 		ceil = 13;
@@ -932,7 +937,6 @@ void Rotate_Block(void) {
 	rotFlag = 0;
 	TIMER0_CTL_R = 0x00000001;
 	NVIC_ST_CTRL_R = 0x00000007;
-	EnableInterrupts();
 }
 
 void Tetris_Init(void) {		

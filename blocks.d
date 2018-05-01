@@ -6,3 +6,4 @@
 .\blocks.o: Random.h
 .\blocks.o: ADC.h
 .\blocks.o: ST7735.h
+.\blocks.o: Sound.h

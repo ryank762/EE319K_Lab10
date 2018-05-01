@@ -16,6 +16,8 @@
 #include "Timer1.h"
 #include "Timer2.h"
 #include "Blocks.h"
+#include "UART.h"
+#include "FiFo.h"
 
 // Slide pot used for x-position of Tetris block
 // Button0 (PE0) : Rotates block
@@ -143,6 +145,11 @@ struct board {
 struct board Buffer[10][16];
 
 int16_t Data;        						// 12-bit ADC
+uint32_t Position = 0;
+uint32_t TxCounter = 0;
+char data;
+
+
 uint32_t linesCleared = 0;
 uint32_t blocksPlaced = 0;
 uint32_t fdropCount = 0;
@@ -152,6 +159,7 @@ uint8_t level = 0;
 uint8_t startLine = 0;
 uint8_t rotFlag = 0;
 uint8_t cFlag = 0;
+uint8_t uartFlag = 0;
 int8_t currentx, tempx, currenty, tempy, xSave, ySave;
 
 
@@ -172,9 +180,11 @@ int main(void) {
 	Timer0_Init();
 //	Timer1_Init();
 //	Timer2_Init();
+	UART_Init();
 	SysTick_Init();
-//	Sound_Init();										// initialize sound
+	Sound_Init();										// initialize sound
 	EnableInterrupts();
+	Sound_Start();
 	while (1) {
 		if ((GPIO_PORTE_DATA_R & 0x02)) {
 			Wait10ms(2);
@@ -192,7 +202,29 @@ int main(void) {
 			PF3 ^= 0x08;
 			Rotate_Block();
 			PF3 ^= 0x08;
+			Sound_Rotate();
 			Delay100ms(2);
+		}
+		int t;													// index
+		uint8_t input[]={0x00,0x2E,0x00,0x00,0x00};			// base output array
+		if (FiFo_Get(&data) != 0) {
+			for(t = 1; t < 7; t++){
+				FiFo_Get(&data);							// update data
+				input[t] = data;
+			}
+		}
+		else {
+			input[0] = 0x00;
+			input[1] = 0x2E;
+			input[2] = 0x00;
+			input[3] = 0x00;
+			input[4] = 0x00;
+		}
+		if ((input[0] == 0x31) &&
+				(input[2] == 0x31) &&
+				(input[3] == 0x31) &&
+				(input[4] == 0x31) ) {
+			Add_Line();
 		}
 	}
 }
@@ -201,19 +233,19 @@ int16_t Floor(uint32_t in) {
 	int16_t floor;
 	in &= 0x00000FFF;
 	if (in < 600) {
-		floor = -1;
+		floor = 1;
 	}
 	else if ((600 <= in) && (in < 1200)) {
-		floor = 0;
+		floor = 1;
 	}
 	else if ((1200 <= in) && (in < 2896)) {
 		floor = 0;
 	}
 	else if ((2896 <= in) && (in < 3496)) {
-		floor = 1;
+		floor = 0;
 		}
 	else if ((3496 <= in) && (in < 4096)) {
-		floor = 1;
+		floor = -1;
 	}
 	return floor;
 }
@@ -229,6 +261,7 @@ void Board_Init(void) {
 }
 
 void Game_Over(void) {
+	Sound_Gameover();
 	DisableInterrupts();
 	ST7735_FillScreen(0x0000);
 	ST7735_SetCursor(3, 1);
@@ -238,10 +271,11 @@ void Game_Over(void) {
 	ST7735_SetCursor(3, 3);
 	LCD_OutDec(score);
 	while (1) {
+		Sound_Gameover();
 	}
 }
 
-void Check_Board(void) {						// ****** contains minor bug, will fix later
+void Check_Board(void) {	
 	int8_t i, j, jSave, iCount, ltemp, lev;
 	for (j = startLine; j < 16; j++) {
 		iCount = 1;
@@ -257,6 +291,7 @@ void Check_Board(void) {						// ****** contains minor bug, will fix later
 			ltemp = 4;
 			lev = 8;
 			if (linesCleared >= ltemp) {
+				uartFlag = 1;
 				// send message through UART to execute Add_Line();
 				ltemp += 4;
 			}
@@ -404,7 +439,7 @@ void SysTick_Init(void) {
 
 void SysTick_Handler(void) {
 	int16_t c, d;
-	Data = ADC_In();  // sample 12-bit channel 5\
+	Data = ADC_In();  // sample 12-bit channel 5
 	Random_Init(Data);
 	c = currentx + Floor(Data);
 	if (c < 0) {
@@ -416,10 +451,38 @@ void SysTick_Handler(void) {
 	d = tempx;
 	Erase_Block(currentType, currentRot, tempx, currenty);
 	if (Check_Collision(currentType, currentRot, c, currenty) == 1) {
+		if (c != currentx) {
+			Sound_Blockhit();
+		}
 		currentx = c;
 	} 
 	Place_Block(currentType, currentRot, currentx, currenty);
 	tempx = d;
+//
+	if (uartFlag == 1) {
+		uint8_t output[]={0x02,0x30,0x2E,0x30,0x30,0x30,0x0D,0x03};			// base output array
+		output[1] = (Position/1000)%10 + 0x30;		// first digit
+		output[3] = (Position/100)%10 + 0x30;			// second digit
+		output[4] = (Position/10)%10 + 0x30;			// third digit
+		output[5] = Position%10 + 0x30;						// fourth digit
+		for(int i=0; i<8; i++){
+			UART_OutChar(output[i]);								// place all elements on array to FIFO
+		}
+		TxCounter++;															// increment total frames transmitted
+		uartFlag = 0;
+	}
+	if (uartFlag == 2) {
+		uint8_t output[]={0x02,0x30,0x2E,0x30,0x30,0x30,0x0D,0x03};
+		output[1] = (Position/1000)%10 + 0x30;		// first digit
+		output[3] = (Position/100)%10 + 0x30;			// second digit
+		output[4] = (Position/10)%10 + 0x30;			// third digit
+		output[5] = Position%10 + 0x30;						// fourth digit
+		for(int i=0; i<8; i++){
+			UART_OutChar(output[i]);								// place all elements on array to FIFO
+		}
+		TxCounter++;															// increment total frames transmitted
+		uartFlag = 0;
+	}
 }
 
 void Delay100ms(uint32_t count) {

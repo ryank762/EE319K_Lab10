@@ -16,3 +16,19 @@ void Sound_Blockhit(void);
 void Sound_Gameover(void);
 void Sound_Song(void);
 void Sound_Play1(const unsigned char *sound, uint32_t length);
+void Sound_Fail(void);
+
+void Sound_Start(void);
+void Sound_NewLine(void);
+
+void Sound_Explosion(void);
+
+
+void Sound_Killed(void);
+
+void NextSound(void);
+
+void Sound_Play2(const unsigned char *sound, uint32_t length);
+
+void ButtonSound(void);
+

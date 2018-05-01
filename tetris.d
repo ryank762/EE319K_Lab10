@@ -11,3 +11,5 @@
 .\tetris.o: Timer1.h
 .\tetris.o: Timer2.h
 .\tetris.o: Blocks.h
+.\tetris.o: UART.h
+.\tetris.o: FiFo.h
