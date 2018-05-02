@@ -152,15 +152,24 @@ Section Cross References
     tetris.o(i.Display_Init) refers to tetris.o(i.Coordinate_ConversionX) for Coordinate_ConversionX
     tetris.o(i.Display_Init) refers to tetris.o(i.Coordinate_ConversionY) for Coordinate_ConversionY
     tetris.o(i.Display_Init) refers to st7735.o(i.ST7735_DrawBitmap) for ST7735_DrawBitmap
+    tetris.o(i.Display_Init) refers to st7735.o(i.ST7735_DrawCharS) for ST7735_DrawCharS
     tetris.o(i.Display_Init) refers to tetris.o(.constdata) for nBlock
     tetris.o(i.GPIOPortF_Handler) refers to blocks.o(i.Rotate_Block) for Rotate_Block
-    tetris.o(i.Game_Over) refers to sound.o(i.Sound_Gameover) for Sound_Gameover
     tetris.o(i.Game_Over) refers to startup.o(.text) for DisableInterrupts
     tetris.o(i.Game_Over) refers to st7735.o(i.ST7735_FillScreen) for ST7735_FillScreen
+    tetris.o(i.Game_Over) refers to st7735.o(i.ST7735_DrawBitmap) for ST7735_DrawBitmap
     tetris.o(i.Game_Over) refers to st7735.o(i.ST7735_SetCursor) for ST7735_SetCursor
     tetris.o(i.Game_Over) refers to st7735.o(i.ST7735_OutString) for ST7735_OutString
     tetris.o(i.Game_Over) refers to print.o(.text) for LCD_OutDec
+    tetris.o(i.Game_Over) refers to sound.o(i.Sound_Gameover) for Sound_Gameover
+    tetris.o(i.Game_Over) refers to tetris.o(.constdata) for SBlock
     tetris.o(i.Game_Over) refers to tetris.o(.data) for score
+    tetris.o(i.Game_Win) refers to st7735.o(i.ST7735_FillScreen) for ST7735_FillScreen
+    tetris.o(i.Game_Win) refers to st7735.o(i.ST7735_SetCursor) for ST7735_SetCursor
+    tetris.o(i.Game_Win) refers to st7735.o(i.ST7735_OutString) for ST7735_OutString
+    tetris.o(i.Game_Win) refers to print.o(.text) for LCD_OutDec
+    tetris.o(i.Game_Win) refers to startup.o(.text) for DisableInterrupts
+    tetris.o(i.Game_Win) refers to tetris.o(.data) for score
     tetris.o(i.PortF_Init) refers to startup.o(.text) for EnableInterrupts
     tetris.o(i.SysTick_Handler) refers to adc.o(i.ADC_In) for ADC_In
     tetris.o(i.SysTick_Handler) refers to random.o(.text) for Random_Init
@@ -169,34 +178,34 @@ Section Cross References
     tetris.o(i.SysTick_Handler) refers to blocks.o(i.Check_Collision) for Check_Collision
     tetris.o(i.SysTick_Handler) refers to sound.o(i.Sound_Blockhit) for Sound_Blockhit
     tetris.o(i.SysTick_Handler) refers to blocks.o(i.Place_Block) for Place_Block
-    tetris.o(i.SysTick_Handler) refers to uart.o(i.UART_OutChar) for UART_OutChar
     tetris.o(i.SysTick_Handler) refers to tetris.o(.data) for Data
     tetris.o(i.main) refers to pll.o(i.PLL_Init) for PLL_Init
     tetris.o(i.main) refers to st7735.o(i.Output_Init) for Output_Init
     tetris.o(i.main) refers to random.o(.text) for Random_Init
     tetris.o(i.main) refers to tetris.o(i.Board_Init) for Board_Init
     tetris.o(i.main) refers to blocks.o(i.Tetris_Init) for Tetris_Init
-    tetris.o(i.main) refers to adc.o(i.ADC_Init) for ADC_Init
-    tetris.o(i.main) refers to st7735.o(i.ST7735_FillScreen) for ST7735_FillScreen
-    tetris.o(i.main) refers to tetris.o(i.Display_Init) for Display_Init
     tetris.o(i.main) refers to tetris.o(i.PortE_Init) for PortE_Init
     tetris.o(i.main) refers to tetris.o(i.PortF_Init) for PortF_Init
+    tetris.o(i.main) refers to uart.o(i.UART_Init) for UART_Init
+    tetris.o(i.main) refers to adc.o(i.ADC_Init) for ADC_Init
+    tetris.o(i.main) refers to st7735.o(i.ST7735_FillScreen) for ST7735_FillScreen
+    tetris.o(i.main) refers to st7735.o(i.ST7735_DrawBitmap) for ST7735_DrawBitmap
+    tetris.o(i.main) refers to st7735.o(i.ST7735_DrawCharS) for ST7735_DrawCharS
+    tetris.o(i.main) refers to tetris.o(.data) for nextBlock
+    tetris.o(i.main) refers to tetris.o(.constdata) for SBlock
+    tetris.o(i.main) refers to io.o(i.Wait10ms) for Wait10ms
+    tetris.o(i.main) refers to tetris.o(i.Display_Init) for Display_Init
     tetris.o(i.main) refers to blocks.o(i.Generate_Block) for Generate_Block
     tetris.o(i.main) refers to tetris.o(i.Display_Board) for Display_Board
     tetris.o(i.main) refers to timer0.o(i.Timer0_Init) for Timer0_Init
-    tetris.o(i.main) refers to uart.o(i.UART_Init) for UART_Init
     tetris.o(i.main) refers to tetris.o(i.SysTick_Init) for SysTick_Init
     tetris.o(i.main) refers to sound.o(i.Sound_Init) for Sound_Init
     tetris.o(i.main) refers to startup.o(.text) for EnableInterrupts
     tetris.o(i.main) refers to sound.o(i.Sound_Start) for Sound_Start
-    tetris.o(i.main) refers to io.o(i.Wait10ms) for Wait10ms
     tetris.o(i.main) refers to blocks.o(i.FastDrop_Block) for FastDrop_Block
     tetris.o(i.main) refers to tetris.o(i.Delay100ms) for Delay100ms
     tetris.o(i.main) refers to blocks.o(i.Rotate_Block) for Rotate_Block
     tetris.o(i.main) refers to sound.o(i.Sound_Rotate) for Sound_Rotate
-    tetris.o(i.main) refers to fifo.o(i.FiFo_Get) for FiFo_Get
-    tetris.o(i.main) refers to blocks.o(i.Add_Line) for Add_Line
-    tetris.o(i.main) refers to tetris.o(.data) for nextBlock
     io.o(i.IO_Touch) refers to io.o(i.Wait10ms) for Wait10ms
     timer2.o(i.Timer2A_Handler) refers to tetris.o(i.Display_Board) for Display_Board
     timer2.o(i.Timer2A_Handler) refers to tetris.o(i.Check_Board) for Check_Board
@@ -229,7 +238,11 @@ Section Cross References
     blocks.o(i.Generate_Block) refers to tetris.o(i.Game_Over) for Game_Over
     blocks.o(i.Generate_Block) refers to random.o(.text) for Random
     blocks.o(i.Generate_Block) refers to tetris.o(.data) for nextBlock
+    blocks.o(i.Generate_Block) refers to blocks.o(.data) for n
     blocks.o(i.Generate_Block) refers to tetris.o(i.Display_Board) for Display_Board
+    blocks.o(i.Generate_Block) refers to startup.o(.text) for DisableInterrupts
+    blocks.o(i.Generate_Block) refers to st7735.o(i.ST7735_DrawBitmap) for ST7735_DrawBitmap
+    blocks.o(i.Generate_Block) refers to blocks.o(.constdata) for nextb
     blocks.o(i.Place_Block) refers to tetris.o(.data) for tempx
     blocks.o(i.Place_Block) refers to blocks.o(.bss) for Tetris
     blocks.o(i.Place_Block) refers to tetris.o(.bss) for Buffer
@@ -312,13 +325,17 @@ Removing Unused input sections from the image.
     Removing st7735.o(i.fillmessage), (72 bytes).
     Removing st7735.o(i.fputc), (16 bytes).
     Removing st7735.o(.bss), (12 bytes).
+    Removing tetris.o(i.Game_Win), (88 bytes).
     Removing tetris.o(i.Wait1ms), (32 bytes).
     Removing io.o(i.IO_HeartBeat), (24 bytes).
     Removing io.o(i.IO_Init), (104 bytes).
     Removing io.o(i.IO_Touch), (40 bytes).
     Removing timer2.o(i.Timer2_Init), (100 bytes).
+    Removing blocks.o(i.Add_Line), (100 bytes).
+    Removing fifo.o(i.FiFo_Get), (68 bytes).
+    Removing uart.o(i.UART_OutChar), (24 bytes).
 
-37 unused section(s) (total 2440 bytes) removed from the image.
+41 unused section(s) (total 2720 bytes) removed from the image.
 
 ==============================================================================
 
@@ -329,21 +346,21 @@ Image Symbol Table
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
     RESET                                    0x00000000   Section      644  startup.o(RESET)
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
-    ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llsshr.o ABSOLUTE
     ../clib/microlib/stubs.s                 0x00000000   Number         0  iusefp.o ABSOLUTE
     ../fplib/microlib/fpadd.c                0x00000000   Number         0  dadd.o ABSOLUTE
@@ -397,88 +414,86 @@ Image Symbol Table
     .text                                    0x0000088c   Section       36  init.o(.text)
     i.ADC_In                                 0x000008b0   Section        0  adc.o(i.ADC_In)
     i.ADC_Init                               0x000008dc   Section        0  adc.o(i.ADC_Init)
-    i.Add_Line                               0x000009bc   Section        0  blocks.o(i.Add_Line)
-    i.Board_Init                             0x00000a20   Section        0  tetris.o(i.Board_Init)
-    i.ButtonSound                            0x00000a58   Section        0  sound.o(i.ButtonSound)
-    i.Check_Board                            0x00000a6c   Section        0  tetris.o(i.Check_Board)
-    i.Check_Collision                        0x00000b88   Section        0  blocks.o(i.Check_Collision)
-    i.Check_Drop                             0x00000cbc   Section        0  blocks.o(i.Check_Drop)
-    i.Coordinate_ConversionX                 0x00000db0   Section        0  tetris.o(i.Coordinate_ConversionX)
-    i.Coordinate_ConversionY                 0x00000db8   Section        0  tetris.o(i.Coordinate_ConversionY)
-    i.DAC_Init                               0x00000dc4   Section        0  dac.o(i.DAC_Init)
-    i.DAC_Out                                0x00000e18   Section        0  dac.o(i.DAC_Out)
-    i.Delay100ms                             0x00000e24   Section        0  tetris.o(i.Delay100ms)
-    i.Delay1ms                               0x00000e48   Section        0  st7735.o(i.Delay1ms)
-    i.Display_Board                          0x00000e68   Section        0  tetris.o(i.Display_Board)
-    i.Display_Init                           0x00000fc4   Section        0  tetris.o(i.Display_Init)
-    i.Drop_Block                             0x00001004   Section        0  blocks.o(i.Drop_Block)
-    i.Erase_Block                            0x000010c8   Section        0  blocks.o(i.Erase_Block)
-    i.FastDrop_Block                         0x000011f0   Section        0  blocks.o(i.FastDrop_Block)
-    i.FiFo_Get                               0x0000121c   Section        0  fifo.o(i.FiFo_Get)
-    i.FiFo_Init                              0x00001260   Section        0  fifo.o(i.FiFo_Init)
-    i.FiFo_Put                               0x00001274   Section        0  fifo.o(i.FiFo_Put)
-    i.Floor                                  0x000012c4   Section        0  tetris.o(i.Floor)
-    i.GPIOPortF_Handler                      0x0000131c   Section        0  tetris.o(i.GPIOPortF_Handler)
-    i.Game_Over                              0x00001330   Section        0  tetris.o(i.Game_Over)
-    i.Generate_Block                         0x00001390   Section        0  blocks.o(i.Generate_Block)
-    i.Output_Init                            0x000017cc   Section        0  st7735.o(i.Output_Init)
-    i.PLL_Init                               0x000017dc   Section        0  pll.o(i.PLL_Init)
-    i.Place_Block                            0x00001858   Section        0  blocks.o(i.Place_Block)
-    i.PortE_Init                             0x00001978   Section        0  tetris.o(i.PortE_Init)
-    i.PortF_Init                             0x000019d0   Section        0  tetris.o(i.PortF_Init)
-    i.Rotate_Block                           0x00001ad0   Section        0  blocks.o(i.Rotate_Block)
-    i.ST7735_DrawBitmap                      0x00001cb0   Section        0  st7735.o(i.ST7735_DrawBitmap)
-    i.ST7735_DrawCharS                       0x00001dd0   Section        0  st7735.o(i.ST7735_DrawCharS)
-    i.ST7735_DrawPixel                       0x00001ec4   Section        0  st7735.o(i.ST7735_DrawPixel)
-    i.ST7735_DrawString                      0x00001f0c   Section        0  st7735.o(i.ST7735_DrawString)
-    i.ST7735_FillRect                        0x00001f64   Section        0  st7735.o(i.ST7735_FillRect)
-    i.ST7735_FillScreen                      0x00002010   Section        0  st7735.o(i.ST7735_FillScreen)
-    i.ST7735_InitR                           0x00002034   Section        0  st7735.o(i.ST7735_InitR)
-    i.ST7735_OutChar                         0x000020b0   Section        0  st7735.o(i.ST7735_OutChar)
-    i.ST7735_OutString                       0x00002184   Section        0  st7735.o(i.ST7735_OutString)
-    i.ST7735_SetCursor                       0x0000219c   Section        0  st7735.o(i.ST7735_SetCursor)
-    i.Sound_Blockhit                         0x000021bc   Section        0  sound.o(i.Sound_Blockhit)
-    i.Sound_Gameover                         0x000021d0   Section        0  sound.o(i.Sound_Gameover)
-    i.Sound_Init                             0x000021e4   Section        0  sound.o(i.Sound_Init)
-    i.Sound_NewLine                          0x000021f4   Section        0  sound.o(i.Sound_NewLine)
-    i.Sound_Play1                            0x00002208   Section        0  sound.o(i.Sound_Play1)
-    i.Sound_Play2                            0x00002238   Section        0  sound.o(i.Sound_Play2)
-    i.Sound_Rotate                           0x00002268   Section        0  sound.o(i.Sound_Rotate)
-    i.Sound_Start                            0x0000227c   Section        0  sound.o(i.Sound_Start)
-    i.SysTick_Handler                        0x00002290   Section        0  tetris.o(i.SysTick_Handler)
-    i.SysTick_Init                           0x00002484   Section        0  tetris.o(i.SysTick_Init)
-    i.Tetris_Init                            0x000024b8   Section        0  blocks.o(i.Tetris_Init)
-    i.Timer0A_Handler                        0x00002980   Section        0  timer0.o(i.Timer0A_Handler)
-    i.Timer0_Init                            0x00002b14   Section        0  timer0.o(i.Timer0_Init)
-    i.Timer1A_Handler                        0x00002b8c   Section        0  sound.o(i.Timer1A_Handler)
-    i.Timer1_Init                            0x00002c18   Section        0  timer1.o(i.Timer1_Init)
-    i.Timer2A_Handler                        0x00002c70   Section        0  timer2.o(i.Timer2A_Handler)
-    i.UART1_Handler                          0x00002c9c   Section        0  uart.o(i.UART1_Handler)
-    i.UART_InChar                            0x00002cd0   Section        0  uart.o(i.UART_InChar)
-    i.UART_Init                              0x00002ce8   Section        0  uart.o(i.UART_Init)
-    i.UART_OutChar                           0x00002dc4   Section        0  uart.o(i.UART_OutChar)
-    i.Wait10ms                               0x00002ddc   Section        0  io.o(i.Wait10ms)
-    i.__scatterload_copy                     0x00002dfc   Section       14  handlers.o(i.__scatterload_copy)
-    i.__scatterload_null                     0x00002e0a   Section        2  handlers.o(i.__scatterload_null)
-    i.__scatterload_zeroinit                 0x00002e0c   Section       14  handlers.o(i.__scatterload_zeroinit)
-    i.commandList                            0x00002e1a   Section        0  st7735.o(i.commandList)
-    commandList                              0x00002e1b   Thumb Code    86  st7735.o(i.commandList)
-    i.commonInit                             0x00002e70   Section        0  st7735.o(i.commonInit)
-    commonInit                               0x00002e71   Thumb Code   340  st7735.o(i.commonInit)
-    i.main                                   0x00002ff4   Section        0  tetris.o(i.main)
-    i.pushColor                              0x00003154   Section        0  st7735.o(i.pushColor)
-    pushColor                                0x00003155   Thumb Code    18  st7735.o(i.pushColor)
-    i.setAddrWindow                          0x00003168   Section        0  st7735.o(i.setAddrWindow)
-    setAddrWindow                            0x00003169   Thumb Code   106  st7735.o(i.setAddrWindow)
-    .constdata                               0x000031dc   Section    224518  sound.o(.constdata)
-    .constdata                               0x00039ee2   Section     2018  st7735.o(.constdata)
-    Font                                     0x00039ee2   Data        1275  st7735.o(.constdata)
-    Bcmd                                     0x0003a3dd   Data         103  st7735.o(.constdata)
-    Rcmd1                                    0x0003a444   Data          59  st7735.o(.constdata)
-    Rcmd2green                               0x0003a47f   Data          13  st7735.o(.constdata)
-    Rcmd2red                                 0x0003a48c   Data          13  st7735.o(.constdata)
-    Rcmd3                                    0x0003a499   Data          43  st7735.o(.constdata)
-    .constdata                               0x0003a6c4   Section      882  tetris.o(.constdata)
+    i.Board_Init                             0x000009bc   Section        0  tetris.o(i.Board_Init)
+    i.ButtonSound                            0x000009f4   Section        0  sound.o(i.ButtonSound)
+    i.Check_Board                            0x00000a08   Section        0  tetris.o(i.Check_Board)
+    i.Check_Collision                        0x00000b24   Section        0  blocks.o(i.Check_Collision)
+    i.Check_Drop                             0x00000c58   Section        0  blocks.o(i.Check_Drop)
+    i.Coordinate_ConversionX                 0x00000d4c   Section        0  tetris.o(i.Coordinate_ConversionX)
+    i.Coordinate_ConversionY                 0x00000d54   Section        0  tetris.o(i.Coordinate_ConversionY)
+    i.DAC_Init                               0x00000d60   Section        0  dac.o(i.DAC_Init)
+    i.DAC_Out                                0x00000db4   Section        0  dac.o(i.DAC_Out)
+    i.Delay100ms                             0x00000dc0   Section        0  tetris.o(i.Delay100ms)
+    i.Delay1ms                               0x00000de4   Section        0  st7735.o(i.Delay1ms)
+    i.Display_Board                          0x00000e04   Section        0  tetris.o(i.Display_Board)
+    i.Display_Init                           0x00000f60   Section        0  tetris.o(i.Display_Init)
+    i.Drop_Block                             0x0000100c   Section        0  blocks.o(i.Drop_Block)
+    i.Erase_Block                            0x000010d0   Section        0  blocks.o(i.Erase_Block)
+    i.FastDrop_Block                         0x000011f8   Section        0  blocks.o(i.FastDrop_Block)
+    i.FiFo_Init                              0x00001224   Section        0  fifo.o(i.FiFo_Init)
+    i.FiFo_Put                               0x00001238   Section        0  fifo.o(i.FiFo_Put)
+    i.Floor                                  0x00001288   Section        0  tetris.o(i.Floor)
+    i.GPIOPortF_Handler                      0x000012e0   Section        0  tetris.o(i.GPIOPortF_Handler)
+    i.Game_Over                              0x000012f4   Section        0  tetris.o(i.Game_Over)
+    i.Generate_Block                         0x00001744   Section        0  blocks.o(i.Generate_Block)
+    i.Output_Init                            0x00001c78   Section        0  st7735.o(i.Output_Init)
+    i.PLL_Init                               0x00001c88   Section        0  pll.o(i.PLL_Init)
+    i.Place_Block                            0x00001d04   Section        0  blocks.o(i.Place_Block)
+    i.PortE_Init                             0x00001e24   Section        0  tetris.o(i.PortE_Init)
+    i.PortF_Init                             0x00001e7c   Section        0  tetris.o(i.PortF_Init)
+    i.Rotate_Block                           0x00001f7c   Section        0  blocks.o(i.Rotate_Block)
+    i.ST7735_DrawBitmap                      0x0000215c   Section        0  st7735.o(i.ST7735_DrawBitmap)
+    i.ST7735_DrawCharS                       0x0000227c   Section        0  st7735.o(i.ST7735_DrawCharS)
+    i.ST7735_DrawPixel                       0x00002370   Section        0  st7735.o(i.ST7735_DrawPixel)
+    i.ST7735_DrawString                      0x000023b8   Section        0  st7735.o(i.ST7735_DrawString)
+    i.ST7735_FillRect                        0x00002410   Section        0  st7735.o(i.ST7735_FillRect)
+    i.ST7735_FillScreen                      0x000024bc   Section        0  st7735.o(i.ST7735_FillScreen)
+    i.ST7735_InitR                           0x000024e0   Section        0  st7735.o(i.ST7735_InitR)
+    i.ST7735_OutChar                         0x0000255c   Section        0  st7735.o(i.ST7735_OutChar)
+    i.ST7735_OutString                       0x00002630   Section        0  st7735.o(i.ST7735_OutString)
+    i.ST7735_SetCursor                       0x00002648   Section        0  st7735.o(i.ST7735_SetCursor)
+    i.Sound_Blockhit                         0x00002668   Section        0  sound.o(i.Sound_Blockhit)
+    i.Sound_Gameover                         0x0000267c   Section        0  sound.o(i.Sound_Gameover)
+    i.Sound_Init                             0x00002690   Section        0  sound.o(i.Sound_Init)
+    i.Sound_NewLine                          0x000026a0   Section        0  sound.o(i.Sound_NewLine)
+    i.Sound_Play1                            0x000026b4   Section        0  sound.o(i.Sound_Play1)
+    i.Sound_Play2                            0x000026e4   Section        0  sound.o(i.Sound_Play2)
+    i.Sound_Rotate                           0x00002714   Section        0  sound.o(i.Sound_Rotate)
+    i.Sound_Start                            0x00002728   Section        0  sound.o(i.Sound_Start)
+    i.SysTick_Handler                        0x0000273c   Section        0  tetris.o(i.SysTick_Handler)
+    i.SysTick_Init                           0x00002804   Section        0  tetris.o(i.SysTick_Init)
+    i.Tetris_Init                            0x00002838   Section        0  blocks.o(i.Tetris_Init)
+    i.Timer0A_Handler                        0x00002d00   Section        0  timer0.o(i.Timer0A_Handler)
+    i.Timer0_Init                            0x00002e94   Section        0  timer0.o(i.Timer0_Init)
+    i.Timer1A_Handler                        0x00002f0c   Section        0  sound.o(i.Timer1A_Handler)
+    i.Timer1_Init                            0x00002f98   Section        0  timer1.o(i.Timer1_Init)
+    i.Timer2A_Handler                        0x00002ff0   Section        0  timer2.o(i.Timer2A_Handler)
+    i.UART1_Handler                          0x0000301c   Section        0  uart.o(i.UART1_Handler)
+    i.UART_InChar                            0x00003050   Section        0  uart.o(i.UART_InChar)
+    i.UART_Init                              0x00003068   Section        0  uart.o(i.UART_Init)
+    i.Wait10ms                               0x00003144   Section        0  io.o(i.Wait10ms)
+    i.__scatterload_copy                     0x00003164   Section       14  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x00003172   Section        2  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x00003174   Section       14  handlers.o(i.__scatterload_zeroinit)
+    i.commandList                            0x00003182   Section        0  st7735.o(i.commandList)
+    commandList                              0x00003183   Thumb Code    86  st7735.o(i.commandList)
+    i.commonInit                             0x000031d8   Section        0  st7735.o(i.commonInit)
+    commonInit                               0x000031d9   Thumb Code   340  st7735.o(i.commonInit)
+    i.main                                   0x0000335c   Section        0  tetris.o(i.main)
+    i.pushColor                              0x00003c80   Section        0  st7735.o(i.pushColor)
+    pushColor                                0x00003c81   Thumb Code    18  st7735.o(i.pushColor)
+    i.setAddrWindow                          0x00003c94   Section        0  st7735.o(i.setAddrWindow)
+    setAddrWindow                            0x00003c95   Thumb Code   106  st7735.o(i.setAddrWindow)
+    .constdata                               0x00003d08   Section    224518  sound.o(.constdata)
+    .constdata                               0x0003aa0e   Section     2018  st7735.o(.constdata)
+    Font                                     0x0003aa0e   Data        1275  st7735.o(.constdata)
+    Bcmd                                     0x0003af09   Data         103  st7735.o(.constdata)
+    Rcmd1                                    0x0003af70   Data          59  st7735.o(.constdata)
+    Rcmd2green                               0x0003afab   Data          13  st7735.o(.constdata)
+    Rcmd2red                                 0x0003afb8   Data          13  st7735.o(.constdata)
+    Rcmd3                                    0x0003afc5   Data          43  st7735.o(.constdata)
+    .constdata                               0x0003b1f0   Section     2178  tetris.o(.constdata)
+    .constdata                               0x0003ba72   Section     7452  blocks.o(.constdata)
     .data                                    0x20000000   Section        8  timer0.o(.data)
     .data                                    0x20000008   Section       20  sound.o(.data)
     .data                                    0x2000001c   Section       44  st7735.o(.data)
@@ -671,97 +686,103 @@ Image Symbol Table
     __scatterload_rt2                        0x0000088d   Thumb Code     0  init.o(.text)
     ADC_In                                   0x000008b1   Thumb Code    36  adc.o(i.ADC_In)
     ADC_Init                                 0x000008dd   Thumb Code   198  adc.o(i.ADC_Init)
-    Add_Line                                 0x000009bd   Thumb Code    86  blocks.o(i.Add_Line)
-    Board_Init                               0x00000a21   Thumb Code    50  tetris.o(i.Board_Init)
-    ButtonSound                              0x00000a59   Thumb Code    14  sound.o(i.ButtonSound)
-    Check_Board                              0x00000a6d   Thumb Code   254  tetris.o(i.Check_Board)
-    Check_Collision                          0x00000b89   Thumb Code   300  blocks.o(i.Check_Collision)
-    Check_Drop                               0x00000cbd   Thumb Code   234  blocks.o(i.Check_Drop)
-    Coordinate_ConversionX                   0x00000db1   Thumb Code     8  tetris.o(i.Coordinate_ConversionX)
-    Coordinate_ConversionY                   0x00000db9   Thumb Code    10  tetris.o(i.Coordinate_ConversionY)
-    DAC_Init                                 0x00000dc5   Thumb Code    70  dac.o(i.DAC_Init)
-    DAC_Out                                  0x00000e19   Thumb Code     6  dac.o(i.DAC_Out)
-    Delay100ms                               0x00000e25   Thumb Code    30  tetris.o(i.Delay100ms)
-    Delay1ms                                 0x00000e49   Thumb Code    32  st7735.o(i.Delay1ms)
-    Display_Board                            0x00000e69   Thumb Code   306  tetris.o(i.Display_Board)
-    Display_Init                             0x00000fc5   Thumb Code    60  tetris.o(i.Display_Init)
-    Drop_Block                               0x00001005   Thumb Code   168  blocks.o(i.Drop_Block)
-    Erase_Block                              0x000010c9   Thumb Code   280  blocks.o(i.Erase_Block)
-    FastDrop_Block                           0x000011f1   Thumb Code    34  blocks.o(i.FastDrop_Block)
-    FiFo_Get                                 0x0000121d   Thumb Code    54  fifo.o(i.FiFo_Get)
-    FiFo_Init                                0x00001261   Thumb Code    12  fifo.o(i.FiFo_Init)
-    FiFo_Put                                 0x00001275   Thumb Code    66  fifo.o(i.FiFo_Put)
-    Floor                                    0x000012c5   Thumb Code    86  tetris.o(i.Floor)
-    GPIOPortF_Handler                        0x0000131d   Thumb Code    14  tetris.o(i.GPIOPortF_Handler)
-    Game_Over                                0x00001331   Thumb Code    66  tetris.o(i.Game_Over)
-    Generate_Block                           0x00001391   Thumb Code  1080  blocks.o(i.Generate_Block)
-    Output_Init                              0x000017cd   Thumb Code    16  st7735.o(i.Output_Init)
-    PLL_Init                                 0x000017dd   Thumb Code   118  pll.o(i.PLL_Init)
-    Place_Block                              0x00001859   Thumb Code   268  blocks.o(i.Place_Block)
-    PortE_Init                               0x00001979   Thumb Code    74  tetris.o(i.PortE_Init)
-    PortF_Init                               0x000019d1   Thumb Code   230  tetris.o(i.PortF_Init)
-    Rotate_Block                             0x00001ad1   Thumb Code   450  blocks.o(i.Rotate_Block)
-    ST7735_DrawBitmap                        0x00001cb1   Thumb Code   280  st7735.o(i.ST7735_DrawBitmap)
-    ST7735_DrawCharS                         0x00001dd1   Thumb Code   232  st7735.o(i.ST7735_DrawCharS)
-    ST7735_DrawPixel                         0x00001ec5   Thumb Code    64  st7735.o(i.ST7735_DrawPixel)
-    ST7735_DrawString                        0x00001f0d   Thumb Code    86  st7735.o(i.ST7735_DrawString)
-    ST7735_FillRect                          0x00001f65   Thumb Code   164  st7735.o(i.ST7735_FillRect)
-    ST7735_FillScreen                        0x00002011   Thumb Code    28  st7735.o(i.ST7735_FillScreen)
-    ST7735_InitR                             0x00002035   Thumb Code    90  st7735.o(i.ST7735_InitR)
-    ST7735_OutChar                           0x000020b1   Thumb Code   176  st7735.o(i.ST7735_OutChar)
-    ST7735_OutString                         0x00002185   Thumb Code    24  st7735.o(i.ST7735_OutString)
-    ST7735_SetCursor                         0x0000219d   Thumb Code    22  st7735.o(i.ST7735_SetCursor)
-    Sound_Blockhit                           0x000021bd   Thumb Code    14  sound.o(i.Sound_Blockhit)
-    Sound_Gameover                           0x000021d1   Thumb Code    14  sound.o(i.Sound_Gameover)
-    Sound_Init                               0x000021e5   Thumb Code    16  sound.o(i.Sound_Init)
-    Sound_NewLine                            0x000021f5   Thumb Code    14  sound.o(i.Sound_NewLine)
-    Sound_Play1                              0x00002209   Thumb Code    28  sound.o(i.Sound_Play1)
-    Sound_Play2                              0x00002239   Thumb Code    26  sound.o(i.Sound_Play2)
-    Sound_Rotate                             0x00002269   Thumb Code    14  sound.o(i.Sound_Rotate)
-    Sound_Start                              0x0000227d   Thumb Code    14  sound.o(i.Sound_Start)
-    SysTick_Handler                          0x00002291   Thumb Code   456  tetris.o(i.SysTick_Handler)
-    SysTick_Init                             0x00002485   Thumb Code    42  tetris.o(i.SysTick_Init)
-    Tetris_Init                              0x000024b9   Thumb Code  1218  blocks.o(i.Tetris_Init)
-    Timer0A_Handler                          0x00002981   Thumb Code   338  timer0.o(i.Timer0A_Handler)
-    Timer0_Init                              0x00002b15   Thumb Code    90  timer0.o(i.Timer0_Init)
-    Timer1A_Handler                          0x00002b8d   Thumb Code   118  sound.o(i.Timer1A_Handler)
-    Timer1_Init                              0x00002c19   Thumb Code    72  timer1.o(i.Timer1_Init)
-    Timer2A_Handler                          0x00002c71   Thumb Code    34  timer2.o(i.Timer2A_Handler)
-    UART1_Handler                            0x00002c9d   Thumb Code    42  uart.o(i.UART1_Handler)
-    UART_InChar                              0x00002cd1   Thumb Code    20  uart.o(i.UART_InChar)
-    UART_Init                                0x00002ce9   Thumb Code   188  uart.o(i.UART_Init)
-    UART_OutChar                             0x00002dc5   Thumb Code    18  uart.o(i.UART_OutChar)
-    Wait10ms                                 0x00002ddd   Thumb Code    32  io.o(i.Wait10ms)
-    __scatterload_copy                       0x00002dfd   Thumb Code    14  handlers.o(i.__scatterload_copy)
-    __scatterload_null                       0x00002e0b   Thumb Code     2  handlers.o(i.__scatterload_null)
-    __scatterload_zeroinit                   0x00002e0d   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
-    main                                     0x00002ff5   Thumb Code   326  tetris.o(i.main)
-    soundwave                                0x000031dc   Data          64  sound.o(.constdata)
-    blockrotate                              0x0000321c   Data        1740  sound.o(.constdata)
-    forcehit                                 0x000038e8   Data        1452  sound.o(.constdata)
-    Song                                     0x00003e94   Data       142174  sound.o(.constdata)
-    gameover                                 0x000269f2   Data       44364  sound.o(.constdata)
-    gameover2                                0x0003173e   Data        9804  sound.o(.constdata)
-    RotateFail                               0x00033d8a   Data        6928  sound.o(.constdata)
-    shoot                                    0x0003589a   Data        4080  sound.o(.constdata)
-    IO_Sound_Effect                          0x0003688a   Data         764  sound.o(.constdata)
-    Level                                    0x00036b86   Data        2448  sound.o(.constdata)
-    explosion                                0x00037516   Data        2000  sound.o(.constdata)
-    invaderkilled                            0x00037ce6   Data        3377  sound.o(.constdata)
-    Drop                                     0x00038a17   Data        3832  sound.o(.constdata)
-    button                                   0x0003990f   Data        1491  sound.o(.constdata)
-    dBfs                                     0x0003a4c4   Data         512  st7735.o(.constdata)
-    IBlock                                   0x0003a6c4   Data          98  tetris.o(.constdata)
-    JBlock                                   0x0003a726   Data          98  tetris.o(.constdata)
-    LBlock                                   0x0003a788   Data          98  tetris.o(.constdata)
-    OBlock                                   0x0003a7ea   Data          98  tetris.o(.constdata)
-    SBlock                                   0x0003a84c   Data          98  tetris.o(.constdata)
-    TBlock                                   0x0003a8ae   Data          98  tetris.o(.constdata)
-    ZBlock                                   0x0003a910   Data          98  tetris.o(.constdata)
-    nBlock                                   0x0003a972   Data          98  tetris.o(.constdata)
-    gBlock                                   0x0003a9d4   Data          98  tetris.o(.constdata)
-    Region$$Table$$Base                      0x0003aa38   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x0003aa58   Number         0  anon$$obj.o(Region$$Table)
+    Board_Init                               0x000009bd   Thumb Code    50  tetris.o(i.Board_Init)
+    ButtonSound                              0x000009f5   Thumb Code    14  sound.o(i.ButtonSound)
+    Check_Board                              0x00000a09   Thumb Code   254  tetris.o(i.Check_Board)
+    Check_Collision                          0x00000b25   Thumb Code   300  blocks.o(i.Check_Collision)
+    Check_Drop                               0x00000c59   Thumb Code   234  blocks.o(i.Check_Drop)
+    Coordinate_ConversionX                   0x00000d4d   Thumb Code     8  tetris.o(i.Coordinate_ConversionX)
+    Coordinate_ConversionY                   0x00000d55   Thumb Code    10  tetris.o(i.Coordinate_ConversionY)
+    DAC_Init                                 0x00000d61   Thumb Code    70  dac.o(i.DAC_Init)
+    DAC_Out                                  0x00000db5   Thumb Code     6  dac.o(i.DAC_Out)
+    Delay100ms                               0x00000dc1   Thumb Code    30  tetris.o(i.Delay100ms)
+    Delay1ms                                 0x00000de5   Thumb Code    32  st7735.o(i.Delay1ms)
+    Display_Board                            0x00000e05   Thumb Code   306  tetris.o(i.Display_Board)
+    Display_Init                             0x00000f61   Thumb Code   160  tetris.o(i.Display_Init)
+    Drop_Block                               0x0000100d   Thumb Code   168  blocks.o(i.Drop_Block)
+    Erase_Block                              0x000010d1   Thumb Code   280  blocks.o(i.Erase_Block)
+    FastDrop_Block                           0x000011f9   Thumb Code    34  blocks.o(i.FastDrop_Block)
+    FiFo_Init                                0x00001225   Thumb Code    12  fifo.o(i.FiFo_Init)
+    FiFo_Put                                 0x00001239   Thumb Code    66  fifo.o(i.FiFo_Put)
+    Floor                                    0x00001289   Thumb Code    86  tetris.o(i.Floor)
+    GPIOPortF_Handler                        0x000012e1   Thumb Code    14  tetris.o(i.GPIOPortF_Handler)
+    Game_Over                                0x000012f5   Thumb Code   978  tetris.o(i.Game_Over)
+    Generate_Block                           0x00001745   Thumb Code  1286  blocks.o(i.Generate_Block)
+    Output_Init                              0x00001c79   Thumb Code    16  st7735.o(i.Output_Init)
+    PLL_Init                                 0x00001c89   Thumb Code   118  pll.o(i.PLL_Init)
+    Place_Block                              0x00001d05   Thumb Code   268  blocks.o(i.Place_Block)
+    PortE_Init                               0x00001e25   Thumb Code    74  tetris.o(i.PortE_Init)
+    PortF_Init                               0x00001e7d   Thumb Code   230  tetris.o(i.PortF_Init)
+    Rotate_Block                             0x00001f7d   Thumb Code   450  blocks.o(i.Rotate_Block)
+    ST7735_DrawBitmap                        0x0000215d   Thumb Code   280  st7735.o(i.ST7735_DrawBitmap)
+    ST7735_DrawCharS                         0x0000227d   Thumb Code   232  st7735.o(i.ST7735_DrawCharS)
+    ST7735_DrawPixel                         0x00002371   Thumb Code    64  st7735.o(i.ST7735_DrawPixel)
+    ST7735_DrawString                        0x000023b9   Thumb Code    86  st7735.o(i.ST7735_DrawString)
+    ST7735_FillRect                          0x00002411   Thumb Code   164  st7735.o(i.ST7735_FillRect)
+    ST7735_FillScreen                        0x000024bd   Thumb Code    28  st7735.o(i.ST7735_FillScreen)
+    ST7735_InitR                             0x000024e1   Thumb Code    90  st7735.o(i.ST7735_InitR)
+    ST7735_OutChar                           0x0000255d   Thumb Code   176  st7735.o(i.ST7735_OutChar)
+    ST7735_OutString                         0x00002631   Thumb Code    24  st7735.o(i.ST7735_OutString)
+    ST7735_SetCursor                         0x00002649   Thumb Code    22  st7735.o(i.ST7735_SetCursor)
+    Sound_Blockhit                           0x00002669   Thumb Code    14  sound.o(i.Sound_Blockhit)
+    Sound_Gameover                           0x0000267d   Thumb Code    14  sound.o(i.Sound_Gameover)
+    Sound_Init                               0x00002691   Thumb Code    16  sound.o(i.Sound_Init)
+    Sound_NewLine                            0x000026a1   Thumb Code    14  sound.o(i.Sound_NewLine)
+    Sound_Play1                              0x000026b5   Thumb Code    28  sound.o(i.Sound_Play1)
+    Sound_Play2                              0x000026e5   Thumb Code    26  sound.o(i.Sound_Play2)
+    Sound_Rotate                             0x00002715   Thumb Code    14  sound.o(i.Sound_Rotate)
+    Sound_Start                              0x00002729   Thumb Code    14  sound.o(i.Sound_Start)
+    SysTick_Handler                          0x0000273d   Thumb Code   172  tetris.o(i.SysTick_Handler)
+    SysTick_Init                             0x00002805   Thumb Code    42  tetris.o(i.SysTick_Init)
+    Tetris_Init                              0x00002839   Thumb Code  1218  blocks.o(i.Tetris_Init)
+    Timer0A_Handler                          0x00002d01   Thumb Code   338  timer0.o(i.Timer0A_Handler)
+    Timer0_Init                              0x00002e95   Thumb Code    90  timer0.o(i.Timer0_Init)
+    Timer1A_Handler                          0x00002f0d   Thumb Code   118  sound.o(i.Timer1A_Handler)
+    Timer1_Init                              0x00002f99   Thumb Code    72  timer1.o(i.Timer1_Init)
+    Timer2A_Handler                          0x00002ff1   Thumb Code    34  timer2.o(i.Timer2A_Handler)
+    UART1_Handler                            0x0000301d   Thumb Code    42  uart.o(i.UART1_Handler)
+    UART_InChar                              0x00003051   Thumb Code    20  uart.o(i.UART_InChar)
+    UART_Init                                0x00003069   Thumb Code   188  uart.o(i.UART_Init)
+    Wait10ms                                 0x00003145   Thumb Code    32  io.o(i.Wait10ms)
+    __scatterload_copy                       0x00003165   Thumb Code    14  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x00003173   Thumb Code     2  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x00003175   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
+    main                                     0x0000335d   Thumb Code  2326  tetris.o(i.main)
+    soundwave                                0x00003d08   Data          64  sound.o(.constdata)
+    blockrotate                              0x00003d48   Data        1740  sound.o(.constdata)
+    forcehit                                 0x00004414   Data        1452  sound.o(.constdata)
+    Song                                     0x000049c0   Data       142174  sound.o(.constdata)
+    gameover                                 0x0002751e   Data       44364  sound.o(.constdata)
+    gameover2                                0x0003226a   Data        9804  sound.o(.constdata)
+    RotateFail                               0x000348b6   Data        6928  sound.o(.constdata)
+    shoot                                    0x000363c6   Data        4080  sound.o(.constdata)
+    IO_Sound_Effect                          0x000373b6   Data         764  sound.o(.constdata)
+    Level                                    0x000376b2   Data        2448  sound.o(.constdata)
+    explosion                                0x00038042   Data        2000  sound.o(.constdata)
+    invaderkilled                            0x00038812   Data        3377  sound.o(.constdata)
+    Drop                                     0x00039543   Data        3832  sound.o(.constdata)
+    button                                   0x0003a43b   Data        1491  sound.o(.constdata)
+    dBfs                                     0x0003aff0   Data         512  st7735.o(.constdata)
+    IBlock                                   0x0003b1f0   Data          98  tetris.o(.constdata)
+    JBlock                                   0x0003b252   Data          98  tetris.o(.constdata)
+    LBlock                                   0x0003b2b4   Data          98  tetris.o(.constdata)
+    OBlock                                   0x0003b316   Data          98  tetris.o(.constdata)
+    SBlock                                   0x0003b378   Data          98  tetris.o(.constdata)
+    TBlock                                   0x0003b3da   Data          98  tetris.o(.constdata)
+    ZBlock                                   0x0003b43c   Data          98  tetris.o(.constdata)
+    nBlock                                   0x0003b49e   Data          98  tetris.o(.constdata)
+    gBlock                                   0x0003b500   Data          98  tetris.o(.constdata)
+    nextb1                                   0x0003b562   Data        1296  tetris.o(.constdata)
+    IBlock0                                  0x0003ba72   Data         648  blocks.o(.constdata)
+    LBlock0                                  0x0003bcfa   Data         972  blocks.o(.constdata)
+    JBlock0                                  0x0003c0c6   Data         972  blocks.o(.constdata)
+    OBlock1                                  0x0003c492   Data         648  blocks.o(.constdata)
+    SBlock0                                  0x0003c71a   Data         972  blocks.o(.constdata)
+    TBlock0                                  0x0003cae6   Data         972  blocks.o(.constdata)
+    ZBlock0                                  0x0003ceb2   Data         972  blocks.o(.constdata)
+    nextb                                    0x0003d27e   Data        1296  blocks.o(.constdata)
+    Region$$Table$$Base                      0x0003d790   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x0003d7b0   Number         0  anon$$obj.o(Region$$Table)
     TimerCount                               0x20000000   Data           4  timer0.o(.data)
     TimerCounter                             0x20000004   Data           4  timer0.o(.data)
     SoundIndex                               0x20000008   Data           4  sound.o(.data)
@@ -789,6 +810,7 @@ Image Symbol Table
     rotFlag                                  0x20000062   Data           1  tetris.o(.data)
     cFlag                                    0x20000063   Data           1  tetris.o(.data)
     uartFlag                                 0x20000064   Data           1  tetris.o(.data)
+    genFlag                                  0x20000065   Data           1  tetris.o(.data)
     Data                                     0x20000066   Data           2  tetris.o(.data)
     data                                     0x20000068   Data           1  tetris.o(.data)
     currentType                              0x20000069   Data           1  tetris.o(.data)
@@ -803,7 +825,7 @@ Image Symbol Table
     ySave                                    0x20000072   Data           1  tetris.o(.data)
     blockColor                               0x20000074   Data          16  blocks.o(.data)
     dropFlag                                 0x20000084   Data           1  blocks.o(.data)
-    genFlag                                  0x20000085   Data           1  blocks.o(.data)
+    n                                        0x20000085   Data           1  blocks.o(.data)
     FIFO                                     0x20000088   Data           8  fifo.o(.data)
     RxCounter                                0x20000090   Data           4  uart.o(.data)
     DataLost                                 0x20000094   Data           4  uart.o(.data)
@@ -820,117 +842,115 @@ Memory Map of the image
 
   Image Entry point : 0x0000026d
 
-  Load Region LR_1 (Base: 0x00000000, Size: 0x0003aaf4, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x00000000, Size: 0x0003d84c, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Base: 0x00000000, Size: 0x0003aa58, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Base: 0x00000000, Size: 0x0003d7b0, Max: 0xffffffff, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x00000000   0x00000284   Code   RO            3  * RESET               startup.o
-    0x00000284   0x00000000   Code   RO          793  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
-    0x00000284   0x00000004   Code   RO          804    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
-    0x00000288   0x00000004   Code   RO          807    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
-    0x0000028c   0x00000000   Code   RO          809    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
-    0x0000028c   0x00000000   Code   RO          811    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
-    0x0000028c   0x00000008   Code   RO          812    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
-    0x00000294   0x00000000   Code   RO          814    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
-    0x00000294   0x00000000   Code   RO          816    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
-    0x00000294   0x00000004   Code   RO          805    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
+    0x00000284   0x00000000   Code   RO          800  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
+    0x00000284   0x00000004   Code   RO          811    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
+    0x00000288   0x00000004   Code   RO          814    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
+    0x0000028c   0x00000000   Code   RO          816    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
+    0x0000028c   0x00000000   Code   RO          818    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
+    0x0000028c   0x00000008   Code   RO          819    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
+    0x00000294   0x00000000   Code   RO          821    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
+    0x00000294   0x00000000   Code   RO          823    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
+    0x00000294   0x00000004   Code   RO          812    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
     0x00000298   0x0000001c   Code   RO            4    .text               startup.o
     0x000002b4   0x0000003c   Code   RO           13    .text               random.o
     0x000002f0   0x00000050   Code   RO          205    .text               lcd.o
     0x00000340   0x000001ac   Code   RO          208    .text               print.o
-    0x000004ec   0x0000014e   Code   RO          796    .text               mf_w.l(dadd.o)
-    0x0000063a   0x000000e4   Code   RO          798    .text               mf_w.l(dmul.o)
-    0x0000071e   0x0000001a   Code   RO          800    .text               mf_w.l(dfltui.o)
-    0x00000738   0x00000032   Code   RO          802    .text               mf_w.l(dfixui.o)
-    0x0000076a   0x0000001e   Code   RO          818    .text               mc_w.l(llshl.o)
-    0x00000788   0x00000020   Code   RO          820    .text               mc_w.l(llushr.o)
-    0x000007a8   0x00000024   Code   RO          822    .text               mc_w.l(llsshr.o)
-    0x000007cc   0x00000000   Code   RO          824    .text               mc_w.l(iusefp.o)
-    0x000007cc   0x000000be   Code   RO          825    .text               mf_w.l(depilogue.o)
+    0x000004ec   0x0000014e   Code   RO          803    .text               mf_w.l(dadd.o)
+    0x0000063a   0x000000e4   Code   RO          805    .text               mf_w.l(dmul.o)
+    0x0000071e   0x0000001a   Code   RO          807    .text               mf_w.l(dfltui.o)
+    0x00000738   0x00000032   Code   RO          809    .text               mf_w.l(dfixui.o)
+    0x0000076a   0x0000001e   Code   RO          825    .text               mc_w.l(llshl.o)
+    0x00000788   0x00000020   Code   RO          827    .text               mc_w.l(llushr.o)
+    0x000007a8   0x00000024   Code   RO          829    .text               mc_w.l(llsshr.o)
+    0x000007cc   0x00000000   Code   RO          831    .text               mc_w.l(iusefp.o)
+    0x000007cc   0x000000be   Code   RO          832    .text               mf_w.l(depilogue.o)
     0x0000088a   0x00000002   PAD
-    0x0000088c   0x00000024   Code   RO          827    .text               mc_w.l(init.o)
+    0x0000088c   0x00000024   Code   RO          834    .text               mc_w.l(init.o)
     0x000008b0   0x0000002c   Code   RO           41    i.ADC_In            adc.o
     0x000008dc   0x000000e0   Code   RO           42    i.ADC_Init          adc.o
-    0x000009bc   0x00000064   Code   RO          663    i.Add_Line          blocks.o
-    0x00000a20   0x00000038   Code   RO          492    i.Board_Init        tetris.o
-    0x00000a58   0x00000014   Code   RO          102    i.ButtonSound       sound.o
-    0x00000a6c   0x0000011c   Code   RO          493    i.Check_Board       tetris.o
-    0x00000b88   0x00000134   Code   RO          664    i.Check_Collision   blocks.o
-    0x00000cbc   0x000000f4   Code   RO          665    i.Check_Drop        blocks.o
-    0x00000db0   0x00000008   Code   RO          494    i.Coordinate_ConversionX  tetris.o
-    0x00000db8   0x0000000a   Code   RO          495    i.Coordinate_ConversionY  tetris.o
-    0x00000dc2   0x00000002   PAD
-    0x00000dc4   0x00000054   Code   RO           16    i.DAC_Init          dac.o
-    0x00000e18   0x0000000c   Code   RO           17    i.DAC_Out           dac.o
-    0x00000e24   0x00000024   Code   RO          496    i.Delay100ms        tetris.o
-    0x00000e48   0x00000020   Code   RO          211    i.Delay1ms          st7735.o
-    0x00000e68   0x0000015c   Code   RO          497    i.Display_Board     tetris.o
-    0x00000fc4   0x00000040   Code   RO          498    i.Display_Init      tetris.o
-    0x00001004   0x000000c4   Code   RO          666    i.Drop_Block        blocks.o
-    0x000010c8   0x00000128   Code   RO          667    i.Erase_Block       blocks.o
-    0x000011f0   0x0000002c   Code   RO          668    i.FastDrop_Block    blocks.o
-    0x0000121c   0x00000044   Code   RO          733    i.FiFo_Get          fifo.o
-    0x00001260   0x00000014   Code   RO          734    i.FiFo_Init         fifo.o
-    0x00001274   0x00000050   Code   RO          735    i.FiFo_Put          fifo.o
-    0x000012c4   0x00000056   Code   RO          499    i.Floor             tetris.o
-    0x0000131a   0x00000002   PAD
-    0x0000131c   0x00000014   Code   RO          500    i.GPIOPortF_Handler  tetris.o
-    0x00001330   0x00000060   Code   RO          501    i.Game_Over         tetris.o
-    0x00001390   0x0000043c   Code   RO          669    i.Generate_Block    blocks.o
-    0x000017cc   0x00000010   Code   RO          214    i.Output_Init       st7735.o
-    0x000017dc   0x0000007c   Code   RO          477    i.PLL_Init          pll.o
-    0x00001858   0x00000120   Code   RO          670    i.Place_Block       blocks.o
-    0x00001978   0x00000058   Code   RO          502    i.PortE_Init        tetris.o
-    0x000019d0   0x00000100   Code   RO          503    i.PortF_Init        tetris.o
-    0x00001ad0   0x000001e0   Code   RO          671    i.Rotate_Block      blocks.o
-    0x00001cb0   0x00000120   Code   RO          218    i.ST7735_DrawBitmap  st7735.o
-    0x00001dd0   0x000000f4   Code   RO          220    i.ST7735_DrawCharS  st7735.o
-    0x00001ec4   0x00000048   Code   RO          223    i.ST7735_DrawPixel  st7735.o
-    0x00001f0c   0x00000056   Code   RO          224    i.ST7735_DrawString  st7735.o
-    0x00001f62   0x00000002   PAD
-    0x00001f64   0x000000ac   Code   RO          225    i.ST7735_FillRect   st7735.o
-    0x00002010   0x00000024   Code   RO          226    i.ST7735_FillScreen  st7735.o
-    0x00002034   0x0000007c   Code   RO          228    i.ST7735_InitR      st7735.o
-    0x000020b0   0x000000d4   Code   RO          230    i.ST7735_OutChar    st7735.o
-    0x00002184   0x00000018   Code   RO          231    i.ST7735_OutString  st7735.o
-    0x0000219c   0x00000020   Code   RO          241    i.ST7735_SetCursor  st7735.o
-    0x000021bc   0x00000014   Code   RO          104    i.Sound_Blockhit    sound.o
-    0x000021d0   0x00000014   Code   RO          107    i.Sound_Gameover    sound.o
-    0x000021e4   0x00000010   Code   RO          108    i.Sound_Init        sound.o
-    0x000021f4   0x00000014   Code   RO          110    i.Sound_NewLine     sound.o
-    0x00002208   0x00000030   Code   RO          111    i.Sound_Play1       sound.o
-    0x00002238   0x00000030   Code   RO          112    i.Sound_Play2       sound.o
-    0x00002268   0x00000014   Code   RO          113    i.Sound_Rotate      sound.o
-    0x0000227c   0x00000014   Code   RO          114    i.Sound_Start       sound.o
-    0x00002290   0x000001f4   Code   RO          504    i.SysTick_Handler   tetris.o
-    0x00002484   0x00000034   Code   RO          505    i.SysTick_Init      tetris.o
-    0x000024b8   0x000004c8   Code   RO          672    i.Tetris_Init       blocks.o
-    0x00002980   0x00000194   Code   RO           63    i.Timer0A_Handler   timer0.o
-    0x00002b14   0x00000078   Code   RO           64    i.Timer0_Init       timer0.o
-    0x00002b8c   0x0000008c   Code   RO          115    i.Timer1A_Handler   sound.o
-    0x00002c18   0x00000058   Code   RO           90    i.Timer1_Init       timer1.o
-    0x00002c70   0x0000002c   Code   RO          645    i.Timer2A_Handler   timer2.o
-    0x00002c9c   0x00000034   Code   RO          760    i.UART1_Handler     uart.o
-    0x00002cd0   0x00000018   Code   RO          761    i.UART_InChar       uart.o
-    0x00002ce8   0x000000dc   Code   RO          762    i.UART_Init         uart.o
-    0x00002dc4   0x00000018   Code   RO          763    i.UART_OutChar      uart.o
-    0x00002ddc   0x00000020   Code   RO          618    i.Wait10ms          io.o
-    0x00002dfc   0x0000000e   Code   RO          831    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x00002e0a   0x00000002   Code   RO          832    i.__scatterload_null  mc_w.l(handlers.o)
-    0x00002e0c   0x0000000e   Code   RO          833    i.__scatterload_zeroinit  mc_w.l(handlers.o)
-    0x00002e1a   0x00000056   Code   RO          245    i.commandList       st7735.o
-    0x00002e70   0x00000184   Code   RO          246    i.commonInit        st7735.o
-    0x00002ff4   0x00000160   Code   RO          507    i.main              tetris.o
-    0x00003154   0x00000012   Code   RO          251    i.pushColor         st7735.o
-    0x00003166   0x00000002   PAD
-    0x00003168   0x00000074   Code   RO          252    i.setAddrWindow     st7735.o
-    0x000031dc   0x00036d06   Data   RO          116    .constdata          sound.o
-    0x00039ee2   0x000007e2   Data   RO          254    .constdata          st7735.o
-    0x0003a6c4   0x00000372   Data   RO          509    .constdata          tetris.o
-    0x0003aa36   0x00000002   PAD
-    0x0003aa38   0x00000020   Data   RO          829    Region$$Table       anon$$obj.o
+    0x000009bc   0x00000038   Code   RO          492    i.Board_Init        tetris.o
+    0x000009f4   0x00000014   Code   RO          102    i.ButtonSound       sound.o
+    0x00000a08   0x0000011c   Code   RO          493    i.Check_Board       tetris.o
+    0x00000b24   0x00000134   Code   RO          670    i.Check_Collision   blocks.o
+    0x00000c58   0x000000f4   Code   RO          671    i.Check_Drop        blocks.o
+    0x00000d4c   0x00000008   Code   RO          494    i.Coordinate_ConversionX  tetris.o
+    0x00000d54   0x0000000a   Code   RO          495    i.Coordinate_ConversionY  tetris.o
+    0x00000d5e   0x00000002   PAD
+    0x00000d60   0x00000054   Code   RO           16    i.DAC_Init          dac.o
+    0x00000db4   0x0000000c   Code   RO           17    i.DAC_Out           dac.o
+    0x00000dc0   0x00000024   Code   RO          496    i.Delay100ms        tetris.o
+    0x00000de4   0x00000020   Code   RO          211    i.Delay1ms          st7735.o
+    0x00000e04   0x0000015c   Code   RO          497    i.Display_Board     tetris.o
+    0x00000f60   0x000000ac   Code   RO          498    i.Display_Init      tetris.o
+    0x0000100c   0x000000c4   Code   RO          672    i.Drop_Block        blocks.o
+    0x000010d0   0x00000128   Code   RO          673    i.Erase_Block       blocks.o
+    0x000011f8   0x0000002c   Code   RO          674    i.FastDrop_Block    blocks.o
+    0x00001224   0x00000014   Code   RO          741    i.FiFo_Init         fifo.o
+    0x00001238   0x00000050   Code   RO          742    i.FiFo_Put          fifo.o
+    0x00001288   0x00000056   Code   RO          499    i.Floor             tetris.o
+    0x000012de   0x00000002   PAD
+    0x000012e0   0x00000014   Code   RO          500    i.GPIOPortF_Handler  tetris.o
+    0x000012f4   0x00000450   Code   RO          501    i.Game_Over         tetris.o
+    0x00001744   0x00000534   Code   RO          675    i.Generate_Block    blocks.o
+    0x00001c78   0x00000010   Code   RO          214    i.Output_Init       st7735.o
+    0x00001c88   0x0000007c   Code   RO          477    i.PLL_Init          pll.o
+    0x00001d04   0x00000120   Code   RO          676    i.Place_Block       blocks.o
+    0x00001e24   0x00000058   Code   RO          503    i.PortE_Init        tetris.o
+    0x00001e7c   0x00000100   Code   RO          504    i.PortF_Init        tetris.o
+    0x00001f7c   0x000001e0   Code   RO          677    i.Rotate_Block      blocks.o
+    0x0000215c   0x00000120   Code   RO          218    i.ST7735_DrawBitmap  st7735.o
+    0x0000227c   0x000000f4   Code   RO          220    i.ST7735_DrawCharS  st7735.o
+    0x00002370   0x00000048   Code   RO          223    i.ST7735_DrawPixel  st7735.o
+    0x000023b8   0x00000056   Code   RO          224    i.ST7735_DrawString  st7735.o
+    0x0000240e   0x00000002   PAD
+    0x00002410   0x000000ac   Code   RO          225    i.ST7735_FillRect   st7735.o
+    0x000024bc   0x00000024   Code   RO          226    i.ST7735_FillScreen  st7735.o
+    0x000024e0   0x0000007c   Code   RO          228    i.ST7735_InitR      st7735.o
+    0x0000255c   0x000000d4   Code   RO          230    i.ST7735_OutChar    st7735.o
+    0x00002630   0x00000018   Code   RO          231    i.ST7735_OutString  st7735.o
+    0x00002648   0x00000020   Code   RO          241    i.ST7735_SetCursor  st7735.o
+    0x00002668   0x00000014   Code   RO          104    i.Sound_Blockhit    sound.o
+    0x0000267c   0x00000014   Code   RO          107    i.Sound_Gameover    sound.o
+    0x00002690   0x00000010   Code   RO          108    i.Sound_Init        sound.o
+    0x000026a0   0x00000014   Code   RO          110    i.Sound_NewLine     sound.o
+    0x000026b4   0x00000030   Code   RO          111    i.Sound_Play1       sound.o
+    0x000026e4   0x00000030   Code   RO          112    i.Sound_Play2       sound.o
+    0x00002714   0x00000014   Code   RO          113    i.Sound_Rotate      sound.o
+    0x00002728   0x00000014   Code   RO          114    i.Sound_Start       sound.o
+    0x0000273c   0x000000c8   Code   RO          505    i.SysTick_Handler   tetris.o
+    0x00002804   0x00000034   Code   RO          506    i.SysTick_Init      tetris.o
+    0x00002838   0x000004c8   Code   RO          678    i.Tetris_Init       blocks.o
+    0x00002d00   0x00000194   Code   RO           63    i.Timer0A_Handler   timer0.o
+    0x00002e94   0x00000078   Code   RO           64    i.Timer0_Init       timer0.o
+    0x00002f0c   0x0000008c   Code   RO          115    i.Timer1A_Handler   sound.o
+    0x00002f98   0x00000058   Code   RO           90    i.Timer1_Init       timer1.o
+    0x00002ff0   0x0000002c   Code   RO          651    i.Timer2A_Handler   timer2.o
+    0x0000301c   0x00000034   Code   RO          767    i.UART1_Handler     uart.o
+    0x00003050   0x00000018   Code   RO          768    i.UART_InChar       uart.o
+    0x00003068   0x000000dc   Code   RO          769    i.UART_Init         uart.o
+    0x00003144   0x00000020   Code   RO          624    i.Wait10ms          io.o
+    0x00003164   0x0000000e   Code   RO          838    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x00003172   0x00000002   Code   RO          839    i.__scatterload_null  mc_w.l(handlers.o)
+    0x00003174   0x0000000e   Code   RO          840    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x00003182   0x00000056   Code   RO          245    i.commandList       st7735.o
+    0x000031d8   0x00000184   Code   RO          246    i.commonInit        st7735.o
+    0x0000335c   0x00000924   Code   RO          508    i.main              tetris.o
+    0x00003c80   0x00000012   Code   RO          251    i.pushColor         st7735.o
+    0x00003c92   0x00000002   PAD
+    0x00003c94   0x00000074   Code   RO          252    i.setAddrWindow     st7735.o
+    0x00003d08   0x00036d06   Data   RO          116    .constdata          sound.o
+    0x0003aa0e   0x000007e2   Data   RO          254    .constdata          st7735.o
+    0x0003b1f0   0x00000882   Data   RO          510    .constdata          tetris.o
+    0x0003ba72   0x00001d1c   Data   RO          680    .constdata          blocks.o
+    0x0003d78e   0x00000002   PAD
+    0x0003d790   0x00000020   Data   RO          836    Region$$Table       anon$$obj.o
 
 
     Execution Region ER_RW (Base: 0x20000000, Size: 0x0000009c, Max: 0xffffffff, ABSOLUTE)
@@ -940,11 +960,11 @@ Memory Map of the image
     0x20000000   0x00000008   Data   RW           65    .data               timer0.o
     0x20000008   0x00000014   Data   RW          117    .data               sound.o
     0x2000001c   0x0000002c   Data   RW          255    .data               st7735.o
-    0x20000048   0x0000002b   Data   RW          510    .data               tetris.o
+    0x20000048   0x0000002b   Data   RW          511    .data               tetris.o
     0x20000073   0x00000001   PAD
-    0x20000074   0x00000012   Data   RW          674    .data               blocks.o
-    0x20000086   0x0000000a   Data   RW          736    .data               fifo.o
-    0x20000090   0x00000008   Data   RW          764    .data               uart.o
+    0x20000074   0x00000012   Data   RW          681    .data               blocks.o
+    0x20000086   0x0000000a   Data   RW          743    .data               fifo.o
+    0x20000090   0x00000008   Data   RW          771    .data               uart.o
     0x20000098   0x00000004   Data   RW           12    DATA                random.o
 
 
@@ -952,8 +972,8 @@ Memory Map of the image
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x2000009c   0x00000280   Zero   RW          508    .bss                tetris.o
-    0x2000031c   0x00000440   Zero   RW          673    .bss                blocks.o
+    0x2000009c   0x00000280   Zero   RW          509    .bss                tetris.o
+    0x2000031c   0x00000440   Zero   RW          679    .bss                blocks.o
     0x2000075c   0x00000004   PAD
     0x20000760   0x00000400   Zero   RW            1    STACK               startup.o
 
@@ -965,10 +985,10 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       268         34          0          0          0       1921   adc.o
-      4264        196          0         18       1088       7886   blocks.o
+       268         34          0          0          0       1949   adc.o
+      4412        236       7452         18       1088       7875   blocks.o
         96         20          0          0          0       5213   dac.o
-       168         36          0         10          0       1637   fifo.o
+       100         22          0         10          0       1198   fifo.o
         32          0          0          0          0        687   io.o
         80         12          0          0          0        196   lcd.o
        124          6          0          0          0        407   pll.o
@@ -977,14 +997,14 @@ Image component sizes
        372        100     224518         20          0       5221   sound.o
       1946        182       2018         44          0      12552   st7735.o
        672        622          0          0       1024        884   startup.o
-      2256        244        882         43        640       9277   tetris.o
+      5060        358       2178         43        640       9788   tetris.o
        524         96          0          8          0       1194   timer0.o
         88         16          0          0          0        410   timer1.o
         44         10          0          0          0        390   timer2.o
-       320         52          0          8          0       2186   uart.o
+       296         46          0          8          0       1799   uart.o
 
     ----------------------------------------------------------------------
-     11750       1644     227452        156       2756      50581   Object Totals
+     14610       1778     236200        156       2756      50283   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          8          0          2          1          4          0   (incl. Padding)
 
@@ -1033,15 +1053,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     12764       1660     227452        156       2756      47681   Grand Totals
-     12764       1660     227452        156       2756      47681   ELF Image Totals
-     12764       1660     227452        156          0          0   ROM Totals
+     15624       1794     236200        156       2756      47539   Grand Totals
+     15624       1794     236200        156       2756      47539   ELF Image Totals
+     15624       1794     236200        156          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)               240216 ( 234.59kB)
+    Total RO  Size (Code + RO Data)               251824 ( 245.92kB)
     Total RW  Size (RW Data + ZI Data)              2912 (   2.84kB)
-    Total ROM Size (Code + RO Data + RW Data)     240372 ( 234.74kB)
+    Total ROM Size (Code + RO Data + RW Data)     251980 ( 246.07kB)
 
 ==============================================================================
 
