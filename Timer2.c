@@ -1,6 +1,6 @@
 // Timer2.c
 // Runs on LM4F120 or TM4C123
-// Program written by: Ryan Kim
+// Program written by: Ryan Kim, Rafay Khurram
 // Lab number: 10
 
 #include <stdint.h>

@@ -1,6 +1,6 @@
 // Tetris.h
 // 4/23/18
-// Ryan Kim
+// Ryan Kim, Rafay Khurram
 
 #include <stdint.h>
 

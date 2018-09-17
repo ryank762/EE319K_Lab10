@@ -2,7 +2,7 @@
 // Runs on LM4F120/TM4C123
 // Provide functions that initialize ADC0
 // Last Modified: 3/29/2018 
-// Student names: Ryan Kim
+// Student names: Ryan Kim, Rafay Khurram
 
 #include <stdint.h>
 #include "Tetris.h"

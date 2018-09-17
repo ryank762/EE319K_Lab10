@@ -4,6 +4,7 @@
 // another microcontroller in Lab 9.  This time, interrupts and FIFOs
 // are used.
 // Daniel Valvano
+// Modified by: Ryan Kim, Rafay Khurram
 // November 17, 2014
 // Modified by EE345L students Charlie Gough && Matt Hawk
 // Modified by EE345M students Agustinus Darmawan && Mingjie Qiu

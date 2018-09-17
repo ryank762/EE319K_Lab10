@@ -1,5 +1,5 @@
 ; LCD.s
-; Student names: Ryan Kim
+; Student names: Ryan Kim, Rafay Khurram
 ; Last modification date: 3/29/2018
 
 ; Runs on LM4F120/TM4C123

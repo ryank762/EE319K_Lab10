@@ -1,9 +1,8 @@
 // IO.h
 // This file has interface for IO module
 // Runs on LM4F120 or TM4C123
-// Program written by: put your names here
+// Program written by: Ryan Kim, Rafay Khurram
 // Date Created: March 30, 2018
-// Last Modified:  change this line or look silly
 // Lab number: 7
 
 

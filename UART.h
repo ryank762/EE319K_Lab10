@@ -2,8 +2,7 @@
 // Runs on LM4F120/TM4C123
 // Provides Prototypes for functions implemented in UART.c
 // Last Modified: 3/6/2015 
-// Student names: change this to your names or look very silly
-// Last modification date: change this to the last modification date or look very silly
+// Student names: Ryan Kim, Rafay Khurram
 
 #include <stdint.h>
 #include "tm4c123gh6pm.h"

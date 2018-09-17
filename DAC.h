@@ -2,7 +2,7 @@
 // This software configures DAC output
 // Lab 6 requires a minimum of 4 bits for the DAC, but you could have 5 or 6 bits
 // Runs on LM4F120 or TM4C123
-// Program written by: put your names here
+// Program written by: Ryan Kim, Rafay Khurram
 // Date Created: 3/6/17 
 // Last Modified: 3/5/18 
 // Lab number: 6

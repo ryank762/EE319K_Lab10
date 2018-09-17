@@ -2,6 +2,7 @@
 // Runs on LM4F120/TM4C123
 // Use TIMER0 in 32-bit periodic mode to request interrupts at a periodic rate
 // Daniel Valvano
+// Modified by: Ryan Kim, Rafay Khurram
 // Last Modified: 3/6/2015 
 // You can use this timer only if you learn how it works
 

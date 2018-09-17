@@ -2,6 +2,7 @@
 // Runs on LM4F120/TM4C123
 // Use Timer1 in 32-bit periodic mode to request interrupts at a periodic rate
 // Daniel Valvano
+// Modified by: Ryan Kim, Rafay Khurram
 // March 20, 2014
 
 /* This example accompanies the book

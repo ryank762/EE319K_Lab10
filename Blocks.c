@@ -1,5 +1,6 @@
 // Blocks.c
 // 4/23/18
+// Ryan Kim, Rafay Khurram
 
 #include <stdint.h>
 #include "tm4c123gh6pm.h"

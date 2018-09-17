@@ -1,6 +1,6 @@
 // Tetris.c
 // Runs on LM4F120/TM4C123
-// Ryan Kim
+// Ryan Kim, Rafay Khurram
 
 // Last Modified: 04/20/2018 
 
